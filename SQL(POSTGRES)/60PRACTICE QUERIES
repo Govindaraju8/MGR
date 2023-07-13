@@ -18,6 +18,8 @@ select ename,empno from chinna_emp where job='MANAGER'and sal>=2600 order by ena
 --q8: Select the information about Managers and President from the column job in the EMP 
 --table.Order the result by name 
 select ename from chinna_emp where job IN ('MANAGER','PRESIDENT') ORDER BY ename;
+  select * from emp where job='MANAGER' or job='PRESIDENT' order by ename;
+
 --q9:  List the employee names that don’t end in ‘S’.
 SELECT ename FROM chinna_emp WHERE ename NOT LIKE '%S';
 --Q10:  List the employee names that start with ‘C’
