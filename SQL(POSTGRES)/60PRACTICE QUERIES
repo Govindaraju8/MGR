@@ -54,4 +54,55 @@ AS emp_info FROM chinna_emp WHERE job = 'CLERK' AND dept_no = 20 AND hiredate = 
 --The NVL function takes two arguments: the column you want to check for NULL values (comm in this case) 
 --and the value to replace NULL with (0 in this case). The result is aliased as comm using the AS keyword.
 select empno,ename,job,mgr,hiredate,sal, NVL(comm,0) AS comm,dept_no from chinna_emp;
+SELECT empno, ename, job, mgr, hiredate, sal, COALESCE(comm, 0) AS comm, dept_no
+FROM chinna_emp;
+
+Q17 : Write a query that will accept a given job title and displays all the records according to that 
+title . 
+select * from emp where job='PRESIDENT';
+
+Q18: 18. List all employees who don’t get any commission. 
+SELECT empno, ename FROM chinna_emp WHERE comm IS NULL;
+select ename from chinna_emp where comm=0;
+
+Q19: Show that length names appear in the EMP table . Eliminate the duplicate lengths from the 
+rows returned. Do not show the name themselves.
+SELECT DISTINCT LENGTH(ename) AS name_length
+FROM emp;
+
+Q20 :  List the names and hire-date of employees in department number 20. Display the hire-date 
+formatted as ‘12-03-81’.
+SELECT ename, TO_CHAR(hiredate, 'DD-MM-YY') AS hire_date FROM emp WHERE dept_no = 20;
+Q21 : How many months has the President worked for the company? Round to the nearest whole 
+number of months. 
+
+Q23:List the employee names, jobs, and a job classification which you will supply. Translate the value stored in each 
+job field(CLERK,MANAGER ETC.) to job classification number (1,2 etc). translate CLERK to 1, MANAGER to 3, 
+PRESIDENT to 5 and all the other jobs to 2. Name the job the classification column JOBCLASS. 
+SELECT ename, job,
+    CASE 
+        WHEN job = 'CLERK' THEN 1
+        WHEN job = 'MANAGER' THEN 3
+        WHEN job = 'PRESIDENT' THEN 5
+        ELSE 2
+    END AS jobclass
+FROM chinna_emp;
+
+
+SELECT ename FROM emp WHERE EXTRACT(MONTH FROM hiredate) = 12;
+
+
+Q24:Give SQL commands to find the average annual salary per job in each department. The sal figures in the EMP table 
+ are for each month. 
+SELECT job, dept_no, AVG(sal * 12) AS avg_annual_salary FROM emp GROUP BY job, dept_no;
+
+
+
+
+
+
+
+
+
+
 
