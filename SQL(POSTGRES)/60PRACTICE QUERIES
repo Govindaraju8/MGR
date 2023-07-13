@@ -96,6 +96,36 @@ Q24:Give SQL commands to find the average annual salary per job in each departme
  are for each month. 
 SELECT job, dept_no, AVG(sal * 12) AS avg_annual_salary FROM emp GROUP BY job, dept_no;
 
+Q25: In one query, count the number of people in department 30 who receive a salary and the 
+number of people who receive commission .
+SELECT COUNT(sal) AS salary, COUNT(comm) AS comm FROM chinna_emp WHERE dept_no = 30;
+
+Q26:Compute the average, minimum and maximum salaries of those groups of employees 
+having the job of clerk or manager.
+SELECT job, AVG(sal) AS average_salary, MIN(sal) AS minimum_salary, MAX(sal) AS maximum_salary
+FROM chinna_emp
+WHERE job = 'CLERK' OR job = 'MANAGER'
+GROUP BY job;
+
+Q27. Display the department numbers where more than 2 Clerks or 3 Managers are working. 
+select dept_no from chinna_emp where jOb='CLERK' OR JOB='MANAGER'GROUP BY dept_no
+HAVING COUNT(CASE WHEN JOB='CLERK' THEN 1 END)>2 OR COUNT(CASE WHEN JOB='MANAGER' THEN 2 END)>3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
