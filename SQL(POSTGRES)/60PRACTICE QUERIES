@@ -111,10 +111,42 @@ Q27. Display the department numbers where more than 2 Clerks or 3 Managers are w
 select dept_no from chinna_emp where jOb='CLERK' OR JOB='MANAGER'GROUP BY dept_no
 HAVING COUNT(CASE WHEN JOB='CLERK' THEN 1 END)>2 OR COUNT(CASE WHEN JOB='MANAGER' THEN 2 END)>3;
 
+Q33:Write a query to display as follows: 
+ Ename Date hired 
+ ****** ********* 
+ Smith June,thirteen 1983 
+ Jones October, thirty first 1983 
+select ename,TO_CHAR(hiredate,'FMMonth FMDDTH YYYY') AS hireddate from chinna_emp where ename='SMITH' or ENAME='JONES';
+
+Q34:. Print the list of employees, display just salary if the salary is more than 1500, if exactly 1500 
+ display on target, if less 
+ than 1500 display below 1500.
+ ENAME SALARY 
+ ADAMS BELOW 1500 
+ ALLEN 1600 
+ BLAKE 2850 
+ CLARK 2450 
+ FORD  3000 
+ JAMES BELOW 1500
+
+select ename, case 
+                 when sal>1500 then CAST(sal AS VARCHAR)
+                 when sal=1500 then 'on target'
+                 else 'less than 1500'
+                end as salary_status from chinna_emp; 
+
+Q35:
+
+Q36. Write query to list salary, (sal-avg(sal)) from emp table. 
+select sal,(sal-(select avg(sal) from chinna_emp)) as diff from chinna_emp;
 
 
+Q37. Find the number of different employees from the different departments. 
 
+select dept_no,count(distinct ename) as dept_wise_unique_names from chinna_emp group by dept_no;
 
+Q38: Determine the average salary of employees. 
+select avg(sal) from chinna_emp;
 
 
 
