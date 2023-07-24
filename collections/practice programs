@@ -1,0 +1,158 @@
+Assume there is an Employee class with the members (int empno, String name, String job,
+double salary, int deptno), create a collection of Employee objects and sort them by name in 
+reverse order using lambda Expression.
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Employee {
+    private int empno;
+    private String name;
+    private String job;
+    private double salary;
+    private int deptno;
+    Employee(int eno,String n,String j,double sal,int depno)
+    {
+        empno=eno;
+        name=n;
+        job=j;
+        salary=sal;
+        deptno=depno;
+    }
+    public int getempno()
+    {
+        return empno;
+    }
+    public void setempno(int f)
+    {
+        empno=f;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public void setName(String n)
+    {
+        name=n;
+    }
+    public String getJob()
+    {
+        return job;
+    }
+    public void setJob(String j)
+    {
+        job=j;
+    }
+    
+    // Constructor, getters, and setters (not shown for brevity)
+
+    public static void main(String[] args) {
+        // Create a list of Employee objects
+        List<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee(101, "John Doe", "Manager", 50000.0, 10));
+        employees.add(new Employee(102, "Jane Smith", "Engineer", 40000.0, 20));
+        employees.add(new Employee(103, "Mike Johnson", "Analyst", 35000.0, 30));
+        employees.add(new Employee(104, "Alice Brown", "Clerk", 30000.0, 40));
+        employees.add(new Employee(105, "Bob Williams", "Manager", 45000.0, 50));
+
+        // Sort employees by name in reverse order using lambda expression
+        Collections.sort(employees, (emp1, emp2) -> emp2.getName().compareTo(emp1.getName()));
+
+        // Display the sorted list of employees
+        for (Employee emp : employees) {
+            System.out.println(emp.getName() + " - " + emp.getJob());
+        }
+    }
+}
+
+
+Explain the advantages of Thread pool and demonstrate the usage of multithreading through 
+ThreadPool using Executor framework. Take at least 3 threads. 
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 1 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 2 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 3 - Iteration: " + i);
+            }
+        });
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+
+//another way-----------*****************************-------------------------
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolDemo {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(new Task1());
+        executor.submit(new Task2());
+        executor.submit(new Task3());
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+// Task1 implementation
+class Task1 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 1 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task2 implementation
+class Task2 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 2 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task3 implementation
+class Task3 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 3 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
