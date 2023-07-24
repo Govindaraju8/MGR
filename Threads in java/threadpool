@@ -2,6 +2,24 @@
 Explain the advantages of Thread pool and demonstrate the usage of multithreading through 
 ThreadPool using Executor framework. Take at least 3 threads. 
 
+Advantages of Thread Pool:
+
+Thread Reuse: One of the main advantages of a thread pool is that it allows the reuse of threads for multiple tasks. Creating and destroying
+threads are resource-intensive operations. Thread pools help save resources by reusing existing threads, resulting in better performance and reduced overhead.
+
+Thread Management: Thread pools abstract the thread management details, so developers can focus on the actual tasks to be
+executed rather than managing threads explicitly. The thread pool handles thread creation, destruction, and scheduling of tasks, 
+making multithreading easier to manage.
+
+Controlled Concurrency: With a thread pool, you can control the number of threads executing tasks simultaneously. 
+This allows you to limit resource consumption and prevents the system from becoming overloaded with too many active threads.
+
+Enhanced Scalability: Thread pools are scalable, and the number of threads in the pool can be adjusted based on the 
+application's requirements and system resources. This flexibility enables efficient utilization of resources and better application performance.
+
+Improved Responsiveness: In applications with thread pools, tasks are executed immediately without having to wait for
+thread creation. This improves overall application responsiveness and reduces task latency.
+
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
