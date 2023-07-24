@@ -1,0 +1,88 @@
+
+Explain the advantages of Thread pool and demonstrate the usage of multithreading through 
+ThreadPool using Executor framework. Take at least 3 threads. 
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 1 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 2 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 3 - Iteration: " + i);
+            }
+        });
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+
+//another way-----------*****************************-------------------------
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolDemo {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(new Task1());
+        executor.submit(new Task2());
+        executor.submit(new Task3());
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+// Task1 implementation
+class Task1 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 1 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task2 implementation
+class Task2 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 2 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task3 implementation
+class Task3 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 3 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
