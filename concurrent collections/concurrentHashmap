@@ -1,0 +1,21 @@
+Demonstrate the usage of ConcurrentHashMap<String,String> by adding couple of elements and 
+read them using forEach loop with lambda expressions
+
+
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConcurrentHashMapDemo {
+    public static void main(String[] args) {
+        // Create a ConcurrentHashMap
+        ConcurrentHashMap<String, String> concurrentMap = new ConcurrentHashMap<>();
+
+        // Adding elements to the ConcurrentHashMap
+        concurrentMap.put("key1", "value1");
+        concurrentMap.put("key2", "value2");
+        concurrentMap.put("key3", "value3");
+        concurrentMap.put("key4", "value4");
+
+        // Reading elements using forEach loop and lambda expression
+        concurrentMap.forEach((key, value) -> System.out.println("Key: " + key + ", Value: " + value));
+    }
+}
