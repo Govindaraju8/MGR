@@ -1,0 +1,54 @@
+class Account extends Thread
+{
+  double bal=10000;
+  synchronized public void withdraw(int amt)
+  {
+      
+    if(bal<amt)
+    {
+        System.out.println("no funds available, waitinng for deposit");
+        try{
+             wait();
+        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+    bal=bal-amt;
+    System.out.println("withdraw successfully completed");
+    System.out.println("available balance after withdraw : "+bal);
+  }
+   synchronized public void deposit(int amt)
+  {
+      System.out.println("available balance before deposit : "+bal);
+      System.out.println("going to deposit");
+      bal=bal+amt;
+      System.out.println("deposit completed");
+      System.out.println("available balance after deposit : "+bal);
+      notifyAll();
+  }
+}
+public class Tcomm
+{
+    public static void main(String args[])
+    {
+      
+      Account a1=new Account(){
+          public void run()
+          {
+              withdraw(1000);
+          }
+      };
+     Account a2=new Account(){
+          public void run()
+          {
+              a1.deposit(15000);
+          }
+      };
+      a1.start();  
+      a2.start();
+      
+      
+    }
+}
