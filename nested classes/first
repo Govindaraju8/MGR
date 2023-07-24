@@ -1,0 +1,127 @@
+/*
+//static nested class
+
+public class Outer
+{
+    static int d=10;
+    static class Inner{
+        public void msg()
+        {
+            System.out.println("data is :"+d);
+        }
+    }
+    public static void main(String args[])
+    {
+        Outer.Inner IO=new Outer.Inner();
+        IO.msg();
+    }
+}
+
+*/
+// non-static nested classes
+   //1.local inner class
+   //2.Anonymous inner class
+   
+   //working of the non-static nested classes
+   //non-static nested classes
+    public class OuterNonstatic
+    {
+        private int d=30;
+        class InnerNonstatic
+        {
+            public void msg()
+            {
+                System.out.println("data is :"+d);
+            }
+        }
+        public static void main(String args[])
+        {
+            OuterNonstatic OO=new OuterNonstatic();
+            OuterNonstatic.InnerNonstatic IO=OO.new InnerNonstatic();
+            IO.msg();
+        }
+
+    }
+    
+    
+    //local inner class- class inside the method
+     public class Outerlocal
+    {
+
+        void msg()
+        {
+            private int d=30;
+            class Innerlocal
+            {
+                public void display()
+                {
+                    System.out.println("this is local inner class method");
+                }
+            }
+            Innerlocal in=new Innerlocal();
+            in.display();
+        }
+        public static void main(String args[])
+        {
+            Outerlocal o=new Outerlocal();
+            o.masg();
+        }
+    }
+    
+    // Anonymous inner class - class with no name and only one time it is called
+    
+    // anonymous inner class with abstract class
+
+abstract class Person
+{
+   abstract void eat();
+}
+public class Main
+{
+    public static void main(String args[])
+    {
+        Person p=new Person(){
+            public void eat()
+            {
+                System.out.println("eating invoking in anonymous inner class");
+            }
+        };
+        p.eat();
+    }
+}
+    
+ //anonymous inner class with interface
+
+Considering the following functional interface , demonstrate the implementation of it on your 
+own class using anonymous inner class & lambda Expressions side by side 6M
+
+
+interface Interest
+{
+    public void calInt();
+    public static double calculateStdInt(double pr,int nm,double rate)
+    {
+        return pr*nm*rate/1200;
+    }
+}
+public class Anonywithinterface
+{
+    public static void main(String args[])
+    {
+        Interest Anon=new Interest(){
+            double p=12000;
+            double t=12;
+            double r=5;
+            public void calInt()
+            {
+                System.out.println((p*t*r)/100);
+            }
+        };
+        Anon.calInt();
+        Interest pp=new Interest
+        System.out.println(Interest.calculateStdInt(10000,6,6));
+    }
+}
+   
+    
+  
