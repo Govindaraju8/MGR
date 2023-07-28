@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <form id="bookingForm">
+    <h1>Ticket Booking</h1><br />
+    <table width="80%" class="center">
+      <tr>
+        <th><label for="from">From</label></th>
+        <td>
+          <select id="from">
+            <option value="select">--Select--</option>
+            <option value="VSKP">VSKP</option>
+            <option value="CHE">CHE</option>
+            <option value="BZA">BZA</option>
+            <option value="SC">SC</option>
+            <option value="TUNI">TUNI</option>
+          </select>
+        </td>
+        <th><label for="to">To</label></th>
+        <td>
+          <select id="to">
+            <option value="select">--Select--</option>
+            <option value="CHE">CHE</option>
+            <option value="VSKP">VSKP</option>
+            <option value="BZA">BZA</option>
+            <option value="SC">SC</option>
+            <option value="TUNI">TUNI</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Train</th>
+        <td>
+          <select id="train">
+            <option value="select">--Select--</option>
+            <option value="T1">12717 - RSF Express</option>
+            <option value="T2">12308 - HSF Express</option>
+            <option value="T3">12799 - Goa Express</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th><label for="class">Class</label></th>
+        <td>
+          <select id="class">
+            <option value="select">--Select--</option>
+            <option value="2S">2S</option>
+            <option value="SL">SL</option>
+            <option value="3A">3A</option>
+            <option value="2A">2A</option>
+            <option value="CC">CC</option>
+          </select>
+        </td>
+        <th><label for="date">Date</label></th>
+        <td>
+          <input type="date" id="date">
+        </td>
+      </tr>
+    </table><br /><br />
+
+    <h2>Passenger details:</h2>
+    <table width="80%" border="1" class="center">
+      <tr>
+        <th>S.no</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+      </tr>
+      <tr>
+        <td><label>1</label></td>
+        <td><input type="text"></td>
+        <td>
+          <select>
+            <option value="select">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Transgender">Transgender</option>
+          </select>
+        </td>
+        <td><input type="text"></td>
+        <td><button type="button" onclick="removePassenger()">Cancel</button></td>
+      </tr>
+      
+    </table>
+    <br /><br />
+     <button type="button" onclick="addPassenger()">Add Passenger</button>
+
+    <br /><br />
+    <button class="end" type="submit">Book Ticket</button>
+    <button class="end" type="reset">Clear</button>
+  </form>
+</body>
+</html>
