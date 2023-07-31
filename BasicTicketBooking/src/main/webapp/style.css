@@ -37,3 +37,9 @@ th, td {
   border: none;
   cursor: pointer;
 }
+label.form-label.to-label {
+      width: 2.7rem;
+    }
+label.form-label.to-label1 {
+      width: 2.2em;
+    }
