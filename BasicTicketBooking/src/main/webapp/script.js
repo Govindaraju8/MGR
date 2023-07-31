@@ -1,5 +1,5 @@
 function addPassenger() {
-  var table = document.querySelector("table.center1");
+  var table = document.querySelector("#tab");
   var rowCount = table.rows.length;
   if (rowCount <= 6) {
     var row = table.insertRow(rowCount);
@@ -7,7 +7,7 @@ function addPassenger() {
     cell1.innerHTML = rowCount;
   
     var cell2 = row.insertCell(1);
-    cell2.innerHTML = '<input onkeydown="return /[a-z]/i.test(event.key)" >';
+    cell2.innerHTML = '<input type="text" onkeydown="return /[a-z]/i.test(event.key)">';
   
     var cell3 = row.insertCell(2);
     cell3.innerHTML = '<select><option value="select">--Select--</option><option value="Male">Male</option><option value="Female">Female</option><option value="Transgender">Transgender</option></select>';
@@ -17,13 +17,14 @@ function addPassenger() {
   
     var cell5 = row.insertCell(4);
     cell5.innerHTML = '<button type="button" onclick="removePassenger()">Cancel</button>';
+    row.classList.add("passenger-row");
   } else {
     alert("You can add a maximum of 6 passengers.");
   }
 }
 
 function removePassenger() {
-  var table = document.querySelector("table.center1");
+  var table = document.querySelector("#tab");
   var rowCount = table.rows.length;
   
   if (rowCount > 2) {
@@ -34,12 +35,11 @@ function removePassenger() {
 document.getElementById("bookingForm").addEventListener("submit", function(event) {
   event.preventDefault();
   if (validateForm()) {
-	alert("Ticket Booked!");
-	resetPage();
-	
+    alert("Ticket Booked!");
+    displayDataAsJSON();
+    resetPage();
   }
 });
-
 
 function validateForm() {
   var inputs = document.getElementsByTagName("input");
@@ -77,8 +77,31 @@ function validateForm() {
   return true;
 }
 
+function displayDataAsJSON() {
+  var formData = {
+    passengers: []
+  };
+  var passengerRows = document.querySelectorAll(".passenger-row");
+  passengerRows.forEach(function (row) {
+    var passenger = {};
+    passenger.name = row.querySelector("input[type='text']").value;
+    passenger.gender = row.querySelector("select").value;
+    passenger.age = row.querySelector("input[type='number']").value;
+    formData.passengers.push(passenger);
+  });
+  var fromStation = document.getElementById("from").value;
+  var toStation = document.getElementById("to").value;
+  var dateInput = document.getElementById("date").value;
+  var Class = document.getElementById("class").value;
+  formData.fromStation = fromStation;
+  formData.toStation = toStation;
+  formData.date = dateInput;
+  formData.Class = Class;
+  alert("Booking Details:\n" + JSON.stringify(formData, null, 2));
+}
+
 function resetPage() {
-  var table = document.querySelector("table.center1");
+  var table = document.querySelector("#tab");
   while (table.rows.length > 2) {
     table.deleteRow(table.rows.length - 1);
   }
