@@ -1,37 +1,6 @@
 -- Create table king_emp as select * from ramu_emp;
 
--- CREATE TABLE king_emp (
---   empno INT,
---   ename VARCHAR(255),
---   job VARCHAR(255),
---   mgr INT,
---   hiredate DATE,
---   sal DECIMAL(8,2),
---   comm DECIMAL(8,2),
---   dept_no INT
--- );
-
--- INSERT INTO king_emp (empno, ename, job, mgr, hiredate, sal, comm, dept_no)
--- VALUES
---   (7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600.0, 300.0, 20),
---   (7521, 'WARD', 'SALESMAN', 7698, '1981-02-22', 1250.0, 500.0, 30),
---   (7566, 'JONES', 'MANAGER', 7839, '1981-04-02', 2975.0, NULL, 20),
---   (7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250.0, 1400.0, 30),
---   (7698, 'BLAKE', 'MANAGER', 7839, '1981-05-01', 2850.0, NULL, 30),
---   (7782, 'CLARK', 'MANAGER', 7839, '1981-06-09', 2450.0, NULL, 10),
---   (7788, 'SCOTT', 'ANALYST', 7566, '1982-12-09', 3000.0, NULL, 20),
---   (7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000.0, NULL, 10),
---   (7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500.0, 0.0, 30),
---   (7876, 'ADAMS', 'CLERK', 7788, '1983-01-12', 1100.0, NULL, 20),
---   (7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 950.0, NULL, 30),
---   (7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000.0, NULL, 20),
---   (7934, 'MILLER', 'CLERK', 7782, '1982-01-23', 1300.0, NULL, 10),
---   (1234, 'SMITH', 'CLERK', 7902, '1980-12-17', 800.0, NULL, 20),
---   (7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600.0, 300.0, 30),
---   (7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600.0, 300.0, 10)
-
 select * from king_emp;
-
 
 -- INSERT INTO public.king_emp(
 -- 	empno, ename, job, mgr, hiredate, sal, comm, dept_no)
@@ -93,7 +62,6 @@ select * from king_emp;
 -- SELECT CONCAT(ename, ' has held the position of ', job, ' in department number ', dept_no, ' since ', TO_CHAR(hiredate, 'DD-MON-YY')) AS data
 -- FROM king_emp
 -- WHERE job = 'CLERK' AND dept_no = 20;
-
 
 -- 16. List all rows from EMP table by converting the NULL values in COMM column to 0 (use NVL 
 -- command) 
@@ -229,16 +197,15 @@ select * from king_emp;
 -- FROM 
 --   king_emp;
 
-
 -- 35. Display as follows- employees hired on or before 15th of any month are paid on the last 
 -- Friday of that month, those hired after the 15th are paid on the last Friday of the following 
 -- month.. 
 -- Print a list of employees, their hire-date and first pay date, sort on hire-date.
 
- 
 -- 36. Write query to list salary, (sal-avg(sal)) from emp table. 
 -- SELECT sal, sal - AVG(sal) OVER () AS difference
 -- FROM king_emp;
+-- select sal ,sal - (select avg(sal) from king_emp)from king_emp 
 
 -- 37. Find the number of different employees and the number of different departments.
 -- SELECT 
@@ -279,7 +246,6 @@ select * from king_emp;
 --   SUM(COALESCE(sal, 0) + COALESCE(comm, 0)) AS total_remuneration
 -- FROM king_emp  GROUP BY job;
 
-
 -- 43. Find out the difference between the highest and lowest salary. 
 -- select max(sal) - min(sal) as difference from king_emp;
 
@@ -296,7 +262,6 @@ select * from king_emp;
 -- FROM 
 --   king_emp;
 
-
 -- 46. List the lowest paid employees working for each manager, exclude any group where the 
 -- minimum salary is less than 1000, sort out the result by salary. 
 -- SELECT mgr, MIN(sal) AS lowest_salary, empno, ename
@@ -306,23 +271,28 @@ select * from king_emp;
 -- ORDER BY lowest_salary;
 
 -- 47. Display all employee names, department numbers, and department names. 
-
+-- (when there is dept table)
 -- SELECT
---   ename,
---   dept_no
+--   e.employee_name,
+--   d.department_number,
+--   d.department_name
 -- FROM
---   king_emp;
+--   employees e
+-- JOIN
+--   departments d ON e.department_id = d.department_id;
 
 -- 48. Display all employee names and their department names in the order of their department 
 -- names. 
--- 
+-- (when there is dept table)
 -- SELECT
--- ename,
--- dept_no
+--   e.employee_name,
+--   d.department_name
 -- FROM
---   king_emp
+--   employees e
+-- JOIN
+--   departments d ON e.department_id = d.department_id
 -- ORDER BY
---   dept_no;
+--   d.department_name;
 
 -- 49. Display the department that has no employees. 
 
@@ -330,19 +300,7 @@ select * from king_emp;
 -- WHERE dept_no  NOT IN (SELECT DISTINCT dept_no FROM king_emp);
 
 -- 50. Find all the employees who joined the company before their manager. 
--- SELECT
---   e1.empno AS employee_id,
---   e1.ename AS employee_name,
---   e1.hiredate AS employee_join_date,
---   e2.empno AS manager_id,
---   e2.ename AS manager_name,
---   e2.hiredate AS manager_join_date
--- FROM
---   king_emp e1
--- JOIN
---   king_emp e2 ON e1.mgr = e2.empno
--- WHERE
---   e1.hiredate < e2.hiredate;
+-- SELECT empno , mgr from king_emp a where hiredate<(select hiredate from king_emp where empno=a.mgr);
 
 -- 51. Find the employees who earn more than the lowest salary in each department. 
 -- SELECT
@@ -396,34 +354,28 @@ select * from king_emp;
 -- WHERE
 --   e.sal > ALL (SELECT MAX(sal) FROM king_emp WHERE dept_no = (SELECT dept_no FROM king_emp WHERE job = 'SALES'));
 
-
 -- 56. Copy all information on department 10 from EMP table to another table.
-
 -- CREATE TABLE another_emp AS
 -- SELECT *
 -- FROM king_emp
 -- WHERE dept_no = 10;
 
 -- 57. Write a query to list all the columns ,datatypes of the given table.
-
 -- SELECT column_name, data_type
 -- FROM information_schema.columns
 -- WHERE table_name = 'another_emp';
 
 -- 58. Write a query to list all the employees who are earning the least 3 salaries
-
 -- SELECT *
 -- FROM king_emp
 -- ORDER BY sal
 -- LIMIT 3;
 
 -- 59. Write a query to list the deptnos which are having the highest max salaray 
-
 -- SELECT dept_no
 -- FROM king_emp
 -- GROUP BY dept_no
 -- HAVING MAX(sal) = (SELECT MAX(sal) FROM king_emp);
-
 
 -- 60. Write a query to list last 10 rows from the table in which number of rows are not known
 -- SELECT *
@@ -431,70 +383,45 @@ select * from king_emp;
 -- ORDER BY job DESC
 -- LIMIT 10;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- deleting duplicate records 
+
+-- WITH DuplicateCTE AS (
+--   SELECT
+--     empno,
+--     ename,
+--     sal,
+--     job,
+--     comm,
+--     ROW_NUMBER() OVER (PARTITION BY empno, ename, sal, job, comm ORDER BY empno) AS rn
+--   FROM
+--     king_emp
+-- )
+-- DELETE FROM king_emp
+-- WHERE (empno, ename, sal, job, comm) IN (
+--   SELECT empno, ename, sal, job, comm
+--   FROM DuplicateCTE
+--   WHERE rn > 1
+-- );
+
+--employee salary greater than manager salary
+
+-- WITH EmpCTE AS (
+--   SELECT
+--     emp.empno,
+--     emp.ename,
+--     emp.sal,
+--     emp.mgr,
+--     mgr.sal AS manager_salary
+--   FROM
+--     king_emp emp
+--   INNER JOIN
+--     king_emp mgr ON emp.mgr = mgr.empno
+-- )
+-- SELECT
+--   empno,
+--   ename,
+--   sal
+-- FROM
+--   EmpCTE
+-- WHERE
+--   sal > manager_salary;
