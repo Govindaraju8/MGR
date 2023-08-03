@@ -159,3 +159,75 @@ xhr.send();
 </body>
 </html>
 
+/************************** with some styling *********************************/
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Project</title>
+</head>
+<body id="exam">
+  <center><marquee direction="right" style="background-color:skyblue;"><h1>My Project</h1></marquee>
+  <h1>Click here to display details</h1>
+  <select id="examSelect">
+    <option value="312-50">Exam1</option>
+    <option value="PT0-001">Exam2</option>
+    <option value="PT0-002">Exam3</option>
+    <option value="XK0-004">Exam4</option>
+    <option value="FC0-U51">Exam5</option>
+    <option value="CS0-002">Exam6</option>
+  </select>
+  <!--button id="examSelect">Click Here</button-->
+  <div id="demo"style="color:pink;"></div></center>
+
+  <script>
+	/*document.getElementById('examSelect').addEventListener('click',function(){
+	fetchExamData();
+	});*/
+    document.getElementById('examSelect').addEventListener('change', function () {
+      fetchExamData();
+    });
+
+    function fetchExamData() {
+      const selectedValue = document.getElementById('examSelect').value;
+      const xhr = new XMLHttpRequest();
+      const url = 'https://tech-exams.p.rapidapi.com/AllExams';
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            const result = JSON.parse(xhr.responseText);
+
+            // Find the exam object with the selected examNumber
+            const selectedExam = result.data.find(exam => exam.examNumber === selectedValue);
+
+            if (selectedExam) {
+              // Display the exam details for the selected exam
+              const out1 = document.getElementById('demo');
+              out1.innerHTML = `
+                <h2>Exam Provider: ${selectedExam.examProvider}</h2>
+                <h2>Exam Description: ${selectedExam.examDescription}</h2>
+                <h2>Exam Number: ${selectedExam.examNumber}</h2>
+              `;
+            } else {
+              // Handle the case when the selected exam is not found
+              const out1 = document.getElementById('demo');
+              out1.innerText = 'Selected exam details not found.';
+            }
+          } else {
+            console.error('Request failed. Status:', xhr.status);
+            const out1 = document.getElementById('demo');
+            out1.innerText = 'Error occurred while fetching data.';
+          }
+        }
+      };
+
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader('X-RapidAPI-Key', '0518ab806amsh385a3e507c16152p12a57ejsn7756485bbfb2');
+      xhr.setRequestHeader('X-RapidAPI-Host', 'tech-exams.p.rapidapi.com');
+      xhr.send();
+    }
+  </script>
+</body>
+</html-->
+
