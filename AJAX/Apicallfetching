@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>my project</title>
+</head>
+<body>
+<center>My project</center>
+<p>click here to display details</p>
+<button id="educt" >Click Here</button>
+<div id="demo"></div>
+<script>
+document.getElementById('educt').addEventListener('click',function(){
+const xhr=new XMLHttpRequest();
+const url='https://tech-exams.p.rapidapi.com/AllExams';
+xhr.onreadystatechange=function(){
+	if(xhr.readyState===4){
+	if(xhr.status===200)
+	{
+	const result= JSON.parse(xhr.responseText);
+	const a1=result.data;
+	const d1=a1[0].examNumber;
+	
+	
+	const out1=document.getElementById('demo');
+	out1.innerText=JSON.stringify(d1,null,2);
+	}
+	else
+	{
+	console.error('request failed.Status:',xhr.status);
+	const out1=document.getElementById('demo');
+	out1.innerText="error occurs";
+}
+}
+};
+xhr.open('GET',url,true);
+xhr.setRequestHeader('X-RapidAPI-Key','0518ab806amsh385a3e507c16152p12a57ejsn7756485bbfb2');
+xhr.setRequestHeader('X-RapidAPI-Host','tech-exams.p.rapidapi.com');
+xhr.send();
+});
+</script>
+</body>
+</html>
