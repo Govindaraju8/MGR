@@ -115,3 +115,47 @@ xhr.send();
   </script>
 </body>
 </html>
+
+/************************example data *********************************************************************************/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX API Call Example</title>
+</head>
+<body>
+  <h1>API Call Example</h1>
+  <button id="getDataButton">Get Data</button>
+  <div id="output"></div> <!-- Using a <div> to display API response data -->
+
+  <script>
+    document.getElementById('getDataButton').addEventListener('click', function () {
+      const xhr = new XMLHttpRequest();
+      const url = 'https://api.example.com/data';
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+            // Display the response data on the page
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerText = JSON.stringify(data, null, 2);
+          } else {
+            console.error('Request failed. Status:', xhr.status);
+            // Display an error message on the page
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerText = 'Error occurred while fetching data.';
+          }
+        }
+      };
+
+      xhr.open('GET', url, true);
+      xhr.send();
+    });
+  </script>
+</body>
+</html>
+
