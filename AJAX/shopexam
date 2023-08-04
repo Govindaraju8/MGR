@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read JSON File with jQuery</title>
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+/////////////*****************************************//////////////////////////////
+[
+ {
+  "ProductName": "Onion (Loose)",
+  "Brand": "Fresho",
+  "Price": 69.75,
+  "DiscountPrice": 52,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40075537_5-fresho-onion.jpg",
+  "Quantity": "2 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Onion",
+  "Brand": "Fresho",
+  "Price": 174.35,
+  "DiscountPrice": 130,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1201414_1-fresho-onion.jpg",
+  "Quantity": "5 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Onion (Loose)",
+  "Brand": "Fresho",
+  "Price": 34.87,
+  "DiscountPrice": 26,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000148_30-fresho-onion.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Onion",
+  "Brand": "Fresho",
+  "Price": 69.74,
+  "DiscountPrice": 52,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1201413_1-fresho-onion.jpg",
+  "Quantity": "2 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Onion (Loose)",
+  "Brand": "Fresho",
+  "Price": 174.37,
+  "DiscountPrice": 129,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000150_19-fresho-onion.jpg",
+  "Quantity": "5 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Farm Eggs - Table Tray, Medium, Antibiotic Residue-Free",
+  "Brand": "Fresho",
+  "Price": 110,
+  "DiscountPrice": 78,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40072320_2-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg",
+  "Quantity": "12 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Farm Eggs - Table Tray, Medium, Antibiotic Residue-Free",
+  "Brand": "Fresho",
+  "Price": 210,
+  "DiscountPrice": 181,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/150502_6-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg",
+  "Quantity": "30 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Potato (Loose)",
+  "Brand": "Fresho",
+  "Price": 50.32,
+  "DiscountPrice": 38.75,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40048457_9-fresho-potato-new-crop.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Potato",
+  "Brand": "Fresho",
+  "Price": 100.65,
+  "DiscountPrice": 77.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40162469_6-fresho-potato-new-crop.jpg",
+  "Quantity": "2 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Eggs - Regular",
+  "Brand": "Fresho",
+  "Price": 250,
+  "DiscountPrice": 250,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1205938_1-fresho-eggs-regular.jpg",
+  "Quantity": "5x6 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Farm Eggs - Regular, Medium, Antibiotic Residue-Free",
+  "Brand": "Fresho",
+  "Price": 50,
+  "DiscountPrice": 38,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/281204_9-fresho-farm-eggs-regular-medium-antibiotic-residue-free.jpg",
+  "Quantity": "6 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Eggs - Regular",
+  "Brand": "Fresho",
+  "Price": 100,
+  "DiscountPrice": 76,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1203477_2-fresho-eggs-regular.jpg",
+  "Quantity": "2x6 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Eggs - Regular",
+  "Brand": "Fresho",
+  "Price": 200,
+  "DiscountPrice": 200,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1205933_1-fresho-eggs-regular.jpg",
+  "Quantity": "4x6 pcs",
+  "Category": "Eggs, Meat & Fish",
+  "SubCategory": "Farm Eggs"
+ },
+ {
+  "ProductName": "Atta\/Godihittu - Whole Wheat",
+  "Brand": "Aashirvaad",
+  "Price": 119,
+  "DiscountPrice": 118,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/161826_8-aashirvaad-atta-whole-wheat.jpg",
+  "Quantity": "2 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Atta Whole Wheat"
+ },
+ {
+  "ProductName": "Atta\/Godihittu - Whole Wheat",
+  "Brand": "Aashirvaad",
+  "Price": 301,
+  "DiscountPrice": 292,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/126903_9-aashirvaad-atta-whole-wheat.jpg",
+  "Quantity": "5 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Atta Whole Wheat"
+ },
+ {
+  "ProductName": "Atta\/Godihittu - Whole Wheat",
+  "Brand": "Aashirvaad",
+  "Price": 65,
+  "DiscountPrice": 63,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30006887_7-aashirvaad-atta-whole-wheat.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Atta Whole Wheat"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid, Original",
+  "Brand": "Harpic",
+  "Price": 93,
+  "DiscountPrice": 93,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/263754_13-harpic-power-plus-disinfectant-toilet-cleaner-liquid-original.jpg",
+  "Quantity": "500 ml",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid - Original",
+  "Brand": "Harpic",
+  "Price": 186,
+  "DiscountPrice": 182.28,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200366_7-harpic-original-disinfectant-toilet-cleaner-liquid.jpg",
+  "Quantity": "500 ml",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid, Original",
+  "Brand": "Harpic",
+  "Price": 195,
+  "DiscountPrice": 181,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/298290_11-harpic-power-plus-disinfectant-toilet-cleaner-original.jpg",
+  "Quantity": "1 L",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid - Original",
+  "Brand": "Harpic",
+  "Price": 390,
+  "DiscountPrice": 360.15,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200277_10-harpic-disinfectant-toilet-cleaner-liquid-original-kills-999-germs.jpg",
+  "Quantity": "1 L",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid - Original",
+  "Brand": "Harpic",
+  "Price": 585,
+  "DiscountPrice": 543,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1207190_6-harpic-original-disinfectant-toilet-cleaner-liquid.jpg",
+  "Quantity": "1 L each",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid, Original",
+  "Brand": "Harpic",
+  "Price": 40,
+  "DiscountPrice": 40,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/263737_10-harpic-power-plus-disinfectant-toilet-cleaner-liquid-original.jpg",
+  "Quantity": "200 ml",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Disinfectant Toilet Cleaner Liquid, Original",
+  "Brand": "Harpic",
+  "Price": 390,
+  "DiscountPrice": 390,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40202555_2-harpic-power-plus-disinfectant-toilet-cleaner.jpg",
+  "Quantity": "1 L each",
+  "Category": "Cleaning & Household",
+  "SubCategory": "Toilet Cleaners"
+ },
+ {
+  "ProductName": "Tomato - Hybrid (Loose)",
+  "Brand": "Fresho",
+  "Price": 26.9,
+  "DiscountPrice": 17.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000200_17-fresho-tomato-hybrid.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Tomato - Hybrid (Loose)",
+  "Brand": "Fresho",
+  "Price": 13.45,
+  "DiscountPrice": 9,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000201_15-fresho-tomato-hybrid.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Red Label",
+  "Price": 40,
+  "DiscountPrice": 40,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266616_16-red-label-tea.jpg",
+  "Quantity": "100 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Red Label",
+  "Price": 285,
+  "DiscountPrice": 285,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266569_16-red-label-tea.jpg",
+  "Quantity": "500 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Red Label",
+  "Price": 145,
+  "DiscountPrice": 132,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266575_18-red-label-tea.jpg",
+  "Quantity": "250 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Red Label",
+  "Price": 570,
+  "DiscountPrice": 526,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/102871_11-red-label-tea.jpg",
+  "Quantity": "1 Kg",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Paneer - Premium Fresh",
+  "Brand": "Milky Mist",
+  "Price": 470,
+  "DiscountPrice": 440,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/137575_4-milky-mist-paneer-premium-fresh.jpg",
+  "Quantity": "1 kg",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Paneer, Tofu & Cream"
+ },
+ {
+  "ProductName": "Paneer - Premium Fresh",
+  "Brand": "Milky Mist",
+  "Price": 224,
+  "DiscountPrice": 224,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200164_3-milky-mist-paneer-premium-fresh.jpg",
+  "Quantity": "2x200 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Paneer, Tofu & Cream"
+ },
+ {
+  "ProductName": "Paneer - Premium Fresh",
+  "Brand": "Milky Mist",
+  "Price": 275,
+  "DiscountPrice": 255,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40003150_3-milky-mist-paneer-premium-fresh.jpg",
+  "Quantity": "500 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Paneer, Tofu & Cream"
+ },
+ {
+  "ProductName": "Paneer - Premium Fresh",
+  "Brand": "Milky Mist",
+  "Price": 112,
+  "DiscountPrice": 112,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/264679_3-milky-mist-paneer-premium-fresh.jpg",
+  "Quantity": "200 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Paneer, Tofu & Cream"
+ },
+ {
+  "ProductName": "Tomato - Local (Loose)",
+  "Brand": "Fresho",
+  "Price": 25.97,
+  "DiscountPrice": 17.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000203_16-fresho-tomato-local.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Tomato - Local (Loose)",
+  "Brand": "Fresho",
+  "Price": 12.99,
+  "DiscountPrice": 9,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000204_16-fresho-tomato-local.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Potato, Onion & Tomato"
+ },
+ {
+  "ProductName": "Carrot - Orange (Loose)",
+  "Brand": "Fresho",
+  "Price": 50.65,
+  "DiscountPrice": 39,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000072_16-fresho-carrot-orange.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Root Vegetables"
+ },
+ {
+  "ProductName": "Carrot - Orange (Loose)",
+  "Brand": "Fresho",
+  "Price": 101.3,
+  "DiscountPrice": 78,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000070_15-fresho-carrot-orange.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Root Vegetables"
+ },
+ {
+  "ProductName": "Carrot - Orange (Loose)",
+  "Brand": "Fresho",
+  "Price": 25.32,
+  "DiscountPrice": 19.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000071_14-fresho-carrot-orange.jpg",
+  "Quantity": "250 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Root Vegetables"
+ },
+ {
+  "ProductName": "2-Minute Instant Noodles - Masala",
+  "Brand": "MAGGI ",
+  "Price": 82,
+  "DiscountPrice": 72,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266112_17-maggi-2-minute-instant-noodles-masala.jpg",
+  "Quantity": "420 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "Masala Instant Noodles Vegetarian",
+  "Brand": "MAGGI ",
+  "Price": 14,
+  "DiscountPrice": 14,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266160_19-maggi-masala-instant-noodles-vegetarian.jpg",
+  "Quantity": "70 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "2-Minute Noodles Masala - Made With Quality Spices, Rich In Fibre",
+  "Brand": "MAGGI ",
+  "Price": 168,
+  "DiscountPrice": 156,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40125873_4-maggi-2-minute-noodles-masala.jpg",
+  "Quantity": "70 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "2-Minute Instant Masala Noodles - Made With Quality Spices, Source Of Iron",
+  "Brand": "MAGGI ",
+  "Price": 55,
+  "DiscountPrice": 52.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266162_17-maggi-2-minute-instant-noodles-masala.jpg",
+  "Quantity": "280 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "Masala 2 Minute Instant Noodles",
+  "Brand": "MAGGI ",
+  "Price": 28,
+  "DiscountPrice": 28,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266165_14-maggi-masala-2-minute-instant-noodles.jpg",
+  "Quantity": "140 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "2-Minute Instant Masala Noodles - Made With Quality Spices, Goodness Of Iron",
+  "Brand": "MAGGI ",
+  "Price": 109,
+  "DiscountPrice": 109,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266109_19-maggi-2-minute-instant-noodles-masala.jpg",
+  "Quantity": "560 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Instant Noodles"
+ },
+ {
+  "ProductName": "Idly Dosa Batter",
+  "Brand": "iD Fresho",
+  "Price": 158,
+  "DiscountPrice": 145,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1208825_3-id-fresho-idly-dosa-batter.jpg",
+  "Quantity": "2x1 kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Breakfast & Snack Mixes"
+ },
+ {
+  "ProductName": "Idly & Dosa Batter",
+  "Brand": "iD Fresho",
+  "Price": 79,
+  "DiscountPrice": 72.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/271205_14-id-fresho-idly-dosa-batter.jpg",
+  "Quantity": "1 Kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Breakfast & Snack Mixes"
+ },
+ {
+  "ProductName": "Bathing Bar Soap - Germ Protection, Original",
+  "Brand": "Dettol",
+  "Price": 600,
+  "DiscountPrice": 456,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206304_6-dettol-bathing-bar-soap-germ-protection-original.jpg",
+  "Quantity": "8x125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Bathing Bar Soap - Original",
+  "Brand": "Dettol",
+  "Price": 240,
+  "DiscountPrice": 225.6,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1208387_5-dettol-bathing-bar-soap-original.jpg",
+  "Quantity": "6x75 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Original Bathing Bar Soap, Daily Protection from Germs",
+  "Brand": "Dettol",
+  "Price": 75,
+  "DiscountPrice": 75,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/100008548_25-dettol-original-bathing-soap-bar-with-76-tfm-protects-from-germs.jpg",
+  "Quantity": "125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Bathing Soap - Original",
+  "Brand": "Dettol",
+  "Price": 300,
+  "DiscountPrice": 249,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200377_8-dettol-bathing-soap-original.jpg",
+  "Quantity": "4x125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Bathing Soap - Original",
+  "Brand": "Dettol",
+  "Price": 150,
+  "DiscountPrice": 132,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1203036_6-dettol-bathing-soap-original.jpg",
+  "Quantity": "2x125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Bathing Bar Soap - Germ Protection, Original",
+  "Brand": "Dettol",
+  "Price": 450,
+  "DiscountPrice": 360,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206303_6-dettol-bathing-bar-soap-germ-protection-original.jpg",
+  "Quantity": "6x125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Colgate Strong Teeth, 150 gm, Indiaâ€™s No: 1 Toothpaste Brand, Calcium-boost for 2X Stronger Teeth, Prevents cavities, Whitens Teeth,Â  Freshens Breath",
+  "Brand": "Colgate",
+  "Price": 85,
+  "DiscountPrice": 85,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/20005547_11-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg",
+  "Quantity": "150 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Colgate Strong Teeth, 500 gm, Indiaâ€™s No: 1 Toothpaste Brand, Calcium-boost for 2X Stronger Teeth, Prevents cavities, Whitens Teeth,Â  Freshens Breath",
+  "Brand": "Colgate",
+  "Price": 244,
+  "DiscountPrice": 219.6,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40186855_5-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg",
+  "Quantity": "500 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Toothpaste - Strong Teeth, Dental Cream, Anti Cavity",
+  "Brand": "Colgate",
+  "Price": 346,
+  "DiscountPrice": 325.36,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1205003_5-colgate-toothpaste-strong-teeth-dental-cream-anti-cavity.jpg",
+  "Quantity": "2x300 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Colgate Strong Teeth, 100 gm, Indiaâ€™s No: 1 Toothpaste Brand, Calcium-boost for 2X Stronger Teeth, Prevents cavities, Whitens Teeth,Â  Freshens Breath",
+  "Brand": "Colgate",
+  "Price": 63,
+  "DiscountPrice": 63,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/100006161_16-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg",
+  "Quantity": "100 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Colgate Strong Teeth, 300 gm, Indiaâ€™s No: 1 Toothpaste Brand, Calcium-boost for 2X Stronger Teeth, Prevents cavities, Whitens Teeth,Â  Freshens Breath",
+  "Brand": "Colgate",
+  "Price": 173,
+  "DiscountPrice": 166,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/263925_17-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg",
+  "Quantity": "3 pcs",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Strong Teeth Anticavity Toothpaste With Amino Shakti - Saver Pack",
+  "Brand": "Colgate",
+  "Price": 488,
+  "DiscountPrice": 429.45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1212657_3-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-saver-pack.jpg",
+  "Quantity": "2x500 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Toothpaste"
+ },
+ {
+  "ProductName": "Rice\/Akki - Raw, Sona Masoori",
+  "Brand": "BB Royal",
+  "Price": 70,
+  "DiscountPrice": 57,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000457_13-bb-royal-rice-raw-sona-masoori.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Raw Rice"
+ },
+ {
+  "ProductName": "Rice\/Akki - Raw, Sona Masoori, 12-17 Months Old",
+  "Brand": "BB Royal",
+  "Price": 700,
+  "DiscountPrice": 545,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000404_18-bb-royal-rice-raw-sona-masoori-12-17-months-old.jpg",
+  "Quantity": "10 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Raw Rice"
+ },
+ {
+  "ProductName": "Sona Masoori Raw Rice\/Akki",
+  "Brand": "BB Royal",
+  "Price": 1750,
+  "DiscountPrice": 1245,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/20001214_15-bb-royal-sona-masoori-raw-rice.jpg",
+  "Quantity": "25 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Raw Rice"
+ },
+ {
+  "ProductName": "Rice\/Akki - Raw, Sona Masoori",
+  "Brand": "BB Royal",
+  "Price": 350,
+  "DiscountPrice": 280,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000415_14-bb-royal-rice-raw-sona-masoori.jpg",
+  "Quantity": "5 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Raw Rice"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 50,
+  "DiscountPrice": 39,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40216129_10-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 200,
+  "DiscountPrice": 151,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214882_8-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "4x200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 300,
+  "DiscountPrice": 219,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214883_8-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "6x200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 400,
+  "DiscountPrice": 288,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214884_9-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "8x200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 600,
+  "DiscountPrice": 417.6,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214885_4-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "12x200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Tender Coconut Water - No Added Sugar, Flavours",
+  "Brand": "Fresho",
+  "Price": 1200,
+  "DiscountPrice": 806.4,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214886_8-fresho-tender-coconut-water-no-added-sugar-flavours.jpg",
+  "Quantity": "24x200 ml",
+  "Category": "Beverages",
+  "SubCategory": "Juices"
+ },
+ {
+  "ProductName": "Original Extra Virgin Olive Oil",
+  "Brand": "BORGES",
+  "Price": 1400,
+  "DiscountPrice": 728,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40006250_7-borges-extra-virgin-olive-oil.jpg",
+  "Quantity": "1 L",
+  "Category": "Gourmet & World Food",
+  "SubCategory": "Extra Virgin Olive Oil"
+ },
+ {
+  "ProductName": "Extra Virgin Olive Oil",
+  "Brand": "BORGES",
+  "Price": 6000,
+  "DiscountPrice": 3060,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40208261_1-borges-extra-virgin-olive-oil.jpg",
+  "Quantity": "5 L",
+  "Category": "Gourmet & World Food",
+  "SubCategory": "Extra Virgin Olive Oil"
+ },
+ {
+  "ProductName": "Original Extra Virgin Olive Oil",
+  "Brand": "BORGES",
+  "Price": 2700,
+  "DiscountPrice": 1377,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40191534_1-borges-extra-virgin-olive-oil.jpg",
+  "Quantity": "2 L",
+  "Category": "Gourmet & World Food",
+  "SubCategory": "Extra Virgin Olive Oil"
+ },
+ {
+  "ProductName": "Frozen Green Peas",
+  "Brand": "Fresho",
+  "Price": 135,
+  "DiscountPrice": 99,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40192104_9-fresho-frozen-green-peas.jpg",
+  "Quantity": "500 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Frozen Vegetables"
+ },
+ {
+  "ProductName": "Frozen Green Peas",
+  "Brand": "Fresho",
+  "Price": 480,
+  "DiscountPrice": 378,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214513_9-fresho-frozen-green-peas.jpg",
+  "Quantity": "2x1 kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Frozen Vegetables"
+ },
+ {
+  "ProductName": "Frozen Green Peas",
+  "Brand": "Fresho",
+  "Price": 240,
+  "DiscountPrice": 189,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40163718_11-fresho-frozen-green-peas.jpg",
+  "Quantity": "1 Kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Frozen Vegetables"
+ },
+ {
+  "ProductName": "Frozen Green Peas",
+  "Brand": "Fresho",
+  "Price": 270,
+  "DiscountPrice": 198,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1210065_9-fresho-frozen-green-peas.jpg",
+  "Quantity": "2x500 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Frozen Vegetables"
+ },
+ {
+  "ProductName": "Tea - Natural Care",
+  "Brand": "Red Label",
+  "Price": 650,
+  "DiscountPrice": 567,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/226491_10-red-label-tea-natural-care.jpg",
+  "Quantity": "1 kg",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea - Natural Care",
+  "Brand": "Red Label",
+  "Price": 170,
+  "DiscountPrice": 151,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266615_12-red-label-tea-natural-care.jpg",
+  "Quantity": "250 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea - Natural Care",
+  "Brand": "Red Label",
+  "Price": 330,
+  "DiscountPrice": 296,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/274791_12-red-label-tea-natural-care.jpg",
+  "Quantity": "500 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea - Natural Care",
+  "Brand": "Red Label",
+  "Price": 65,
+  "DiscountPrice": 65,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266583_10-red-label-tea-natural-care.jpg",
+  "Quantity": "100 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Carbon Zinc Battery Red HD AA 1015",
+  "Brand": "Eveready",
+  "Price": 360,
+  "DiscountPrice": 261.9,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214632_2-eveready-carbon-zinc-battery-red-hd-aa-1015.jpg",
+  "Quantity": "2 x 10 pcs",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Battery & Electrical"
+ },
+ {
+  "ProductName": "Carbon Zinc Battery Red HD AA 1015",
+  "Brand": "Eveready",
+  "Price": 180,
+  "DiscountPrice": 135,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/106417_2-eveready-carbon-zinc-battery-red-hd-aa-1015.jpg",
+  "Quantity": "10 pcs",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Battery & Electrical"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Taj Mahal",
+  "Price": 800,
+  "DiscountPrice": 730,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/137936_11-taj-mahal-tea.jpg",
+  "Quantity": "1 Kg",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Taj Mahal",
+  "Price": 410,
+  "DiscountPrice": 391,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266564_11-taj-mahal-tea.jpg",
+  "Quantity": "500 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Rich & Flavourful Tea",
+  "Brand": "Taj Mahal",
+  "Price": 90,
+  "DiscountPrice": 90,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266597_12-taj-mahal-rich-flavourful-tea.jpg",
+  "Quantity": "100 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Taj Mahal",
+  "Price": 220,
+  "DiscountPrice": 220,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266551_8-taj-mahal-tea.jpg",
+  "Quantity": "250 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Ladies Finger (Loose)",
+  "Brand": "Fresho",
+  "Price": 31.82,
+  "DiscountPrice": 24.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000144_13-fresho-ladies-finger.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Beans, Brinjals & Okra"
+ },
+ {
+  "ProductName": "Ladies Finger (Loose)",
+  "Brand": "Fresho",
+  "Price": 63.64,
+  "DiscountPrice": 49,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000142_16-fresho-ladies-finger.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Beans, Brinjals & Okra"
+ },
+ {
+  "ProductName": "Ladies Finger (Loose)",
+  "Brand": "Fresho",
+  "Price": 15.91,
+  "DiscountPrice": 12.25,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000143_14-fresho-ladies-finger.jpg",
+  "Quantity": "250 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Beans, Brinjals & Okra"
+ },
+ {
+  "ProductName": "Dry Pet Food - For Adult Dogs, Chicken & Vegetables",
+  "Brand": "Pedigree",
+  "Price": 105,
+  "DiscountPrice": 105,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/265378_14-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "400 g",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Dry Dog Food - Chicken & Vegetables, For Adult Dogs",
+  "Brand": "Pedigree",
+  "Price": 285,
+  "DiscountPrice": 256.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/256652_14-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "1.2 kg",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Dry Pet Food - For Adult Dogs, Chicken & Vegetables",
+  "Brand": "Pedigree",
+  "Price": 1390,
+  "DiscountPrice": 1223.2,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40021902_16-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "6 kg",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Dry Pet Food - For Adult Dogs, Chicken & Vegetables",
+  "Brand": "Pedigree",
+  "Price": 725,
+  "DiscountPrice": 562,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30005107_17-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "3 kg",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Dry Pet Food - For Adult Dogs, Chicken & Vegetables",
+  "Brand": "Pedigree",
+  "Price": 3160,
+  "DiscountPrice": 2686,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30005108_18-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "15 kg",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Dry Pet Food - For Adult Dogs, Chicken & Vegetables",
+  "Brand": "Pedigree",
+  "Price": 2220,
+  "DiscountPrice": 1887,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/130331_16-pedigree-dry-dog-food-chicken-vegetables-for-adult-dogs.jpg",
+  "Quantity": "10 kg",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 66.55,
+  "DiscountPrice": 66.55,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/253537_9-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "125 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 127.77,
+  "DiscountPrice": 127.77,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/253539_10-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "250 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 214.06,
+  "DiscountPrice": 214.06,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/208003_11-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "550 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 1641.59,
+  "DiscountPrice": 1641.59,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40005079_6-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "5 L",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 331.41,
+  "DiscountPrice": 331.41,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40124254_9-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "1 L",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Antiseptic Disinfectant Liquid",
+  "Brand": "Dettol",
+  "Price": 33.27,
+  "DiscountPrice": 33.27,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/253535_7-dettol-antiseptic-disinfectant-liquid.jpg",
+  "Quantity": "60 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Antiseptics & Bandages"
+ },
+ {
+  "ProductName": "Cumin\/Jeera\/Jeerige - Whole",
+  "Brand": "BB Royal",
+  "Price": 600,
+  "DiscountPrice": 380,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40030808_10-bb-royal-cuminjeera-whole.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Cumin\/Jeera\/Jeerige - Whole",
+  "Brand": "BB Royal",
+  "Price": 300,
+  "DiscountPrice": 192,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40026603_9-bb-royal-cuminjeera-whole.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Cumin\/Jeera\/Jeerige - Whole",
+  "Brand": "BB Royal",
+  "Price": 30,
+  "DiscountPrice": 20,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30000308_10-bb-royal-cuminjeera-whole.jpg",
+  "Quantity": "50 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Cumin\/Jeera\/Jeerige - Whole",
+  "Brand": "BB Royal",
+  "Price": 120,
+  "DiscountPrice": 78,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000486_14-bb-royal-cuminjeera-whole.jpg",
+  "Quantity": "200 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Cumin\/Jeera\/Jeerige - Whole",
+  "Brand": "BB Royal",
+  "Price": 60,
+  "DiscountPrice": 40,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000479_13-bb-royal-cuminjeera-whole.jpg",
+  "Quantity": "100 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "GoodLife UHT Treated Toned Milk",
+  "Brand": "Nandini",
+  "Price": 28,
+  "DiscountPrice": 28,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/242671_1-nandini-goodlife-toned-milk.jpg",
+  "Quantity": "500 ml",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Milk"
+ },
+ {
+  "ProductName": "Adult Gravy DogÃ‚Â Food - Chicken & Liver Chunks In Gravy, 25 RsÃ‚Â Off Value Pack",
+  "Brand": "Pedigree",
+  "Price": 600,
+  "DiscountPrice": 494,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/70001924_13-pedigree-adult-gravy-doga-food-chicken-liver-chunks-in-gravy-25-rsa-off-value-pack.jpg",
+  "Quantity": "70 g",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Pet Meals & Treats"
+ },
+ {
+  "ProductName": "GoodLife UHT Treated Toned Milk",
+  "Brand": "Nandini",
+  "Price": 60,
+  "DiscountPrice": 60,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/100285703_15-nandini-goodlife-toned-milk.jpg",
+  "Quantity": "1 L",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Milk"
+ },
+ {
+  "ProductName": "Assam Teas With Gently Rolled Aromatic Long Leaves, Rich & Aromatic Chai, Black Tea",
+  "Brand": "Tata Tea Gold",
+  "Price": 620,
+  "DiscountPrice": 527,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/240065_14-tata-tea-gold-tea.jpg",
+  "Quantity": "1 kg",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Tata Tea Gold",
+  "Price": 145,
+  "DiscountPrice": 145,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/263642_19-tata-tea-gold-tea.jpg",
+  "Quantity": "250 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Assam Teas With Gently Rolled Aromatic Long Leaves, Rich & Aromatic Chai, Black Tea",
+  "Brand": "Tata Tea Gold",
+  "Price": 285,
+  "DiscountPrice": 232,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/240067_19-tata-tea-gold-tea.jpg",
+  "Quantity": "500 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Tata Tea Gold",
+  "Price": 40,
+  "DiscountPrice": 40,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/264565_4-tata-tea-gold-tea.jpg",
+  "Quantity": "100 g",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Tea",
+  "Brand": "Tata Tea Gold",
+  "Price": 885,
+  "DiscountPrice": 708,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40200082_3-tata-tea-gold-tea.jpg",
+  "Quantity": "1.5 Kg",
+  "Category": "Beverages",
+  "SubCategory": "Leaf & Dust Tea"
+ },
+ {
+  "ProductName": "Sun Lite - Sunflower Refined Oil",
+  "Brand": "Fortune ",
+  "Price": 189,
+  "DiscountPrice": 181,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/274145_14-fortune-sun-lite-sunflower-refined-oil.jpg",
+  "Quantity": "1 L",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sunflower, Rice Bran Oil"
+ },
+ {
+  "ProductName": "Sunflower Refined Oil - Sun Lite",
+  "Brand": "Fortune ",
+  "Price": 567,
+  "DiscountPrice": 534,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1204455_2-fortune-sunflower-refined-oil-sun-lite.jpg",
+  "Quantity": "3x910 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sunflower, Rice Bran Oil"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar",
+  "Brand": "Dove",
+  "Price": 128,
+  "DiscountPrice": 128,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1203041_2-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "2x75 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar",
+  "Brand": "Dove",
+  "Price": 840,
+  "DiscountPrice": 651.64,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1209799_4-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "3x(3x125 g)",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar, Has 1\/4th Moisturizing Cream",
+  "Brand": "Dove",
+  "Price": 64,
+  "DiscountPrice": 64,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/306161_10-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "100 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar",
+  "Brand": "Dove",
+  "Price": 944,
+  "DiscountPrice": 802,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1209800_3-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "5x100 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar - For Soft,Â Smooth Skin",
+  "Brand": "Dove",
+  "Price": 870,
+  "DiscountPrice": 696,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40158282_10-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "100 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar, Has 1\/4th Moisturizing Cream",
+  "Brand": "Dove",
+  "Price": 472,
+  "DiscountPrice": 401,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40016743_10-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar",
+  "Brand": "Dove",
+  "Price": 384,
+  "DiscountPrice": 345.6,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1209809_3-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "6x100 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar, Has 1\/4th Moisturizing Cream",
+  "Brand": "Dove",
+  "Price": 280,
+  "DiscountPrice": 230,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266706_15-dove-cream-beauty-bathing-bar.jpg",
+  "Quantity": "125 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Cream Beauty Bathing Bar Soap",
+  "Brand": "Dove",
+  "Price": 512,
+  "DiscountPrice": 512,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206004_1-dove-cream-beauty-bathing-bar-soap.jpg",
+  "Quantity": "8x75 g",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Bathing Bars & Soaps"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee - Chicory Mixture",
+  "Brand": "Nescafe ",
+  "Price": 95,
+  "DiscountPrice": 90,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/20005895_6-nescafe-sunrise-instant-coffee-chicory-mixture.jpg",
+  "Quantity": "50 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Rich Aroma",
+  "Brand": "Nescafe ",
+  "Price": 795,
+  "DiscountPrice": 795,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40111434_10-nescafe-sunrise-rich-aroma.jpg",
+  "Quantity": "500 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee Powder - Chicory Mix, Extra Strong",
+  "Brand": "Nescafe ",
+  "Price": 785,
+  "DiscountPrice": 785,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/118572_3-nescafe-sunrise-extra-sachet.jpg",
+  "Quantity": "1 kg",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee - Chicory Mix, Rich In Aroma & Flavour",
+  "Brand": "Nescafe ",
+  "Price": 190,
+  "DiscountPrice": 190,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/292149_7-nescafe-sunrise-instant-coffee-chicory-mix.jpg",
+  "Quantity": "100 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee-Chicory Mix, Rich In Aroma & Flavour,",
+  "Brand": "Nescafe ",
+  "Price": 10,
+  "DiscountPrice": 10,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40020215_6-nescafe-sunrise-coffee.jpg",
+  "Quantity": "10 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee",
+  "Brand": "Nescafe ",
+  "Price": 5,
+  "DiscountPrice": 5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40020218_3-nescafe-sunrise-instant-coffee.jpg",
+  "Quantity": "5.5 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Sunrise Instant Coffee - Chicory Mix, Rich In Aroma & Flavour",
+  "Brand": "Nescafe ",
+  "Price": 380,
+  "DiscountPrice": 338,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/241695_13-nescafe-sunrise-rich-aroma-instant-coffee-chicory-mix.jpg",
+  "Quantity": "200 g",
+  "Category": "Beverages",
+  "SubCategory": "Instant Coffee"
+ },
+ {
+  "ProductName": "Gulabari Premium Rose Water - Paraben Free Skin Toner",
+  "Brand": "Dabur",
+  "Price": 170,
+  "DiscountPrice": 134.4,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1214522_3-dabur-gulabari-premium-rose-water-paraben-free-skin-toner.jpg",
+  "Quantity": "2x250 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Face Care"
+ },
+ {
+  "ProductName": "Gulabari Premium Rose Water - Daily Glow, All Skin Types, Paraben Free, Alcohol Free",
+  "Brand": "Dabur",
+  "Price": 85,
+  "DiscountPrice": 72,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/263860_8-dabur-gulabari-premium-rose-water-paraben-free-skin-toner.jpg",
+  "Quantity": "250 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Face Care"
+ },
+ {
+  "ProductName": "Gulabari Premium Rose Water - Daily Glow, All Skin Types, Paraben Free, Alcohol Free",
+  "Brand": "Dabur",
+  "Price": 50,
+  "DiscountPrice": 45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/260654_7-dabur-gulabari-premium-rose-water-paraben-free-skin-toner.jpg",
+  "Quantity": "120 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Face Care"
+ },
+ {
+  "ProductName": "Pasteurised Butter",
+  "Brand": "Amul",
+  "Price": 255,
+  "DiscountPrice": 251,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/104864_8-amul-butter-pasteurised.jpg",
+  "Quantity": "500 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Butter - Pasteurized",
+  "Brand": "Amul",
+  "Price": 104,
+  "DiscountPrice": 99.96,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200163_4-amul-butter-pasteurized.jpg",
+  "Quantity": "2x100 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Butter - Pasteurized",
+  "Brand": "Amul",
+  "Price": 510,
+  "DiscountPrice": 502,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1202759_3-amul-butter-pasteurized.jpg",
+  "Quantity": "2x500 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Butter - Pasteurised",
+  "Brand": "Amul",
+  "Price": 156,
+  "DiscountPrice": 149.94,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1205137_3-amul-butter-pasteurized-carton.jpg",
+  "Quantity": "3x100 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Pasteurised Butter",
+  "Brand": "Amul",
+  "Price": 52,
+  "DiscountPrice": 51,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/104860_8-amul-butter-pasteurised.jpg",
+  "Quantity": "100 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Butter - Pasteurized",
+  "Brand": "Amul",
+  "Price": 208,
+  "DiscountPrice": 204,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1204991_3-amul-butter-pasteurized.jpg",
+  "Quantity": "4x100 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Butter & Margarine"
+ },
+ {
+  "ProductName": "Farm Fresh Curd\/Dahi - Premium, No Preservatives",
+  "Brand": "Milky Mist",
+  "Price": 46,
+  "DiscountPrice": 45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40003162_4-milky-mist-curd-farm-fresh.jpg",
+  "Quantity": "500 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Curd"
+ },
+ {
+  "ProductName": "Farm Fresh Curd\/Dahi - Premium, No Preservatives",
+  "Brand": "Milky Mist",
+  "Price": 92,
+  "DiscountPrice": 89,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1200180_4-milky-mist-curd-farm-fresh.jpg",
+  "Quantity": "2x500 g",
+  "Category": "Bakery, Cakes & Dairy",
+  "SubCategory": "Curd"
+ },
+ {
+  "ProductName": "Chana Dal\/Kadale Bele",
+  "Brand": "BB Royal",
+  "Price": 160,
+  "DiscountPrice": 99,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000803_14-bb-royal-channa-dal.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Toor, Channa & Moong Dal"
+ },
+ {
+  "ProductName": "Chana Dal\/Kadale Bele",
+  "Brand": "BB Royal",
+  "Price": 320,
+  "DiscountPrice": 194,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40042838_11-bb-royal-channa-dal.jpg",
+  "Quantity": "2 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Toor, Channa & Moong Dal"
+ },
+ {
+  "ProductName": "Chana Dal\/Kadale Bele",
+  "Brand": "BB Royal",
+  "Price": 80,
+  "DiscountPrice": 51,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000471_17-bb-royal-channa-dal.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Toor, Channa & Moong Dal"
+ },
+ {
+  "ProductName": "Maida",
+  "Brand": "BB Royal",
+  "Price": 60,
+  "DiscountPrice": 45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000416_12-bb-royal-maida.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Maida",
+  "Brand": "BB Royal",
+  "Price": 120,
+  "DiscountPrice": 86,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40044729_7-bb-royal-maida.jpg",
+  "Quantity": "2 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Maida",
+  "Brand": "BB Royal",
+  "Price": 30,
+  "DiscountPrice": 24,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000468_12-bb-royal-maida.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Maida",
+  "Brand": "BB Royal",
+  "Price": 300,
+  "DiscountPrice": 225,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1213921_1-bb-royal-maida.jpg",
+  "Quantity": "5x1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Moong - Green, Whole\/Sabut",
+  "Brand": "BB Royal",
+  "Price": 90,
+  "DiscountPrice": 69,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000443_16-bb-royal-moong-green-wholesabut.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Toor, Channa & Moong Dal"
+ },
+ {
+  "ProductName": "Green Moong Whole\/Hesaru Kaalu - Sabut",
+  "Brand": "BB Royal",
+  "Price": 180,
+  "DiscountPrice": 135,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/20000437_12-bb-royal-green-moong-wholesabut.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Toor, Channa & Moong Dal"
+ },
+ {
+  "ProductName": "Black Soft Drink - Max Taste, Zero Sugar(Diet)",
+  "Brand": "Pepsi",
+  "Price": 35,
+  "DiscountPrice": 33.25,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40104245_6-pepsi-black-soft-drink-max-taste-zero-caldiet.jpg",
+  "Quantity": "250 ml",
+  "Category": "Beverages",
+  "SubCategory": "Cold Drinks"
+ },
+ {
+  "ProductName": "Poha \/Avalakki\/Aval\/Chivda -Thick",
+  "Brand": "BB Royal",
+  "Price": 40,
+  "DiscountPrice": 35,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000453_14-bb-royal-poha-avalakkiavalchivda-thick.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Poha, Sabudana & Murmura"
+ },
+ {
+  "ProductName": "Poha\/Avalakki\/Aval\/Chivda Thick - Flattened & Beaten Rice , Makers Breakfast &Â  Teatime Snacks",
+  "Brand": "BB Royal",
+  "Price": 80,
+  "DiscountPrice": 58,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000431_18-bb-royal-pohaavalakkiavalchivda-thick.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Poha, Sabudana & Murmura"
+ },
+ {
+  "ProductName": "Diaper Pants - XXL",
+  "Brand": "Pampers ",
+  "Price": 399,
+  "DiscountPrice": 361,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40111395_7-pampers-diaper-pants-xxl.jpg",
+  "Quantity": "16 pcs",
+  "Category": "Baby Care",
+  "SubCategory": "Diapers"
+ },
+ {
+  "ProductName": "All-Round Protection Diaper Pants - XXL, 15-25 kg, Ultra Absorb Core, Leakage Prevention for upto 12 Hours",
+  "Brand": "Pampers ",
+  "Price": 1199,
+  "DiscountPrice": 841.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40185708_4-pampers-diaper-pants-xxl.jpg",
+  "Quantity": "42 pcs",
+  "Category": "Baby Care",
+  "SubCategory": "Diapers"
+ },
+ {
+  "ProductName": "Urad Dal\/Uddina Bele - Split",
+  "Brand": "BB Popular",
+  "Price": 200,
+  "DiscountPrice": 139,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30010377_11-bb-popular-urad-dal-split.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Urad & Other Dals"
+ },
+ {
+  "ProductName": "Urad Dal\/Uddina Bele - Split",
+  "Brand": "BB Popular",
+  "Price": 100,
+  "DiscountPrice": 71,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30010379_12-bb-popular-urad-dal-split.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Urad & Other Dals"
+ },
+ {
+  "ProductName": "Mustard\/Sasive\/Rai - Small",
+  "Brand": "BB Royal",
+  "Price": 150,
+  "DiscountPrice": 80,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40026602_10-bb-royal-mustardrai-small.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Mustard\/Sasive\/Rai - Small",
+  "Brand": "BB Royal",
+  "Price": 30,
+  "DiscountPrice": 17,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000482_13-bb-royal-mustardrai-small.jpg",
+  "Quantity": "100 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Mustard\/Sasive\/Rai - Small",
+  "Brand": "BB Royal",
+  "Price": 300,
+  "DiscountPrice": 158,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40030810_8-bb-royal-mustardrai-small.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Mustard\/Sasive\/Rai - Small",
+  "Brand": "BB Royal",
+  "Price": 60,
+  "DiscountPrice": 32,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000485_14-bb-royal-mustardrai-small.jpg",
+  "Quantity": "200 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Whole Spices"
+ },
+ {
+  "ProductName": "Organic - Almond\/Badam",
+  "Brand": "BB Royal",
+  "Price": 675,
+  "DiscountPrice": 549,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40101871_11-bb-royal-organic-almondbadam.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Dry Fruits"
+ },
+ {
+  "ProductName": "Organic - Almond\/Badam",
+  "Brand": "BB Royal",
+  "Price": 1299,
+  "DiscountPrice": 1089,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40125916_10-bb-royal-organic-almondbadam.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Dry Fruits"
+ },
+ {
+  "ProductName": "Organic - Almond\/Badam",
+  "Brand": "BB Royal",
+  "Price": 140,
+  "DiscountPrice": 125,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40072510_14-bb-royal-organic-almondbadam.jpg",
+  "Quantity": "100 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Dry Fruits"
+ },
+ {
+  "ProductName": "Organic - Almond\/Badam",
+  "Brand": "BB Royal",
+  "Price": 375,
+  "DiscountPrice": 235,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40092231_10-bb-royal-organic-almondbadam.jpg",
+  "Quantity": "200 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Dry Fruits"
+ },
+ {
+  "ProductName": "Ridge Gourd",
+  "Brand": "Fresho",
+  "Price": 45.45,
+  "DiscountPrice": 21.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000176_15-fresho-ridge-gourd.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Gourd, Pumpkin, Drumstick"
+ },
+ {
+  "ProductName": "Ridge Gourd",
+  "Brand": "Fresho",
+  "Price": 90.91,
+  "DiscountPrice": 43,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000175_15-fresho-ridge-gourd.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Gourd, Pumpkin, Drumstick"
+ },
+ {
+  "ProductName": "H2O Unbreakable Water Bottle - Blue",
+  "Brand": "Cello",
+  "Price": 1236,
+  "DiscountPrice": 714,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206863_1-cello-h2o-unbreakable-water-bottle-blue.jpg",
+  "Quantity": "6x1 L",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Water & Fridge Bottles"
+ },
+ {
+  "ProductName": "H2o Unbreakable Water Bottle - Blue",
+  "Brand": "Cello",
+  "Price": 206,
+  "DiscountPrice": 119,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40080581_2-cello-h2o-unbreakable-water-bottle-blue.jpg",
+  "Quantity": "1 L",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Water & Fridge Bottles"
+ },
+ {
+  "ProductName": "H2O Unbreakable Water Bottle - Blue",
+  "Brand": "Cello",
+  "Price": 618,
+  "DiscountPrice": 267,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206870_1-cello-h2o-unbreakable-water-bottle-blue.jpg",
+  "Quantity": "3x1 L",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Water & Fridge Bottles"
+ },
+ {
+  "ProductName": "H2O Unbreakable Water Bottle - Blue",
+  "Brand": "Cello",
+  "Price": 412,
+  "DiscountPrice": 178,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1206877_1-cello-h2o-unbreakable-water-bottle-blue.jpg",
+  "Quantity": "2x1 L",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Water & Fridge Bottles"
+ },
+ {
+  "ProductName": "Coccinia (Loose)",
+  "Brand": "Fresho",
+  "Price": 87.66,
+  "DiscountPrice": 58.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000089_19-fresho-coccinia.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Cucumber & Capsicum"
+ },
+ {
+  "ProductName": "Coccinia (Loose)",
+  "Brand": "Fresho",
+  "Price": 21.92,
+  "DiscountPrice": 15,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000090_17-fresho-coccinia.jpg",
+  "Quantity": "250 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Cucumber & Capsicum"
+ },
+ {
+  "ProductName": "Coccinia (Loose)",
+  "Brand": "Fresho",
+  "Price": 43.83,
+  "DiscountPrice": 29.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000091_18-fresho-coccinia.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Cucumber & Capsicum"
+ },
+ {
+  "ProductName": "Oats Breakfast Cereal - Rich In Protein, Dietary Fibre, Nutritious, Easy To Cook",
+  "Brand": "Quaker",
+  "Price": 199,
+  "DiscountPrice": 179,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/208345_20-quaker-oats-breakfast-cereal-rich-in-protein-dietary-fibre-nutritious-easy-to-cook.jpg",
+  "Quantity": "1 Kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Oats & Porridge"
+ },
+ {
+  "ProductName": "Oats Breakfast Cereal - Rich In Protein, Dietary Fibre, Nutritious, Easy To Cook",
+  "Brand": "Quaker",
+  "Price": 79,
+  "DiscountPrice": 72.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/266122_16-quaker-oats-breakfast-cereal-rich-in-protein-dietary-fibre-nutritious-easy-to-cook.jpg",
+  "Quantity": "400 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Oats & Porridge"
+ },
+ {
+  "ProductName": "Oats - Multigrain, Breakfast Cereal, Rich In Fibre & Calcium, Good For Heart",
+  "Brand": "Quaker",
+  "Price": 175,
+  "DiscountPrice": 130,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40007739_18-quaker-oats-multigrain-breakfast-cereal-rich-source-of-energy-nutritious-easy-to-cook.jpg",
+  "Quantity": "600 g",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Oats & Porridge"
+ },
+ {
+  "ProductName": "Oats Breakfast Cereal - Rich In Protein, Dietary Fibre, Nutritious, Easy To Cook",
+  "Brand": "Quaker",
+  "Price": 292,
+  "DiscountPrice": 229,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/284405_16-quaker-oats-breakfast-cereal-rich-in-protein-dietary-fibre-nutritious-easy-to-cook.jpg",
+  "Quantity": "1.5 Kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Oats & Porridge"
+ },
+ {
+  "ProductName": "Rolled Oats - Rich In Protein, Nutritious, Easy To Cook",
+  "Brand": "Quaker",
+  "Price": 338,
+  "DiscountPrice": 338,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40091105_13-quaker-rolled-oats-rich-in-protein-nutritious-easy-to-cook.jpg",
+  "Quantity": "2 Kg",
+  "Category": "Snacks & Branded Foods",
+  "SubCategory": "Oats & Porridge"
+ },
+ {
+  "ProductName": "Premium Stainless Steel Kitchen Knife - Large, Multipurpose, BBPK02",
+  "Brand": "BB Home",
+  "Price": 210,
+  "DiscountPrice": 99,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40197167_7-bb-home-premium-stainless-steel-kitchen-knife-large-multipurpose-bbpk02.jpg",
+  "Quantity": "1 pc",
+  "Category": "Kitchen, Garden & Pets",
+  "SubCategory": "Knives & Peelers"
+ },
+ {
+  "ProductName": "Sooji - Bansi",
+  "Brand": "BB Royal",
+  "Price": 38,
+  "DiscountPrice": 26,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000464_9-bb-royal-sooji-bansi.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Bansi Sooji",
+  "Brand": "BB Royal",
+  "Price": 75,
+  "DiscountPrice": 49,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40018904_4-bb-royal-bansi-sooji.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Palak 250g+Ladies Finger 500g+Cucumber 1kg+Capsicum Green 500g+Bottle Gourd 1pc",
+  "Brand": "Fresho",
+  "Price": 228.26,
+  "DiscountPrice": 160.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/1209674_1-fresho-palak-250gladies-finger-500gcucumber-1kgcapsicum-green-500gbottle-gourd-1pc.jpg",
+  "Quantity": "Combo",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Leafy Vegetables"
+ },
+ {
+  "ProductName": "Intensive Care Cocoa Glow Body Lotion - With Shea Butter, Non-Greasy Formula",
+  "Brand": "Vaseline",
+  "Price": 399,
+  "DiscountPrice": 219.45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/286741_23-vaseline-intensive-care-cocoa-glow-body-lotion-with-shea-butter-non-greasy-formula.jpg",
+  "Quantity": "400 ml",
+  "Category": "Beauty & Hygiene",
+  "SubCategory": "Body Care"
+ },
+ {
+  "ProductName": "Radish - White (Loose)",
+  "Brand": "Fresho",
+  "Price": 37.66,
+  "DiscountPrice": 24.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000164_14-fresho-radish-white.jpg",
+  "Quantity": "1 kg",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Root Vegetables"
+ },
+ {
+  "ProductName": "Radish - White (Loose)",
+  "Brand": "Fresho",
+  "Price": 18.83,
+  "DiscountPrice": 12.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000166_16-fresho-radish-white.jpg",
+  "Quantity": "500 g",
+  "Category": "Fruits & Vegetables",
+  "SubCategory": "Root Vegetables"
+ },
+ {
+  "ProductName": "Organic - Brown Sugar\/Sakkare",
+  "Brand": "BB Royal",
+  "Price": 499,
+  "DiscountPrice": 375,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40114163_16-bb-royal-organic-brown-sugar.jpg",
+  "Quantity": "5 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Sugar, Jaggery"
+ },
+ {
+  "ProductName": "Organic - Brown Sugar\/Sakkare",
+  "Brand": "BB Royal",
+  "Price": 60,
+  "DiscountPrice": 43,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40075301_13-bb-royal-organic-brown-sugar.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Sugar, Jaggery"
+ },
+ {
+  "ProductName": "Organic - Brown Sugar\/Sakkare",
+  "Brand": "BB Royal",
+  "Price": 119,
+  "DiscountPrice": 83,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40075302_14-bb-royal-organic-brown-sugar.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Sugar, Jaggery"
+ },
+ {
+  "ProductName": "Organic - Brown Sugar\/Sakkare",
+  "Brand": "BB Royal",
+  "Price": 229,
+  "DiscountPrice": 155,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40091135_14-bb-royal-organic-brown-sugar.jpg",
+  "Quantity": "2 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Organic Sugar, Jaggery"
+ },
+ {
+  "ProductName": "Besan Fine\/Kadale Hittu",
+  "Brand": "BB Royal",
+  "Price": 75,
+  "DiscountPrice": 45,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000475_8-bb-royal-besan-flour.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Besan Fine\/Kadale Hittu",
+  "Brand": "BB Royal",
+  "Price": 150,
+  "DiscountPrice": 89,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/30000155_6-bb-royal-besan-flour.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Sooji, Maida & Besan"
+ },
+ {
+  "ProductName": "Rice - Flour",
+  "Brand": "BB Royal",
+  "Price": 60,
+  "DiscountPrice": 41,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000458_11-bb-royal-rice-flour.jpg",
+  "Quantity": "1 kg",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Rice & Other Flours"
+ },
+ {
+  "ProductName": "Rice - Flour",
+  "Brand": "BB Royal",
+  "Price": 30,
+  "DiscountPrice": 22,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/10000420_8-bb-royal-rice-flour.jpg",
+  "Quantity": "500 g",
+  "Category": "Foodgrains, Oil & Masala",
+  "SubCategory": "Rice & Other Flours"
+ },
+ {
+  "ProductName": "Premium Care Diapers - Large",
+  "Brand": "Pampers ",
+  "Price": 2299,
+  "DiscountPrice": 1559.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40136610_7-pampers-premium-care-diapers-large.jpg",
+  "Quantity": "88 pcs",
+  "Category": "Baby Care",
+  "SubCategory": "Diapers"
+ },
+ {
+  "ProductName": "Premium Care Diapers - Large",
+  "Brand": "Pampers ",
+  "Price": 320,
+  "DiscountPrice": 290.5,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40040331_13-pampers-premium-care-diapers-large.jpg",
+  "Quantity": "13 pcs",
+  "Category": "Baby Care",
+  "SubCategory": "Diapers"
+ },
+ {
+  "ProductName": "Premium Care Diaper Pants - Large, 9-14 kg, Air Channels, Lotion with Aloe Vera",
+  "Brand": "Pampers ",
+  "Price": 799,
+  "DiscountPrice": 610,
+  "Image_Url": "https:\/\/www.bigbasket.com\/media\/uploads\/p\/l\/40141636_3-pampers-premium-care-diapers-large.jpg",
+  "Quantity": "30 pcs",
+  "Category": "Baby Care",
+  "SubCategory": "Diapers"
+ }
+]
+
+
+
+
+/********************************************/
+
+$(document).ready(function() {
+  var jsonFile = 'products.json';
+    $.getJSON(jsonFile, function(data) {
+      console.log(data);
+    })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error:', errorThrown);
+      });
+  
+});
