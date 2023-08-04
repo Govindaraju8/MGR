@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Project</title>
+</head>
+<body>
+  <center>My Project</center>
+  <p>Click here to display details</p>
+  <select id="questSelect">
+    <option value="A flashing red traffic light signifies that a driver should do what?">q1</option>
+    <option value="A knish is traditionally stuffed with what filling?">q2</option>
+    <option value="A pita is a type of what?">q3</option>
+    <option value="A portrait that comically exaggerates a person's physical traits is called a what?">q4</option>
+    <option value="A second-year college student is usually called a what?">q5</option>
+    <option value="A student who earns a J.D. can begin his or her career as a what?">q6</option>
+  </select>
+  <!--button id="questSelect">Click Here</button-->
+  <div id="demo"></div>
+
+  <script>
+	/*document.getElementById('questSelect').addEventListener('click',function(){
+	fetchExamData();
+	});*/
+    document.getElementById('questSelect').addEventListener('change', function () {
+      fetchQuestionData();
+    });
+
+    function fetchQuestionData() {
+      const selectedValue = document.getElementById('questSelect').value;
+      const xhr = new XMLHttpRequest();
+      const url = 'https://quiz26.p.rapidapi.com/questions';
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            const result = JSON.parse(xhr.responseText);
+			
+
+            // Find the exam object with the selected examNumber
+            //const selectedquest = result.data.find(quest => quest.question === selectedValue);
+			const out1 = document.getElementById('demo');
+			  out1.innerHTML=JSON.stringify(result,null,2);
+            /*if (selectedquest) {
+              // Display the exam details for the selected exam
+              
+			  
+              out1.innerHTML = `
+                <h2>Question: ${selectedquest.question}</h2>
+                <h2>option A: ${selectedquest.A}</h2>
+                <h2>option B: ${selectedquest.B}</h2>
+				<h2>option C: ${selectedquest.C}</h2>
+                <h2>option D: ${selectedquest.D}</h2>
+				<h2>answer: ${selectedquest.answer}</h2>
+				
+              `;*/
+             /*else {
+              // Handle the case when the selected exam is not found
+              const out1 = document.getElementById('demo');
+              out1.innerText = 'Selected exam details not found.';
+            }*/
+          } else {
+            console.error('Request failed. Status:', xhr.status);
+            const out1 = document.getElementById('demo');
+            out1.innerText = 'Error occurred while fetching data.';
+          }
+        }}
+      ;
+
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader('X-RapidAPI-Key', '0518ab806amsh385a3e507c16152p12a57ejsn7756485bbfb2');
+      xhr.setRequestHeader('X-RapidAPI-Host', 'quiz26.p.rapidapi.com');
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
+

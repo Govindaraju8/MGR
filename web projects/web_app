@@ -1,0 +1,520 @@
+<!--
+<!doctype html>
+<head>
+    <title> www.irctc.co.in </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <h1 >  Train Ticket Booking </h1>
+        <form id="booking-ticket">
+            <div class="form-group">
+                <label for="from">From:</label>
+                <select id="from" name="from" required>
+                  <option value="" disabled selected>Select departure city</option>
+                  <option value="city1">City 1</option>
+                  <option value="city2">City 2</option>
+                 
+                </select>
+              </div>
+            <div class="form-group">
+                <label for="To">To:</label>
+                <select id="'To" name="To" required>
+                    <option value="" disabled selected>Select departure city</option>
+                    <option value="city1">city1</option>
+                    <option value="city2">city1</option>
+                    <option value="city3">city1</option>
+                    <option value="city4">city1</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    
+</body>-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train Ticket Booking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Train Ticket Booking</h1>
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="departure-city">Departure City:</label>
+        <input type="text" id="departure-city" name="departureCity" required>
+      </div>
+      <div class="form-group">
+        <label for="destination-city">Destination City:</label>
+        <input type="text" id="destination-city" name="destinationCity" required>
+      </div>
+      <div class="form-group">
+        <label for="departure-date">Departure Date:</label>
+        <input type="date" id="departure-date" name="departureDate" required>
+      </div>
+      <div class="form-group">
+        <label for="passengers">Number of Passengers:</label>
+        <input type="number" id="passengers" name="passengers" min="1" max="10" required>
+      </div>
+      <button type="submit">Book Tickets</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Train Ticket Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Train Ticket Booking</h1>
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="from">From:</label>
+        <select id="from" name="from" required>
+          <option value="" disabled selected>Select departure city</option>
+          <option value="city1">City 1</option>
+          <option value="city2">City 2</option>
+          <!-- Add more options for other cities as needed 
+        </select>
+      </div>
+      <div class="form-group1">
+        <label for="to">To:</label>
+        <select id="to" name="to" required>
+          <option value="" disabled selected>Select destination city</option>
+          <option value="city1">City 1</option>
+          <option value="city2">City 2</option>
+          <!-- Add more options for other cities as needed 
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="train">Train:</label>
+        <select id="train" name="train" required>
+          <option value="" disabled selected>Select train</option>
+          <option value="train1">Train 1</option>
+          <option value="train2">Train 2</option>
+          <!-- Add more options for other trains as needed 
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="departure-date">Departure Date:</label>
+        <input type="date" id="departure-date" name="departureDate" required>
+      </div>
+      <div class="form-group">
+        <label for="passengers">Number of Passengers:</label>
+        <input type="number" id="passengers" name="passengers" min="1" max="10" required>
+      </div>
+      <button type="submit">Book Tickets</button>
+    </form>
+  </div>
+</body>
+</html>
+-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train Ticket Booking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Train Ticket Booking</h1>
+    <form>
+      <label for="class">From:</label>
+      <select id="class" name="class" required>
+        <option value="vizag">vizag</option>
+        <option value="tanuku">tanuku</option>
+        <option value="vijayawada">vijayawada</option>
+      </select>
+
+      <label for="class">To:</label>
+      <select id="class" name="class" required>
+        <option value="vizag">vizag</option>
+        <option value="tanuku">tanuku</option>
+        <option value="vijayawada">vijayawada</option>
+      </select>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="class">Class:</label>
+      <select id="class" name="class" required>
+        <option value="economy">Economy</option>
+        <option value="business">Business</option>
+        <option value="first-class">First Class</option>
+      </select>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</body>
+</html>
+-->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train Ticket Booking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Train Ticket Booking</h1>
+    <form>
+      <div class="form-group">
+        <label for="from">From:</label>
+        <select id="from" name="from" required>
+          <option value="vizag">Vizag</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="chennai">Chennai</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="to">To:</label>
+        <select id="to" name="to" required>
+          <option value="vizag">Vizag</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="chennai">Chennai</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="train-type">Train Type:</label>
+        <select id="train-type" name="train-type" required>
+          <option value="express">Express</option>
+          <option value="superfast">Superfast</option>
+          <option value="shatabdi">Shatabdi</option>
+          <option value="rajdhani">Rajdhani</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+          <option value="economy">Economy</option>
+          <option value="business">Business</option>
+          <option value="first-class">First Class</option>
+        </select>
+      </div>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train Ticket Booking</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Train Ticket Booking</h1>
+    <form id="booking-form">
+      <div class="form-group">
+        <div class="half-width">
+          <label for="from">From:</label>
+          <select id="from" name="from" required>
+            <option value="">Choose from the List</option>
+            <option value="vizag">Vizag</option>
+            <option value="delhi">Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="chennai">Chennai</option>
+          </select>
+        </div>
+        <div class="half-width">
+          <label for="to">To:</label>
+          <select id="to" name="to" required>
+            <option value="">Choose from the List</option>
+            <option value="vizag">Vizag</option>
+            <option value="delhi">Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="chennai">Chennai</option>
+          </select>
+        </div>
+      </div>
+<br>
+      <div class="traintypes">
+        <label for="train-type">Train :</label>
+        <select id="train-type" name="train-type" required>
+          <option value="">Choose from the List</option>
+          <option value="express">Express</option>
+          <option value="superfast">Superfast</option>
+          <option value="shatabdi">Shatabdi</option>
+          <option value="rajdhani">Rajdhani</option>
+        </select>
+      </div>
+
+      <div class="form-groups">
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+          <option value="">Choose from the List</option>
+          <option value="economy">Economy</option>
+          <option value="business">Business</option>
+          <option value="first-class">First Class</option>
+        </select>
+      </div>
+
+      <div class="form-groups">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+     
+      <br>
+      <h2>Passengers</h2>
+  <table id="tablelevels">
+    <thead>
+      <tr>
+        <th>SI No</th>
+        <th>Name of the Passenger</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>cancellation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><input type="text" id="name" placeholder="Enter name"></td>
+        <td><input type="text" id="age" placeholder="Enter age" min=="1" max="100"></td>
+        <td><select id="class" name="class" required>
+          <option value="">Choose option</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="transgender">transgender</option>
+        </select>
+        <td><button type="reset" class="cancel-button">Cancel</button></td>
+      
+      </td>
+      </tr>
+      <!--
+      <tr>
+        <td>2</td>
+        <td><input type="text" placeholder="Enter name"></td>
+        <td><input type="text" placeholder="Enter age"></td>
+        <td><select id="class" name="class" required>
+          <option value="">Choose option</option>
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="transgender">transgender</option>
+        </select>
+      </td>
+      </tr>-->
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+  <br>
+      <button class="add-button" onclick="addPassenger()">add</button>
+<br>
+
+<button type="submit" class="submit-button">Book ticket</button>
+<button type="reset" class="clear-button">Clear</button>
+
+    </form>
+    <br>
+    <br>
+  </div>
+</body>
+</html>
+
+
+
+/**********************************css ************************************************/
+
+
+body{
+    background-color: #f2f2f2;
+    /*background-image:1.jpg;*/
+    background-image: url('1.jpg');
+    background-repeat: no-repeat;
+      width: 800px;
+      margin:0  auto;
+      padding: 50px;
+    
+}
+h1 {
+    text-align:center;
+  }
+  
+  div.half-width {
+    width: 49%;
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+  }
+  div.traintypes
+  {
+    padding-top:15px;
+  }
+  div.form-groups {
+    width: 49%;
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+    padding-top:15px;
+
+  }
+  
+  .container {
+    background-color:white;
+    padding: 20px;
+    border-radius: 10px;
+    align:center;
+    width: 800px;
+    height: 600px;
+  
+    
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #17020253;
+  }
+  
+
+  /* Style for "Add Passenger" button */
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .add-button {
+    background-color: hsl(250, 9%, 87%);
+    margin-left: 700px;
+   
+  }
+
+  /* Style for "Book Now" button */
+  .submit-button {
+    background-color: hsl(250, 9%, 87%);
+    margin-left: 260px;
+
+  }
+
+  /* Style for "Clear" button */
+  .clear-button {
+    background-color:hsl(250, 9%, 87%);
+  }
+  .cancel-button {
+    background-color:hsl(250, 9%, 87%);
+  }
+
+
+/***********************************js************************************/
+
+function addPassenger() {
+    var table = document.querySelector("#tablelevels");
+    var rowCount = table.rows.length;
+
+    if (rowCount <= 4) {
+      var row = table.insertRow(rowCount);
+      
+      var cell1 = row.insertCell(0);
+      cell1.innerHTML = rowCount;
+    
+      var cell2 = row.insertCell(1);
+      cell2.innerHTML = '<input type="text" placeholder="Enter name">';
+    
+      var cell3 = row.insertCell(2);
+      cell3.innerHTML = '<input type="text" placeholder="Enter age">';
+    
+      var cell4 = row.insertCell(3);
+      cell4.innerHTML = '<select required><option value="">Choose option</option><option value="male">male</option><option value="female">female</option><option value="transgender">transgender</option></select>';
+    
+      var cell5 = row.insertCell(4);
+      cell5.innerHTML = '<button type="button" class="cancel-button" onclick="removePassenger(this)">Cancel</button>';
+    } else {
+      alert("You can add a maximum of 4 passengers.");
+    }
+  }
+
+  function removePassenger(button) {
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  }
+
+  function validateForm() {
+    var table = document.getElementById("tablelevels");
+  var rows = table.getElementsByTagName("tr");
+
+  for (var rowIndex = 1; rowIndex < rows.length; rowIndex++) {
+    var nameInput = rows[rowIndex].querySelector("input[type='text']");
+    var ageInput = rows[rowIndex].querySelector("input[type='text']");
+    var name = nameInput.value.trim();
+    var age = parseInt(ageInput.value);
+
+    if (name === "") {
+      alert("Please enter name for all passengers.");
+      return false;
+    }
+
+    var nameRegex = /^[A-Za-z]+$/;
+    if (!nameRegex.test(name)) {
+      alert("Names can only contain alphabets (A-Z or a-z).");
+      return false;
+    }
+
+    if (isNaN(age) || age < 1 || age > 100) {
+      alert("Age should be a number between 1 and 100 for all passengers.");
+      return false;
+    }
+  }
+
+  return true;
+  }
+
+
+  document.getElementById("bookingForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    if (validateForm()) {
+        alert("Ticket booked successfully!");
+        // Assuming you have implemented the following functions:
+        // displayDataAsJSON();
+        // resetPage();
+      }
+  });
