@@ -1,0 +1,56 @@
+Demonstrate producer and consumer pattern by writing alphabets A-Z from a producer thread 
+to a concurrent Queue and read all those alphabets from the Queue using Consumer thread. 
+Implement this either using ArrayBlockingQueue or ConcurrentLinkedQueue.
+
+
+import java.util.concurrent.ArrayBlockingQueue;
+public class ProducerConsumerDemo {
+    public static void main(String[] args) {
+        // Create a concurrent queue to store alphabets
+        ArrayBlockingQueue<Character> queue = new ArrayBlockingQueue<>(26);
+
+        // Create producer and consumer threads
+        Thread producerThread = new Thread(() -> produceAlphabets(queue));
+        Thread consumerThread = new Thread(() -> consumeAlphabets(queue));
+
+        // Start the threads
+        producerThread.start();
+        consumerThread.start();
+
+        // Wait for both threads to complete
+        try {
+            producerThread.join();
+            consumerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("All alphabets have been produced and consumed.");
+    }
+
+    // Producer thread to produce alphabets A to Z
+    private static void produceAlphabets(ArrayBlockingQueue<Character> queue) {
+        for (char ch = 'A'; ch <= 'Z'; ch++) {
+            try {
+                queue.put(ch);
+                System.out.println("Produced: " + ch);
+                Thread.sleep(200); // Simulate some processing time for the producer
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Consumer thread to read and consume alphabets from the queue
+    private static void consumeAlphabets(ArrayBlockingQueue<Character> queue) {
+        while (!queue.isEmpty()) {
+            try {
+                char alphabet = queue.take();
+                System.out.println("Consumed: " + alphabet);
+                Thread.sleep(500); // Simulate some processing time for the consumer
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}

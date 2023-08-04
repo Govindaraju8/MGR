@@ -1,0 +1,117 @@
+Normal Generics:
+Normal generics allow you to define generic classes, interfaces, and 
+methods without any restrictions on the type parameter. The type parameter can 
+represent any type, including classes, interfaces, or even other type parameters. 
+For example:
+
+class Box<T> {
+    private T item;
+
+    public T getItem() {
+        return item;
+    }
+
+    public void setItem(T item) {
+        this.item = item;
+    }
+}
+
+In the above example, T is a type parameter that can represent any type.
+There are no constraints or limitations placed on T, and it can be substituted
+ with any class or interface.
+
+Bounded Generics:
+Bounded generics, on the other hand, introduce restrictions or 
+bounds on the type parameters. They allow you to specify that the type parameter 
+must be a specific type or a subtype/supertype of a specific type.
+
+Upper Bounded Generics:
+Upper bounded generics restrict the type parameter to be a specific type or any 
+of its subtypes. It is denoted using the extends keyword. 
+For example:
+class Box<T extends Number> {
+    // ...
+}
+In this case, the type parameter T must be a subclass of Number or 
+Number itself. This allows the usage of methods and properties specific 
+to the Number class within the generic class.
+
+
+
+Wildcard generics:
+In Java allow you to represent unknown types or types that are not explicitly 
+specified. They are denoted by the "?" symbol and can be used in various 
+contexts to provide flexibility in generic type declarations. 
+There are three main uses of wildcard generics:
+
+Unbounded Wildcards: <?>
+An unbounded wildcard represents an unknown type. 
+It can be used as a generic type argument when you want to work with a 
+collection without specifying its element type. 
+For example:
+List<?> list = new ArrayList<>();
+
+In this case, the list can hold elements of any type, but you cannot add elements to it (except for null). 
+You can only read elements from the list as Object references.
+
+Upper Bounded Wildcards: <? extends Type>
+An upper bounded wildcard restricts the unknown type to be a specific type or any of its subtypes. 
+It is denoted by ? extends Type. 
+For example:
+List<? extends Number> numbers = new ArrayList<>();
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UpperBoundedWildcardExample {
+    public static double sum(List<? extends Number> numbers) {
+        double total = 0.0;
+        for (Number number : numbers) {
+            total += number.doubleValue();
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+
+        double result = sum(integers);
+        System.out.println("Sum: " + result);
+    }
+}
+
+Here, the numbers list can hold elements of type Number or any of its subtypes (e.g., Integer, Double). 
+You can read elements from this list as instances of the upper bound type (Number), but you cannot add elements to it.
+
+Lower Bounded Wildcards: <? super Type>
+A lower bounded wildcard restricts the unknown type to be a specific type or any of its supertypes. 
+It is denoted by ? super Type. 
+For example:
+List<? super Integer> integers = new ArrayList<>();
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LowerBoundedWildcardExample {
+    public static void addIntegers(List<? super Integer> integers) {
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+    }
+
+    public static void main(String[] args) {
+        List<Number> numbers = new ArrayList<>();
+        addIntegers(numbers);
+
+        System.out.println("Numbers: " + numbers);
+    }
+}
+
+In this case, the integers list can hold elements of type Integer or any of its supertypes (e.g., Number, Object). 
+You can add elements of the lower bound type (Integer) or its subtypes to this list, but you can only read elements as Object references.
+
+Wildcard generics provide flexibility when working with collections of unknown types or when you want to define more generic method signatures.
+ They allow you to write code that can operate on a wide range of types without being overly specific.

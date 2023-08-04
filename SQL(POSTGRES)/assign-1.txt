@@ -1,0 +1,112 @@
+--15
+select empname || 'has held the position of clerk in department number'||deptno||'since'||hiredate from emp01_184
+--16
+select empid,empname,job,mgrno,hiredate,sal,coalesce(comm,0) as comm,deptno from emp01_184
+--17
+Not Done
+--18
+select * from emp01_184 where comm is null or comm=0
+--19
+select distinct length(empname) from emp01_184
+--20
+select empname,to_char(hiredate,'dd-mm-yy') from emp01_184 where deptno=30
+--21
+select extract(year from age(hiredate))*12+extract(month from age(hiredate))+round(extract (day from age(hiredate))) from emp01_184 where job='Manager'
+--22
+select empname from emp01_184 where extract(month from hiredate)=12
+--23
+select empname,job,case
+		    when job='Clerk' then '1'
+                    when job='Manager' then '3'
+                    when job='President' then '5'
+                    else '2'
+                    end
+                    as jobclass from emp01_184
+--24
+select deptno,job,avg(sal*12) from emp01_184 group by deptno,job
+--25
+select count(sal),count(comm) from emp01_184 where deptno=30
+--26
+select avg(sal),min(sal),max(sal) from emp01_184 where job='Clerk' or job='Manager'
+--27
+select deptno from emp01_184 group by deptno,job having job='Clerk' and count(job)>2 or job='Manager' and count(job)>3
+--28
+select deptno,sum(sal+
+               case
+               when comm>0 then comm
+               else 100
+               end
+              )as comp
+              from emp01_184 group by deptno
+--29
+select * from emp01_184 where empid=(select empid from emp01_184 group by empid having count(empid)>1)
+--30
+select sal from emp01_184 order by sal desc limit 1 offset 4
+--31
+select empname from emp01_184 group by empname having count(deptno)=(select count(*) from emp01_184)
+--32
+select count(empname) from emp01_184 e,dept_184 d where e.empid=d.deptno and d.loc='New York'
+--33
+select empname||' '||to_char(hiredate,'month')||','||cast((extract(day from hiredate)) as text)||' '||to_char(hiredate,'YYYY') from emp01_184
+--34
+select empname,sal,case
+		    when sal>1500 then to_char(sal,'9999')
+                    when sal=1500 then 'ON TARGET'
+                    else 'BELOW 1500'
+                    end
+                    from emp01_184
+--35
+Not Done
+--36
+select sal,sal-(select avg(sal) from emp01_184) from emp01_184 order by sal desc
+--37
+select count(distinct(empname)),count(distinct(deptno)) from emp01_184
+--38
+select avg(sal) from emp01_184
+--39
+select d.deptno,d.deptname,d.loc,sum(e.comm),sum(e.sal) from emp01_184 e,dept_184 d where e.deptno=d.deptno group by d.deptno,d.deptname,d.loc
+--40
+select deptno,job,round(avg(sal),2) from emp01_184 group by deptno,job
+-41
+select job,min(sal) from emp01_184 group by job having min(sal)>=3000
+--42
+select job,round(avg(sal),2),sal+comm as remun from emp01_184 group by job,sal+comm
+--43
+select max(sal)-min(sal) from emp01_184
+--44
+select deptno,count(deptno) from emp01_184 group by deptno having count(deptno)>3
+--45
+select empname,count(*) from emp01_184 group by empname
+--46
+select min(sal),mgrno from emp01_184 group by mgrno,sal having min(sal)>1000 order by sal
+--47
+select e.empname,d.deptno,d.deptname from emp01_184 e,dept_184 d
+--48
+select e.empname,d.deptname from emp01_184 e,dept_184 d order by d.deptname
+--49
+select d.deptname,e.empname from emp01_184 e,dept_184 d group by d.deptname,e.empname having count(e.empname)=0
+--50
+select e.empname,e1.empname from emp01_184 e,emp01_184 e1 where e.mgrno=e1.empid and e.hiredate<e1.hiredate
+--51
+select empname,deptno from emp01_184 group by deptno,empname having min(sal)>(select min(sal) from emp01_184) order by deptno
+--52
+select empname,deptno from emp01_184 group by deptno,empname having min(sal)>(select min(sal) from emp01_184) and deptno=30 order by deptno
+--53
+select empname from emp01_184 group by empname,sal having sal>(select max(sal) from emp01_184 where deptno=30)
+--54
+select job from emp01_184 group by job,sal having sal>(select max(sal) from emp01_184)
+--55
+select empname,job,hiredate from emp01_184 where sal>(select max(sal) from emp01_184 where job='Salesman')
+--56
+select * into emp03_184 from emp01_184
+--57
+select * from information_schema.columns where table_name='emp01_184'
+--58
+select empname from emp01_184 order by sal limit 3
+--59
+select deptno from emp01_184 group by deptno having max(sal)>(select max(sal) from emp01_184)
+--60
+select * from emp01_184 limit 10 offset n-10
+-- select * from emp01_184
+-- select * from dept_184
+

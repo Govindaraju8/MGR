@@ -1,0 +1,170 @@
+// queries
+
+select * from chinna_emp;
+--q1: List the employee numbers, name, job title and hiredate of the employees in department 10
+--q2: Select the name & salary of all employees who are working as clerks.
+--q3: List the names, job title & salary of employees who were hired on December 17, 1980. 
+select ename,job,sal from chinna_emp where hiredate='1980-12-17';
+--q4:Select the name, salary, and commission of employees whose commission is greater than their salary
+select ename,sal,comm from chinna_emp where comm>=sal;
+--q5:display the names, monthly-salary, daily-salary, and hourly-salary for all the employees.
+select ename,sal as monthly_salary,sal/30 as daily_salary, sal/(30*8) as hourly_salary from chinna_emp;
+--q6: Assume that salary column in the table is monthly salary, and the number of working days are 22 and the number of working hours per day are 8.
+--Rename the columns as MONTHLY, DAILY, AND HOURLY.
+select sal as monthly, sal/22 as daily,sal/(22*8) as hourly from chinna_emp;
+--q7:  List the names and employee numbers of Managers who earn more than 2600/-.
+--Display in alphabetical order of their names.
+select ename,empno from chinna_emp where job='MANAGER'and sal>=2600 order by ename asc;
+--q8: Select the information about Managers and President from the column job in the EMP 
+--table.Order the result by name 
+select ename from chinna_emp where job IN ('MANAGER','PRESIDENT') ORDER BY ename;
+  select * from emp where job='MANAGER' or job='PRESIDENT' order by ename;
+
+--q9:  List the employee names that don’t end in ‘S’.
+SELECT ename FROM chinna_emp WHERE ename NOT LIKE '%S';
+--Q10:  List the employee names that start with ‘C’
+SELECT ename from chinna_emp where ename LIKE 'C%';
+--Q11 : list the name, job and department numbers of those employees whose names fall in the 
+--alphabetical range of ‘C’ to ‘F’.
+select ename,job,dept_no from chinna_emp where ename>='C' and ename<='F' order by ename;
+select ename,job,dept_no from chinna_emp where ename between 'C' and 'F' order by ename; 
+--Q12: Display the list of employee names starting with ‘I’ and ending with ‘R’. 
+select ename from chinna_emp where ename LIKE 'I%R';
+--Q13: Display the employee names which have ‘TII’ or ‘LL’ in them. 
+select ename from chinna_emp where ename LIKE '%TII%' or ename LIKE '%LL%';
+--Q14: display the list of employees who were hired during 1983.
+
+-- To display the list of employees who were hired during the year 1983, 
+--you can use the EXTRACT function to extract the year from the hiredate column and 
+--compare it to the desired year.
+
+select * from chinna_emp where EXTRACT(YEAR from hiredate)=1983;
+
+--Q15: Display the data shown as follows 
+ --Smith has held the position of clerk in department number 20 since 13-JUNE-83. 
+ --Allen has held the position of clerk in department number 20 since 13-JUNE-83. 
+ --Ward has held the position of clerk in department number 20 since 13-JUNE-83.
+ 
+SELECT ename || ' has held the position of ' || job || ' in department number ' || dept_no || ' since ' || TO_CHAR(hiredate, 'DD-MON-YY')
+AS emp_info FROM chinna_emp WHERE job = 'CLERK' AND dept_no = 20 AND hiredate = DATE '1983-06-13';
+
+--Q16:  List all rows from EMP table by converting the NULL values in COMM column to 0 (use NVL command) 
+
+--In this query, the NVL function is used to replace NULL values in the comm column with 0. 
+--The NVL function takes two arguments: the column you want to check for NULL values (comm in this case) 
+--and the value to replace NULL with (0 in this case). The result is aliased as comm using the AS keyword.
+select empno,ename,job,mgr,hiredate,sal, NVL(comm,0) AS comm,dept_no from chinna_emp;
+SELECT empno, ename, job, mgr, hiredate, sal, COALESCE(comm, 0) AS comm, dept_no
+FROM chinna_emp;
+
+Q17 : Write a query that will accept a given job title and displays all the records according to that 
+title . 
+select * from emp where job='PRESIDENT';
+
+Q18: 18. List all employees who don’t get any commission. 
+SELECT empno, ename FROM chinna_emp WHERE comm IS NULL;
+select ename from chinna_emp where comm=0;
+
+Q19: Show that length names appear in the EMP table . Eliminate the duplicate lengths from the 
+rows returned. Do not show the name themselves.
+SELECT DISTINCT LENGTH(ename) AS name_length
+FROM emp;
+
+Q20 :  List the names and hire-date of employees in department number 20. Display the hire-date 
+formatted as ‘12-03-81’.
+SELECT ename, TO_CHAR(hiredate, 'DD-MM-YY') AS hire_date FROM emp WHERE dept_no = 20;
+Q21 : How many months has the President worked for the company? Round to the nearest whole 
+number of months. 
+
+Q23:List the employee names, jobs, and a job classification which you will supply. Translate the value stored in each 
+job field(CLERK,MANAGER ETC.) to job classification number (1,2 etc). translate CLERK to 1, MANAGER to 3, 
+PRESIDENT to 5 and all the other jobs to 2. Name the job the classification column JOBCLASS. 
+SELECT ename, job,
+    CASE 
+        WHEN job = 'CLERK' THEN 1
+        WHEN job = 'MANAGER' THEN 3
+        WHEN job = 'PRESIDENT' THEN 5
+        ELSE 2
+    END AS jobclass
+FROM chinna_emp;
+
+
+SELECT ename FROM emp WHERE EXTRACT(MONTH FROM hiredate) = 12;
+
+
+Q24:Give SQL commands to find the average annual salary per job in each department. The sal figures in the EMP table 
+ are for each month. 
+SELECT job, dept_no, AVG(sal * 12) AS avg_annual_salary FROM emp GROUP BY job, dept_no;
+
+Q25: In one query, count the number of people in department 30 who receive a salary and the 
+number of people who receive commission .
+SELECT COUNT(sal) AS salary, COUNT(comm) AS comm FROM chinna_emp WHERE dept_no = 30;
+
+Q26:Compute the average, minimum and maximum salaries of those groups of employees 
+having the job of clerk or manager.
+SELECT job, AVG(sal) AS average_salary, MIN(sal) AS minimum_salary, MAX(sal) AS maximum_salary
+FROM chinna_emp
+WHERE job = 'CLERK' OR job = 'MANAGER'
+GROUP BY job;
+
+Q27. Display the department numbers where more than 2 Clerks or 3 Managers are working. 
+select dept_no from chinna_emp where jOb='CLERK' OR JOB='MANAGER'GROUP BY dept_no
+HAVING COUNT(CASE WHEN JOB='CLERK' THEN 1 END)>2 OR COUNT(CASE WHEN JOB='MANAGER' THEN 2 END)>3;
+
+Q33:Write a query to display as follows: 
+ Ename Date hired 
+ ****** ********* 
+ Smith June,thirteen 1983 
+ Jones October, thirty first 1983 
+select ename,TO_CHAR(hiredate,'FMMonth FMDDTH YYYY') AS hireddate from chinna_emp where ename='SMITH' or ENAME='JONES';
+
+Q34:. Print the list of employees, display just salary if the salary is more than 1500, if exactly 1500 
+ display on target, if less 
+ than 1500 display below 1500.
+ ENAME SALARY 
+ ADAMS BELOW 1500 
+ ALLEN 1600 
+ BLAKE 2850 
+ CLARK 2450 
+ FORD  3000 
+ JAMES BELOW 1500
+
+select ename, case 
+                 when sal>1500 then CAST(sal AS VARCHAR)
+                 when sal=1500 then 'on target'
+                 else 'less than 1500'
+                end as salary_status from chinna_emp; 
+
+Q35:
+
+Q36. Write query to list salary, (sal-avg(sal)) from emp table. 
+select sal,(sal-(select avg(sal) from chinna_emp)) as diff from chinna_emp;
+
+
+Q37. Find the number of different employees from the different departments. 
+
+select dept_no,count(distinct ename) as dept_wise_unique_names from chinna_emp group by dept_no;
+
+Q38: Determine the average salary of employees. 
+select avg(sal) from chinna_emp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

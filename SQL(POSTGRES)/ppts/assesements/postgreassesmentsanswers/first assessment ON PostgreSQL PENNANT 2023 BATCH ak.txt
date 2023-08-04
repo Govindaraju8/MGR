@@ -1,0 +1,210 @@
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: FIRST SET ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+I) ON EMP AND DEPT TABLES
+
+1) Write the commands to apply foreign key on MGR column referring empno on the same table and add ON DELETE CASCADE option.
+
+a) Write this with CREATE TABLE COLUMN LEVEL
+ANS:
+
+CREATE TABLE emp(
+eno INT PRIMARY KEY,
+ename VARCHAR(30) NOT NULL,
+esal NUMERIC(10,2) NOT NULL,
+mgr INT REFERENCES emp(eno) ON DELETE CASCADE
+);
+
+
+b) write this with ALTER TABLE TABLE LEVEL
+ANS:
+ALTER TABLE emp ADD CONSTRAINT fk1_mgr FOREIGN KEY(mgr) REFERENCES emp(eno) ON DELETE CASCADE;
+
+
+2) Write a query to list all employees who are earning more than  at least any one employee in 20th dept. 
+Exclude the employees who are working as CLERKS.
+ANS:
+ SELECT *
+ FROM emp
+ WHERE job not like 'CLERK' AND sal > any ( select sal from emp where deptno=20);
+ 
+ or
+ANS:
+ SELECT *
+ FROM emp
+ WHERE job<>'CLERK' AND sal > ( select min(sal) from emp where deptno=20);
+ 
+3) Write a query to list the departments that are having their avg salary more than 30th dept avg sal.
+Exclude the departments having less than two employees.
+ANS:
+SELECT deptno
+FROM emp
+GROUP BY deptno
+HAVING count(*)>=2 and AVG(sal) > 
+(SELECT avg(sal)
+FROM emp
+WHERE deptno=30);
+
+4) WRITE A SELECT statement to list all the duplicated records.
+ANS:
+
+SELECT *
+FROM emp
+WHERE empno IN (SELECT empno
+        FROM emp
+        GROUP BY empno
+        HAVING COUNT(*)>1);
+        
+OR
+ANS:
+SELECT e1.*
+FROM emp e1
+WHERE 1<(SELECT COUNT(*)
+         FROM emp e2
+         WHERE e1.empno=e2.empno);
+         
+5) Write a query to list the departments that are having at least 2 clerks with minumum of 10000 salary.
+Exclude clerks who have joined in 2020.
+ANS:
+SELECT deptno
+FROM emp
+WHERE job='CLERK' AND sal>=10000 AND EXTRACT(year from hiredate) <> 2020 
+GROUP BY deptno,job
+HAVING (job='CLERK' AND COUNT(*)>=2);
+
+
+II)
+Write a query to list all the accounts with these fields of information( accno,op_date,current_bal,last tranaction date,last transaction amount)
+ANS:
+
+SELECT a.accno,a.op_date,a.current_bal,t.tr_date,t.amount
+FROM accounts a,transactions t
+WHERE a.accno=t.accno AND ROW (t.accno,t.tr_date) IN ( SELECT accno,max(tr_date)
+                                                        FROM transactions
+                                                        GROUP BY accno );
+III)
+
+1) write a query to list the products (prod_id,name,batchno,qty,unitprice,expdate,gsttax).
+Exclude the products that are expired already. And also exclude the products that are gaving gst more than 25%.
+ANS:
+
+SELECT p.prod_id,p.name,ps.batchno,ps.qty,ps.unitprice,ps.expdate,h.gst 
+FROM products p, productstock ps, hsncodes h
+WHERE p.prod_id=ps.prod_id AND p.hsncode=h.hsncode AND NOT ps.expdate<NOW()::date AND h.gst<=25;
+
+
+2)write a query to list the orders(ord_id,customer_name,order_date,total) that are having at least 5 products in their order.
+ANS:
+
+SELECT o.order_id,o.customer_name,o.order_date,o.total
+FROM orders o
+WHERE 5<=( SELECT count(*)
+           FROM orderproducts op
+           where o.order_id=op.order_id);
+3) Write a query to list the products (prod_id,name,gst,avg_gst percentage of all products). Exclude the products categories of "Electronics" and "Mobile".
+ANS:
+SELECT p.prod_id,p.name,h.gst,(select avg(h.gst) from products p, hsncodes h where p.hsncode=h.hsncode)
+FROM  products p, hsncodes h
+WHERE p.hsncode=h.hsncode AND p.category NOT IN ('ELECTRONICS','MOBILE')
+
+
+
+
+4) Write a query to list the orders(Order_id,order_date,customer_name,total,highest order total of that day).
+ANS:
+SELECT o.order_id,o.order_date,o.customer_name,o.total,(SELECT MAX(total) FROM orders o1 WHERE o.order_date=o1.order_date)
+FROM orders o
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: SECOND SET ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+1)
+
+select *
+from emp e ,emp m
+where e.mgr=m.empno and e.sal>m.sal;
+
+
+2)
+select *
+from emp
+where extract(year from hiredate) not in(2020,2021,2022) AND sal>all(select sal from emp where deptno=10);
+or
+select
+from emp
+where extract(year from hiredate) not in(2020,2021,2022) AND sal>(select max(sal) from emp where deptno=10);
+3)
+create table emp
+(
+empno int primary key,
+sal numeric(8,2),
+deptno int,
+mgr int references emp(empno),
+CONSTRAINT fk_emp FOREIGN KEY(deptno) REFERENCES dept(deptno),
+CONSTRAINT ck_sal CHECK(sal>=5000 and sal<=10000)
+)
+
+4)
+select deptno
+from emp
+where job='CLERK' OR job='MANAGER'
+GROUP BY deptno,job
+HAVING (job='CLERK' AND count(*)=2) or (job='MANAGER' AND count(*)=3);
+
+5)
+select deptno
+from emp
+GROUP BY deptno
+HAVING sum(sal)>(select sum(sal)
+                 from emp
+                 where job='MANAGER');
+6)
+
+select deptno,avg(sal),min(sal),max(sal),count(*)
+from emp
+group by deptno
+having count(*)>=2 and avg(sal)>=2000;
+
+7)
+select *
+from emp
+where row(deptno,sal) in (select deptno,min(sal)
+                          from emp
+                          group by deptno);
+
+8)
+
+select deptno
+from emp
+where sal>=3000
+group by deptno
+having count(*)>=4;
+
+9)
+
+select  *
+from  emp
+where sal>=10000 and sal = (select max(sal) from emp);
+
+
+10)
+
+select deptno
+from emp
+group by deptno
+having count(*)>=2 and avg(sal) >(select avg(sal) from emp where deptno=30);
+
+
+
+12)
+
+select extract(year from hiredate)
+from emp
+where job='CLERK'
+GROUP BY extract(year from hiredate),job
+HAVING count(*) >= all( 
+                        select count(*)
+                        from emp
+                        where job='CLERK'
+                        GROUP BY extract(year from hiredate),job);
+
+
+

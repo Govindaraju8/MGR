@@ -1,0 +1,69 @@
+/* different ways to create an thread in java */
+
+
+//    way-1 :  create an thread with runnable interface
+ 
+ /*
+ public class Main implements Runnable
+ {
+     public void run()
+     {
+         System.out.println("thread created using runnable interface ");
+     }
+     public static void main(String args[])
+     {
+         Main m=new Main();
+         Thread t1=new Thread(m);
+         t1.start();
+     }
+ }  
+ 
+// way-2 : create an thread using thread class
+/*
+public class Main extends Thread
+{
+    public void run()
+     {
+         System.out.println("thread created using thread class ");
+     }
+     public static void main(String args[])
+     {
+         Main m=new Main();
+        
+         m.start();
+     }
+}
+*/
+
+//way-3  : create a thread using anonymous inner class using thread class
+/*
+public class Main
+{
+    public static void main(String args[])
+    {
+        Thread t1=new Thread(){
+            public void run()
+            {
+                System.out.println("thread created using threadclass with anonymous inner class ");
+            }
+        };
+        t1.start();
+    }
+}
+*/
+
+//way-4 : create a thread using anonymous inner class using runnable intereface
+
+public class Main
+{
+    public static void main(String args[])
+    {
+        Thread t1=new Thread(new Runnable(){
+            public void run()
+            {
+                System.out.println("thread created using thread class which implements runnable interface");
+            }
+        });
+        t1.start();
+    }
+}

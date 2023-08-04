@@ -1,0 +1,300 @@
+::::::::::::::::::::::::::::::::::::::::::::::::PostgreSQL 2nd Assessment ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Roman I::
+
+1) write a query to list the employees who have less experience than their managers but are earning more than their managers.
+a) write this query using self_join.
+
+select e1.*
+from msemp e1, msemp e2
+where e1.mgr=e2.msempno and e1.sal>e2.sal and e1.hiredate > e2.hiredate;
+
+b)write this query using CTE
+
+With emp_cte(Eno,Ename,Esal,Ehiredate,Emgr)
+AS (select msempno,ename,sal,hiredate,mgr
+    from msemp),
+     mgr_cte(Mno,Msal,Mhiredate)
+AS (select msempno,sal,hiredate
+    from msemp)
+Select e.*
+from emp_cte e,mgr_cte m
+where e.Emgr=m.Mno and e.Esal>m.Msal and e.Ehiredate > m.Mhiredate;
+
+2) Write a query to list the employees by comparing their salary with the company avg salary, their dept avg salary.
+Query should print these columns(empno,ename,job,sal,"Company avg sal","dept avg sal").
+a) Write this query using inline query.
+select e.msempno,e.ename,e.sal,d.davg,c.cavg
+from msemp e,(select avg(sal) cavg from msemp) c,(select msdeptno,avg(sal) davg from msemp group by msdeptno) d
+where e.msdeptno=d.msdeptno;
+
+b)write this query using CTE.
+
+With e_cte(Eno,Ename,Esal,Edept)
+AS (select msempno,ename,sal,msdeptno
+    from msemp),
+     d_cte(Dno,Davg)
+AS (select msdeptno,avg(sal)
+    from msemp
+    group by msdeptno),
+     c_cte(Cavg)
+AS (select avg(sal)
+    from msemp)
+Select e_cte.Eno,e_cte.Ename,e_cte.Esal,d_cte.Davg,c_cte.Cavg
+from e_cte,d_cte,c_cte
+where e_cte.Edept=d_cte.Dno;
+
+3) 
+A) List 3 conditions to manpulate through view..
+ANS:- 
+* We can manpulate the views based on some conditions.
+* But before that we have to know there are two kinds of views those are 
+  1) simple view
+  2) complex view
+ 1)Simple view:: If a view is created on only one table then it is known as simple view
+ 2)Complex view:: If a view is created on more than one table than it is known as complex view..
+* Basically manipulations can be one of these - INSERT , UPDATE  or DELETE
+1)DELETE:
+ If we want to delete a record through the view
+ * The view should be a simple view. Then only we can delete from the view
+ Reason: If we want to delete a record from a complex view, since it is the data from more than one table then there is an ambiguity
+          in deleting. We may loss un intended data in some other table. So we cant delete a record from a view if it is a complex view.
+2)UPDATE:
+ If we want to update a record through the view
+ *) The view must be a simple view
+ *) Threre should not be any expression column
+ Reason: If there is an expresson column in a table and we create view on that table including that expression column then from outside
+         we dont know whether it is an expression column or normal column in that view since all are looks like normal columns in the view.
+3)INSERT:
+ If we want to insert through a view we have 3 conditions
+ *) view must be a simple view
+ *) There should not be any expression columns
+ *) NO not null columns should be excluded
+ Reason: If a not null column is excluded in a view, then we cant give value to that column from our view since it is not presented
+         in that view but by the definition not null column should have a value. So it should not be excluded.
+         
+4) List the employees and their managers hierarchically.
+
+select m.ename manager, e.ename Employee
+from msemp e, msemp m
+where e.mgr=m.msempno
+order by e.mgr;
+
+5) Write a query to list highest paid employees in each department.
+
+select e.*
+from msemp e
+where   row(e.msdeptno,sal) in   ( select msdeptno,max(sal)
+                                  from msemp 
+                                  group by msdeptno)
+order by e.msdeptno;
+
+6) Write a query to list all the departments. Show * symbol opposite to the department that has at least 5 employees with 2 years experience.
+
+select concat(d.dname,' *')::char(50)
+from  msdept d
+where 5<=( select count(*)
+           from msemp e
+           where e.msdeptno=d.msdeptno and extract(years from age(now(),e.hiredate))::int >=2)-- atleast 2 years exp
+UNION 
+(
+select d.dname
+from  msdept d
+except
+select d.dname
+from  msdept d
+where 5<=( select count(*)
+           from msemp e
+           where e.msdeptno=d.msdeptno and extract(years from age(now(),e.hiredate))::int >=2)
+);
+
+
+Roman II::
+
+1) Write a stored procedure to calculate the interest for all accounts for the last 
+6 months and deposit the accumulated intrest amount into the same accounts.
+ANS::
+
+create or replace function amount_on_date(acno bigint,which_date date)
+returns numeric
+language plpgsql
+as $$
+declare 
+    cur_tran_upto_ondate cursor for select tr_type,tr_amount from mstransactions where accno=acno and tr_date>which_date;
+    curr_bal numeric:=(select current_bal from msaccounts where accno=acno);
+    tt char(1);
+    ta numeric;
+begin
+    open cur_tran_upto_ondate;
+    loop 
+        fetch cur_tran_upto_ondate into tt,ta;
+        exit when not found;
+        if (tt='D') then
+             curr_bal=curr_bal+ta;
+        else 
+             curr_bal=curr_bal-ta;
+        end if;     end loop;
+     close cur_tran_upto_ondate;
+     return curr_bal;
+end;
+$$;       
+--////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+create or replace function min_bal_bw_two_dates(ano bigint,start_date date,end_date date)
+returns numeric
+language plpgsql
+as $$
+declare
+      load_records_bw_two_dates cursor for select tr_type,tr_amount from mstransactions where accno=ano and tr_date between start_date and end_date order by tr_date ASC;
+      t_type char(1);
+      t_amo numeric;
+      store_bal numeric:= (select amount_on_date(ano,start_date-1));
+      min_bal numeric:=store_bal;
+begin
+     open load_records_bw_two_dates;
+     loop
+        fetch load_records_bw_two_dates into t_type,t_amo;
+        exit when not found;
+        if (t_type='C') then
+           store_bal=store_bal+t_amo;
+        else
+           store_bal=store_bal-t_amo;
+        end if;
+        if (store_bal<min_bal) then
+           min_bal=store_bal;
+        end if;
+      end loop;
+      close load_records_bw_two_dates;
+      return min_bal;
+end;
+$$;
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+create or replace procedure intrestt_for_an_acc(ano bigint) --This will calculate intrest for a single account and deposit back to it
+language plpgsql
+as $$
+declare 
+   this_month_starting_day date := (select now()::date -  extract(days from now())::int+1);
+	month_start date; --//
+    month_end date;  --//
+    total_intrest numeric:=0; --//
+    current_month_intrest numeric; --//
+    least_bal_in_that_month numeric; --//
+    intrest_percentage numeric(4,2):=4.00; --//
+    account_creation_date date:= (select op_date from msaccounts where accno=ano);
+    age_of_account_years int; --??
+    age_of_account_months int ; --??
+    day_of_creation int; --??
+    n int;
+begin
+	
+    month_start:=this_month_starting_day;
+    month_end :=this_month_starting_day;
+    age_of_account_years :=extract(years from age(now()::date,account_creation_date))::int;
+    age_of_account_months :=extract(months from age(now()::date,account_creation_date))::int;
+    
+    if(age_of_account_years>=1) then n=6;
+    elsif(age_of_account_months>=6) then n=6;
+    else
+    	day_of_creation:=extract(day from (SELECT op_date from msaccounts where accno=ano))::int;
+        if(day_of_creation<10 and day_of_creation<>1) then n=age_of_account_months+1;
+        elsif (day_of_creation=1) then n=age_of_account_months;
+        else n=age_of_account_months;
+        end if;
+     end if;
+    for i in 1..n loop
+    	 month_end := month_start-1;
+         month_start:=month_start-interval '1 month';
+         least_bal_in_that_month=min_bal_bw_two_dates(ano,month_start+10,month_end);
+         current_month_intrest:= (least_bal_in_that_month*1*intrest_percentage)/(12*12*100);
+         total_intrest:=total_intrest+current_month_intrest;
+    end loop;
+    update msaccounts set current_bal=current_bal+total_intrest where accno=ano;
+end;
+$$;
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+create or replace procedure all_accounts_intrest() --take every account no and call above procedure
+language plpgsql
+as $$
+declare 
+   all_acc CURSOR FOR (select accno from msaccounts);
+   ano int;
+begin
+   open all_acc;
+   loop
+      	fetch all_acc into ano;
+  	    exit when not found;
+   		raise notice 'accno is %',ano;
+        call intrestt_for_an_acc(ano);
+   end loop;
+   close all_acc;
+end;
+$$;
+
+
+call all_accounts_intrest();
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+3) Write a stored procedure to get Max_Bal_Bw_Two_Dates
+ANS::
+
+create or replace procedure SpGetMaxBalance(ano bigint,start_date date,end_date date, inout maxbal numeric) --OUT can be used
+language plpgsql
+as $$
+declare
+      load_records_bw_two_dates cursor for select tr_type,tr_amount from mstransactions where accno=ano and tr_date between start_date and end_date order by tr_date ASC;
+      t_type char(1);
+      t_amo numeric;
+      store_bal numeric:= (select amount_on_date(ano,start_date-1));
+      max_bal numeric:=store_bal;
+begin
+     open load_records_bw_two_dates;
+     loop
+        fetch load_records_bw_two_dates into t_type,t_amo;
+        exit when not found;
+        if (t_type='C') then
+           store_bal=store_bal+t_amo;
+        else
+           store_bal=store_bal-t_amo;
+        end if;
+        if (store_bal>max_bal) then
+           max_bal=store_bal;
+        end if;
+      end loop;
+      close load_records_bw_two_dates;
+      select max_bal into maxbal;
+end;
+$$;
+
+call SpGetMaxBalance(321,'2023-01-01','2023-02-28',0);
+
+
+6) Write a database trigger to automate the balance update in accounts table whenever there is an insertion in transaction in tansaction
+table.
+ANS:
+create or replace function auto_up_fun()
+returns trigger
+language plpgsql
+AS $$
+Begin
+	if(new.tr_type='C') then
+    update msaccounts set current_bal=current_bal+new.tr_amount where accno=new.accno;
+    else
+    update msaccounts set current_bal=current_bal-new.tr_amount where accno=new.accno;
+    end if;
+    return new;
+End;
+$$;
+
+create trigger auto_trigger
+After insert
+on mstransactions
+for each row
+execute function auto_up_fun();
+
+insert into mstransactions values(321,now()::date,'C',100000);

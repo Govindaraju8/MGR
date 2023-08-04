@@ -1,0 +1,16 @@
+interface Lamdaexe{
+    void Stringexe();
+}
+public class LambdaClass{
+    public static void main(String args[]){
+        new Lamdaexe(){
+            public void Stringexe(){
+                System.out.println("hello");
+            }
+        }.Stringexe();
+         /*Lamdaexe r=()->{
+                System.out.println("hello");
+        };
+        r.Stringexe();*/
+    }
+}

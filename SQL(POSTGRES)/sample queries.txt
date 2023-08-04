@@ -1,0 +1,21 @@
+SQL Queries
+1. Write a query to list the total salary of employess?
+2. write a query to list the maximum salary of all clerks?
+3. write a query to list the average salary of all clerks who are earning 5000rs?
+4. what is the output of the query?
+    select deptno,av(sal) from emp;
+5. write a query to list the department and their respective average salary of an employees?
+6. write a query to list dpartment wis number of clrks?
+7. write a query to list department wise which are having average salary is morethan 5000rs salary?
+8. write a query to list the departments that are having the total salary between 5000 and 100000?
+9. write a query to list the departments which are having atleast one clerk or one manager?
+10. write a query to list the departments that are having 2 clerks or 3 managers?
+11. write a query to list yearwise number of employees joined?
+12. write a query to list the employees who is getting the top salary?
+13. write a query to list the employees who are earning morethan the average salary of 20th department?
+14. write q query to list the departments that are having average salary is morethan the average salary of all the employees?
+15. write a query to list the departments that are having the total salary morethan the maximum salary all clerks but 
+         lessthan the minimum salary of all managers?
+16. write a query to list the department with highest average salary?
+17. write a query to list the employes who are earning morethan atleast anyone of the employees in 20th department?
+18. write q query to list the year in which highest number of clerks have been joined?

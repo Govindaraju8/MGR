@@ -1,0 +1,106 @@
+
+Explain the advantages of Thread pool and demonstrate the usage of multithreading through 
+ThreadPool using Executor framework. Take at least 3 threads. 
+
+Advantages of Thread Pool:
+
+Thread Reuse: One of the main advantages of a thread pool is that it allows the reuse of threads for multiple tasks. Creating and destroying
+threads are resource-intensive operations. Thread pools help save resources by reusing existing threads, resulting in better performance and reduced overhead.
+
+Thread Management: Thread pools abstract the thread management details, so developers can focus on the actual tasks to be
+executed rather than managing threads explicitly. The thread pool handles thread creation, destruction, and scheduling of tasks, 
+making multithreading easier to manage.
+
+Controlled Concurrency: With a thread pool, you can control the number of threads executing tasks simultaneously. 
+This allows you to limit resource consumption and prevents the system from becoming overloaded with too many active threads.
+
+Enhanced Scalability: Thread pools are scalable, and the number of threads in the pool can be adjusted based on the 
+application's requirements and system resources. This flexibility enables efficient utilization of resources and better application performance.
+
+Improved Responsiveness: In applications with thread pools, tasks are executed immediately without having to wait for
+thread creation. This improves overall application responsiveness and reduces task latency.
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 1 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 2 - Iteration: " + i);
+            }
+        });
+
+        executor.submit(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Task 3 - Iteration: " + i);
+            }
+        });
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+
+//another way-----------*****************************-------------------------
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolDemo {
+    public static void main(String[] args) {
+        // Create a thread pool with 3 threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        // Submit tasks to the thread pool
+        executor.submit(new Task1());
+        executor.submit(new Task2());
+        executor.submit(new Task3());
+
+        // Shutdown the thread pool once tasks are completed
+        executor.shutdown();
+    }
+}
+
+// Task1 implementation
+class Task1 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 1 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task2 implementation
+class Task2 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 2 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
+
+// Task3 implementation
+class Task3 implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Task 3 - Iteration: " + i + " - Thread: " + Thread.currentThread().getName());
+        }
+    }
+}
