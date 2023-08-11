@@ -22,3 +22,6 @@ public class My extends HttpServlet {
         p.println("Hello servlet");
     }
 }
+
+
+javac -cp "C:\Users\mastani.s\Desktop\Tomcat 8.5\lib\servlet-api.jar" HelloServlet.java
