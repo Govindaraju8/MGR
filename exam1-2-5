@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hotels.com Configuration</title>
+</head>
+<body>
+  <h1>Hotels.com Configuration</h1>
+
+  <script>
+    var xhr = new XMLHttpRequest();
+    var apiUrl = 'https://hotels4.p.rapidapi.com/v2/get-meta-data';
+    
+    xhr.open('GET', apiUrl, true);
+
+    // Set custom headers required by the API
+    xhr.setRequestHeader('X-RapidAPI-Host', 'hotels4.p.rapidapi.com');
+    xhr.setRequestHeader('X-RapidAPI-Key', 'b5173a6b9emshd56da68f325a33cp1a30bajsnfa805b17af61');
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        var jsonData = JSON.parse(xhr.responseText);
+
+        // Function to create and populate a table
+        function createTable(elementData) {
+          var table = document.createElement('table');
+          table.border = "1";
+
+          var tbody = document.createElement('tbody');
+          var headerRow = document.createElement('tr');
+          var headerCell1 = document.createElement('th');
+          headerCell1.textContent = "Property";
+          var headerCell2 = document.createElement('th');
+          headerCell2.textContent = "Value";
+          headerRow.appendChild(headerCell1);
+          headerRow.appendChild(headerCell2);
+          tbody.appendChild(headerRow);
+
+          for (var property in elementData) {
+            if (elementData.hasOwnProperty(property)) {
+              var row = document.createElement('tr');
+              var propertyCell = document.createElement('td');
+              propertyCell.textContent = property;
+              var valueCell = document.createElement('td');
+              valueCell.textContent = JSON.stringify(elementData[property]);
+
+              row.appendChild(propertyCell);
+              row.appendChild(valueCell);
+
+              tbody.appendChild(row);
+            }
+          }
+
+          table.appendChild(tbody);
+          document.body.appendChild(table);
+        }
+
+        // Iterate through each element and create a table
+        for (var element in jsonData) {
+          if (jsonData.hasOwnProperty(element)) {
+            createTable(jsonData[element]);
+          }
+        }
+      } else {
+        console.error('Request failed with status:', xhr.status);
+      }
+    };
+
+    xhr.send();
+  </script>
+</body>
+</html>
+
+
+
+/***************************************************
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Form with Validations</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">Name*</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="aadhar">Aadhar*</label>
+                <input type="text" class="form-control" id="aadhar" pattern="[0-9]{12}" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile*</label>
+                <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">DOB*</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="fbUrl">Facebook URL*</label>
+                <input type="url" class="form-control" id="fbUrl" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password*</label>
+                <input type="password" class="form-control" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password*</label>
+                <input type="password" class="form-control" id="confirmPassword" required>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById("registrationForm");
+        const passwordField = document.getElementById("password");
+        const confirmPasswordField = document.getElementById("confirmPassword");
+
+        form.addEventListener("blur", function(event) {
+            const input = event.target;
+            validateField(input);
+        }, true);
+
+        passwordField.addEventListener("input", function() {
+            validateConfirmPassword();
+        });
+
+        confirmPasswordField.addEventListener("input", function() {
+            validateConfirmPassword();
+        });
+
+        function validateField(input) {
+            if (input.checkValidity()) {
+                input.classList.remove("is-invalid");
+            } else {
+                input.classList.add("is-invalid");
+            }
+        }
+
+        function validateConfirmPassword() {
+            if (passwordField.value === confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity("");
+            } else {
+                confirmPasswordField.setCustomValidity("Passwords do not match.");
+            }
+            validateField(confirmPasswordField);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+**************************************************************
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour Registration</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="mb-4">Tour Registration</h1>
+  <form id="registration-form">
+    <div id="passengers">
+    </div>
+    <button type="button" class="btn btn-success me-2" id="add-passenger">+ Add Passenger</button>
+    <button type="button" class="btn btn-danger" id="remove-passenger">- Remove Passenger</button>
+    <h3 class="mt-3">Total Amount: <span id="total-amount">0</span> INR</h3>
+    <button type="submit" class="btn btn-primary mt-3">Register</button>
+  </form>
+</div>
+
+<script>
+  const addPassengerButton = document.getElementById("add-passenger");
+  const removePassengerButton = document.getElementById("remove-passenger");
+  const passengersContainer = document.getElementById("passengers");
+  const totalAmountSpan = document.getElementById("total-amount");
+  const registrationForm = document.getElementById("registration-form");
+
+  let passengerCount = 0;
+  let farePerPassenger = 900;
+
+  addPassengerButton.addEventListener("click", () => {
+    passengerCount++;
+    const newPassengerDiv = document.createElement("div");
+    newPassengerDiv.className = "passenger mt-4";
+    newPassengerDiv.innerHTML = `
+      <h3>Passenger ${passengerCount}</h3>
+    `;
+    passengersContainer.appendChild(newPassengerDiv);
+    addPassengerFields(newPassengerDiv, passengerCount);
+  });
+
+  removePassengerButton.addEventListener("click", () => {
+    if (passengerCount > 0) {
+      const lastPassengerDiv = passengersContainer.lastElementChild;
+      passengersContainer.removeChild(lastPassengerDiv);
+      passengerCount--;
+      updateTotalAmount();
+    }
+  });
+
+  registrationForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    updateTotalAmount();
+  });
+
+  function addPassengerFields(passengerDiv, count) {
+    const fields = [
+      { label: "Name", type: "text", validation: "required" },
+      { label: "Email", type: "email", validation: "required" },
+      { label: "Mobile No", type: "tel", validation: "required pattern=^[0-9]{10}$", placeholder: "Enter 10-digit number" },
+      { label: "Age", type: "number", validation: "required min=1 max=120" },
+      { label: "Gender", type: "select", options: ["Male", "Female", "Other"], validation: "required" }
+    ];
+    
+    fields.forEach((field) => {
+      const label = document.createElement("label");
+      label.setAttribute("for", `${field.label.toLowerCase()}${count}`);
+      label.textContent = `${field.label}:`;
+      
+      const input = document.createElement(field.type === "select" ? "select" : "input");
+      input.setAttribute("id", `${field.label.toLowerCase()}${count}`);
+      input.setAttribute("name", `${field.label.toLowerCase()}${count}`);
+      input.setAttribute("class", "form-control");
+      
+      if (field.type !== "select") {
+        input.setAttribute("type", field.type);
+        if (field.placeholder) {
+          input.setAttribute("placeholder", field.placeholder);
+        }
+        if (field.validation) {
+          input.setAttribute("pattern", field.validation);
+        }
+      }
+      
+      if (field.options) {
+        field.options.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.textContent = option;
+          optionElement.value = option.toLowerCase();
+          input.appendChild(optionElement);
+        });
+      }
+      
+      passengerDiv.appendChild(label);
+      passengerDiv.appendChild(input);
+      passengerDiv.appendChild(document.createElement("br"));
+    });
+  }
+
+  function updateTotalAmount() {
+    const totalAmount = farePerPassenger * passengerCount;
+    totalAmountSpan.textContent = totalAmount.toFixed(2) + " INR";
+  }
+</script>
+</body>
+</html>
+
