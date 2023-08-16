@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Product List</title>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add jQuery UI CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+    /* Custom CSS for Product List */
+    body {
+      padding: 20px;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .product-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product-description {
+      color: #666;
+    }
+
+    .product-price {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .product-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .add-to-cart-btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Custom CSS for Search Bar */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 300px;
+      height: 40px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .search-button {
+      margin-left: 10px;
+      height: 40px;
+    }
+
+    /* Custom CSS for Category Buttons */
+    .category-btns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .category-btn {
+      margin: 0 5px;
+    }
+
+    /* Custom CSS for Search Suggestion Box */
+    .ui-autocomplete {
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 1000;
+      background-color: #f5f5f5;
+    }
+
+    .ui-menu-item {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #filter-button {
+      margin-left: 40px;
+    }
+
+    #cart-button {
+      margin-left: 40px;
+    }
+
+    .ui-menu-item:hover {
+      background-color: #e5e5e5;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="mb-4">
+    <center>MGR-SM Electronics products store</center>
+  </h1>
+  <div class="search-bar">
+    <input type="text" id="search-input" class="form-control search-input" placeholder="Search products...">
+    <button class="btn btn-primary search-button" onclick="searchItem()">Search</button>
+    <button class="btn btn-success" id="filter-button" onclick="showFilterModal()">Filter</button>
+    <button class="btn btn-success" onclick="viewCart()" id="cart-button">Cart</button>
+  </div>
+  <div class="category-btns">
+    <button class="btn btn-primary category-btn" onclick="filterByCategory('smartphones')">Smartphones</button>
+    <button class="btn btn-primary category-btn" onclick="filterByCategory('laptops')">Laptops</button>
+    <button class="btn btn-primary category-btn" onclick="filterByCategory('fragrances')">Fragrances</button>
+    <button class="btn btn-primary category-btn" onclick="filterByCategory('skincare')">Skincare</button>
+    <button class="btn btn-primary category-btn" onclick="filterByCategory('groceries')">Groceries</button>
+  </div>
+  <div class="row" id="product-list"></div>
+  <div id="cart-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cart Items</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="cart-items"></div>
+        <div class="modal-footer">
+          <p class="modal-total">Total Price: <span id="cart-total-price">$0</span></p>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Filter Modal -->
+  <div id="filter-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Filter Products by Price Range</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="min-price-input">Minimum Price:</label>
+            <input type="number" class="form-control" id="min-price-input" placeholder="Enter minimum price">
+          </div>
+          <div class="form-group">
+            <label for="max-price-input">Maximum Price:</label>
+            <input type="number" class="form-control" id="max-price-input" placeholder="Enter maximum price">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="applyFilter()">Apply</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 10px; right: 10px;">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+      <div class="toast-header">
+        <strong class="mr-auto">Item Added</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        The item has been added to the cart.
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Add jQuery UI (optional, only needed for autocomplete) -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+  const data={
+		  "products": [
+		    {
+		      "id": 1,
+		      "title": "iPhone 9",
+		      "description": "An apple mobile which is nothing like apple",
+		      "price": 549,
+		      "image": "https://images.macrumors.com/t/e0o2RzHJ5cPlD4FgyKQ5jCdSGko=/1600x/article-new/2016/05/iphone8gold.jpg",
+		      "category": "smartphones"
+		    },
+		    {
+		      "id": 2,
+		      "title": "iPhone X",
+		      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+		      "price": 899,
+		      "image": "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-x-new-1.jpg",
+		      "category": "smartphones"
+		    },
+		    {
+		      "id": 3,
+		      "title": "Samsung Universe 9",
+		      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+		      "price": 1249,
+		      "image": "https://www.91-img.com/gallery_images_uploads/6/a/6aead76b1f3deeb8b71f150419a58bd80d732dfc.jpg?tr=h-630,c-at_max,q-80",
+		      "category": "smartphones"
+		    },
+		    {
+		      "id": 4,
+		      "title": "OPPOF19",
+		      "description": "OPPO F19 is officially announced on April 2021.",
+		      "price": 280,
+		      "image": "https://fdn2.gsmarena.com/vv/pics/oppo/oppo-f19-0.jpg",
+		      "category": "smartphones"
+		    },
+		    {
+		      "id": 5,
+		      "title": "Huawei P30",
+		      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+		      "price": 499,
+		      "image": "https://fdn2.gsmarena.com/vv/pics/huawei/huawei-p30-1.jpg",
+		      "category": "smartphones"
+		    },
+		    {
+		      "id": 6,
+		      "title": "MacBook Pro",
+		      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+		      "price": 1749,
+		      "image": "https://images.pexels.com/photos/249538/pexels-photo-249538.jpeg?cs=srgb&dl=pexels-john-tekeridis-249538.jpg&fm=jpg",
+		      "category": "laptops"
+		    },
+		    {
+		      "id": 7,
+		      "title": "Samsung Galaxy Book",
+		      "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+		      "price": 1499,
+		      "image": "https://images.samsung.com/is/image/samsung/p6pim/in/feature/163913587/in-feature-galaxy-book2-pro-13inch-np930xeda-531331954?$FB_TYPE_A_MO_JPG$",
+		      "category": "laptops"
+		    },
+		    {
+		      "id": 8,
+		      "title": "Microsoft Surface Laptop 4",
+		      "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+		      "price": 1499,
+		      "image": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4MCcc",
+		      "category": "laptops"
+		    },
+		    {
+		      "id": 9,
+		      "title": "Infinix INBOOK",
+		      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+		      "price": 1099,
+		      "image":"https://cdn1.smartprix.com/rx-iNMbx0f5m-w1200-h1200/NMbx0f5m.jpg",
+		      "category": "laptops"
+		    },
+		    {
+		      "id": 10,
+		      "title": "HP Pavilion 15-DK1056WM",
+		      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+		      "price": 1099,
+		      "image": "https://images-na.ssl-images-amazon.com/images/I/71TmJKXhl+L._AC_UL600_SR600,600_.jpg",
+		      "category": "laptops"
+		    },
+		    {
+		      "id": 11,
+		      "title": "perfume Oil",
+		      "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+		      "price": 13,
+		      "image": "https://img.freepik.com/premium-photo/arabian-oud-attar-perfume-agarwood-oil-fragrances-mini-bottles_158388-2813.jpg?w=2000",
+		      "category": "fragrances"
+		    },
+		    {
+		      "id": 12,
+		      "title": "Brown Perfume",
+		      "description": "Royal_Mirage Sport Brown Perfume for Men & Women - 120ml",
+		      "price": 40,
+		      "image": "https://www.takeit2day.com/image/cache/data/arabic-fragrance/fragrance%20world/fragrance-world-brown-orchid-edp-80-ml-600x800-0.jpg",
+		      "category": "fragrances"
+		    },
+		    {
+		      "id": 13,
+		      "title": "Fog Scent Xpressio Perfume",
+		      "description": "Product details of Best Fog Scent Xpressio Perfume 100ml For Men cool long lasting perfumes for Men",
+		      "price": 13,
+		      "image": "https://www.bigbasket.com/media/uploads/p/l/40046724-7_1-fogg-scent-xpressio-for-men.jpg",
+		      "category": "fragrances"
+		    },
+		    {
+		      "id": 14,
+		      "title": "Non-Alcoholic Concentrated Perfume Oil",
+		      "description": "Original Al Munakh® by Mahal Al Musk | Our Impression of Climate | 6ml Non-Alcoholic Concentrated Perfume Oil",
+		      "price": 120,
+		      "image": "https://5.imimg.com/data5/SELLER/Default/2021/5/BM/YU/WF/35324123/whatsapp-image-2021-05-14-at-6-45-26-pm-500x500.jpeg",
+		      "category": "fragrances"
+		    },
+		    {
+		      "id": 15,
+		      "title": "Eau De Perfume Spray",
+		      "description": "Genuine  Al-Rehab spray perfume from UAE/Saudi Arabia/Yemen High Quality",
+		      "price": 30,
+		      "image": "https://media.istockphoto.com/id/1158358904/photo/spraying-perfume-on-dark-background-closeup-image.jpg?s=612x612&w=0&k=20&c=FgO1tJIxW_fVH0e7YHb-oMb_iDshELnMR6qXGILQFcU=",
+		      "category": "fragrances"
+		    },
+		    {
+		      "id": 16,
+		      "title": "Hyaluronic Acid Serum",
+		      "description": "L'OrÃ©al Paris introduces Hyaluron Expert Replumping Serum formulated with 1.5% Hyaluronic Acid",
+		      "price": 19,
+		      "image": "https://hips.hearstapps.com/hmg-prod/images/gh-030220-best-hyaluronic-acid-serums-1583186519.png",
+		      "category": "skincare"
+		    },
+		    {
+		      "id": 17,
+		      "title": "Tree Oil 30ml",
+		      "description": "Tea tree oil contains a number of compounds, including terpinen-4-ol, that have been shown to kill certain bacteria,",
+		      "price": 12,
+		      "image": "https://m.media-amazon.com/images/I/41Zc7DmOH1S.jpg",
+		      "category": "skincare"
+		    },
+		    {
+		      "id": 18,
+		      "title": "Oil Free Moisturizer 100ml",
+		      "description": "Dermive Oil Free Moisturizer with SPF 20 is specifically formulated with ceramides, hyaluronic acid & sunscreen.",
+		      "price": 40,
+		      "image": "https://ailaaj.com/cdn/shop/products/dermive-oil-free_1024x.jpg?v=1647943273",
+		      "category": "skincare"
+		    },
+		    {
+		      "id": 19,
+		      "title": "Skin Beauty Serum.",
+		      "description": "Product name: rorec collagen hyaluronic acid white face serum riceNet weight: 15 m",
+		      "price": 46,
+		      "image": "https://images.meesho.com/images/products/281230197/0gdmb_512.webp",
+		      "category": "skincare"
+		    },
+		    {
+		      "id": 20,
+		      "title": "Freckle Treatment Cream- 15gm",
+		      "description": "Fair & Clear is Pakistan's only pure Freckle cream which helpsfade Freckles, Darkspots and pigments. Mercury level is 0%, so there are no side effects.",
+		      "price": 70,
+		      "image": "https://cdn2.stylecraze.com/wp-content/uploads/2021/05/15-Best-Freckle-Removal-Creams-To-Lighten-Your-Skin--2022.jpg",
+		      "category": "skincare"
+		    },
+		    {
+		      "id": 21,
+		      "title": "- Daal Masoor 500 grams",
+		      "description": "Fine quality Branded Product Keep in a cool and dry place",
+		      "price": 20,
+		      "image": "https://needline.in/wp-content/uploads/2020/11/masoor-min.jpg",
+		      "category": "groceries"
+		    },
+		    {
+		      "id": 22,
+		      "title": "Elbow Macaroni - 400 gm",
+		      "description": "Product details of Bake Parlor Big Elbow Macaroni - 400 gm",
+		      "price": 14,
+		      "image": "https://m.media-amazon.com/images/I/615YeN2l47L.jpg",
+		      "category": "groceries"
+		    },
+		    {
+		      "id": 23,
+		      "title": "Orange Essence Food Flavou",
+		      "description": "Specifications of Orange Essence Food Flavour For Cakes and Baking Food Item",
+		      "price": 14,
+		      "image": "https://5.imimg.com/data5/SELLER/Default/2021/11/FT/XU/VT/135046750/orange-food-500x500.jpg",
+		      "category": "groceries"
+		    },
+		    {
+		      "id": 24,
+		      "title": "cereals muesli fruit nuts",
+		      "description": "original fauji cereal muesli 250gm box pack original fauji cereals muesli fruit nuts flakes breakfast cereal break fast faujicereals cerels cerel foji fouji",
+		      "price": 46,
+		      "image": "https://m.media-amazon.com/images/I/718yoYXp+lL._AC_UF1000,1000_QL80_.jpg",
+		      "category": "groceries"
+		    },
+		    {
+		      "id": 25,
+		      "title": "Gulab Powder 50 Gram",
+		      "description": "Dry Rose Flower Powder Gulab Powder 50 Gram • Treats Wounds",
+		      "price": 70,
+		      "image": "https://m.media-amazon.com/images/I/811b3u4-JBL.jpg",
+		      "category": "groceries"
+		    }
+		  ]
+		}
+
+    let allProductsData=data;
+    let cart = [];
+    let filteredProducts = []; // Store filtered products separately
+    
+    displayProducts(allProductsData.products);
+
+    // Function to display product data on the web page
+    function displayProducts(products) {
+      const productListDiv = $('#product-list');
+      let html = '';
+      products.forEach((product) => {
+        html += `
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card">
+              <h3 class="product-title">${product.title}</h3>
+              <img class="product-image" src="${product.image}" alt="${product.title}">
+              <p class="product-description">${product.description}</p>
+              <p class="product-price">Price: $${product.price}</p>
+              <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+          </div>
+        `;
+      });
+      productListDiv.html(html);
+    }
+
+    // Function to show a toast message
+    function showToast() {
+      const toast = $('.toast');
+      toast.toast('show');
+    }
+
+    // Function to add a product to the cart
+    // Function to add a product to the cart
+     function addToCart(productId) {
+      const productToAdd = allProductsData.products.find(product => product.id === productId);
+      if (productToAdd && !cart.includes(productToAdd)) {
+        cart.push(productToAdd);
+        //updateLocalStorageCart();
+        console.log('Added to cart:', productToAdd);
+        updateCartButton();
+        showToast(); // Show the toast message when an item is added to the cart
+      }
+      updateCartTotal();
+    }
+    
+    
+
+/*
+    // Function to initialize the cart from Local Storage
+    function initCartFromLocalStorage() {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartTotal();
+        updateCartButton();
+      }
+    }
+
+    // Call this function on page load
+    window.addEventListener('load', () => {
+      initCartFromLocalStorage();
+      // Other page initialization code...
+    });
+*/
+    // Function to remove a product from the cart
+    function removeFromCart(productId) {
+      const index = cart.findIndex(item => item.id === productId);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        console.log('Removed from cart:', productId);
+        updateCartButton();
+        //updateLocalStorageCart();
+      }
+      updateCartTotal();
+      updateCartItems();
+    }
+/*
+    function updateLocalStorageCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }*/
+    // Function to view cart contents
+    
+    /*
+    function viewCart() {
+      const cartItemsDiv = $('#cart-items');
+      let html = '';
+      if (cart.length === 0) {
+        html = '<p>Your cart is empty.</p>';
+      } else {
+        cart.forEach((item) => {
+          html += `
+            <div>
+              <h4>${item.title}</h4>
+              <p>Price: $${item.price}</p>
+              <img src="${item.image}" alt="${item.title}" style="width: 50px; height: 50px; object-fit: cover;">
+              <button class="btn btn-danger" onclick="removeFromCart(${item.id})">Remove</button>
+              <hr>
+            </div>
+          `;
+        });
+      }
+      cartItemsDiv.html(html);
+      $('#cart-modal').modal('show');
+      updateCartTotal();
+    }*/
+    function viewCart() {
+    	  const xhr = new XMLHttpRequest();
+
+    	  // Construct the URL with the cart items as a query parameter
+    	  const cartItemsUrl = 'CartServlet?cartItems=' + encodeURIComponent(JSON.stringify(cart));
+
+    	  // Open a GET request to the servlet URL
+    	  xhr.open('GET', cartItemsUrl, true);
+
+    	  // Set up a callback function to handle the response
+    	  xhr.onload = function () {
+    	    if (xhr.status === 200) {
+    	      // Display the cart items using the responseText
+    	      document.body.innerHTML = xhr.responseText;
+    	    } else {
+    	      console.error('Error retrieving cart items:', xhr.statusText);
+    	    }
+    	  };
+
+    	  // Send the GET request
+    	  xhr.send();
+    	}
+
+    /*
+    
+    function viewCart() {
+    	  const xhr = new XMLHttpRequest();
+
+    	  // Configure the request
+    	  xhr.open('GET', 'cartServlet', true); // Replace with the actual servlet URL
+
+    	  // Set up a callback function to handle the response
+    	  xhr.onload = function () {
+    	    if (xhr.status === 200) {
+    	      // Process the response and update the UI
+    	      const cartItems = JSON.parse(xhr.responseText);
+    	      displayCartItems(cartItems);
+    	    } else {
+    	      console.error('Error retrieving cart items:', xhr.statusText);
+    	    }
+    	  };
+
+    	  // Send the request
+    	  xhr.send();
+    	}
+
+    	// Function to display cart items in the UI
+    	function displayCartItems(cartItems) {
+    	  const cartItemsDiv = $('#cart-items');
+    	  let html = '';
+
+    	  if (cartItems && cartItems.length > 0) {
+    	    cartItems.forEach((item) => {
+    	      html += `
+    	        <div>
+    	          <h4>${item.productName}</h4>
+    	          <p>Price: $${item.productPrice}</p>
+    	          <img src="${item.productImage}" alt="${item.productName}" style="width: 50px; height: 50px; object-fit: cover;">
+    	          <button class="btn btn-danger" onclick="removeFromCart(${item.productId})">Remove</button>
+    	          <hr>
+    	        </div>
+    	      `;
+    	    });
+    	  } else {
+    	    html = '<p>Your cart is empty.</p>';
+    	  }
+
+    	  cartItemsDiv.html(html);
+    	  $('#cart-modal').modal('show');
+    	  updateCartTotal();
+    	}*/
+
+    // Function to update the cart total price
+    function updateCartTotal() {
+      const total = cart.reduce((acc, item) => acc + item.price, 0);
+      $('#cart-total-price').text(`$${total.toFixed(2)}`);
+    }
+
+    // Function to update the cart button text
+    function updateCartButton() {
+      const cartButton = $('#cart-button');
+      if (cart.length === 0) {
+        cartButton.text('Cart');
+      } else {
+        cartButton.text(`Cart (${cart.length})`);
+      }
+    }
+
+    // Function to update the cart items display in the cart modal
+    function updateCartItems() {
+      const cartItemsDiv = $('#cart-items');
+      let html = '';
+      if (cart.length === 0) {
+        html = '<p>Your cart is empty.</p>';
+      } else {
+        cart.forEach((item) => {
+          html += `
+            <div>
+              <h4>${item.title}</h4>
+              <p>Price: $${item.price}</p>
+              <img src="${item.image}" alt="${item.title}" style="width: 50px; height: 50px; object-fit: cover;">
+              <button class="btn btn-danger" onclick="removeFromCart(${item.id})">Remove</button>
+              <hr>
+            </div>
+          `;
+        });
+      }
+      cartItemsDiv.html(html);
+      updateCartTotal();
+    }
+
+    // Function to filter products by category
+    function filterByCategory(category) {
+      if (category === 'all') {
+        displayProducts(allProductsData.products);
+      } else {
+        const filteredProducts = allProductsData.products.filter(product => product.category === category);
+        displayProducts(filteredProducts);
+      }
+    }
+
+    
+
+    // Search functionality with suggestion box
+    $('#search-input').autocomplete({
+      source: function (request, response) {
+        const searchKeyword = request.term.trim().toLowerCase();
+        const filteredProducts = allProductsData.products.filter(product => product.title.toLowerCase().includes(searchKeyword));
+        const titles = filteredProducts.map(product => product.title);
+        response(titles);
+      }
+    });
+
+    // Search button functionality
+    function searchItem() {
+      const searchKeyword = $('#search-input').val().trim().toLowerCase();
+      const filteredProducts = allProductsData.products.filter(product => product.title.toLowerCase().includes(searchKeyword));
+      displayProducts(filteredProducts);
+    }
+
+    // Function to display the filtered product data on the web page
+    function displayFilteredProducts() {
+      const productListDiv = $('#product-list');
+      let html = '';
+      const sortedProducts = sortProductsByPrice(filteredProducts); // Sort filtered products by price
+      sortedProducts.forEach((product) => {
+        html += `
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card">
+              <h3 class="product-title">${product.title}</h3>
+              <img class="product-image" src="${product.image}" alt="${product.title}">
+              <p class="product-description">${product.description}</p>
+              <p class="product-price">Price: $${product.price}</p>
+              <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+          </div>
+        `;
+      });
+      productListDiv.html(html);
+    }
+
+    // Function to apply the filter based on minimum and maximum price
+    function applyFilter() {
+      const minPrice = parseFloat($('#min-price-input').val());
+      const maxPrice = parseFloat($('#max-price-input').val());
+      if (isNaN(minPrice) || isNaN(maxPrice) || minPrice > maxPrice) {
+        alert("Please enter valid minimum and maximum prices.");
+        return;
+      }
+      filteredProducts = allProductsData.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+      displayFilteredProducts(); // Display the filtered products
+      $('#filter-modal').modal('hide'); // Hide the filter modal after applying the filter
+    }
+
+    // Function to show the filter modal
+    function showFilterModal() {
+      $('#filter-modal').modal('show');
+    }
+
+    // Function to sort products by price in ascending order
+    function sortProductsByPrice(products) {
+      return products.sort((a, b) => a.price - b.price);
+    }
+
+  </script>
+
+  <!-- Add Bootstrap JS (optional, only needed if you want to use Bootstrap JavaScript features) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

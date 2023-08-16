@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Food Items</title>
+
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body><center>
+    <h1><u>M&G Restatrunt</u></h1>
+  <form action="/search" method="get">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="q" placeholder="Search for food">
+    <input type="submit" value="Search" class="btn info">
+  </form>
+
+  <button class="btn info" onclick="displayItems('biryani_items')">Biryani</button>
+  <button class="btn info" onclick="displayItems('noodle_items')">Noodles</button>
+  <button class="btn info" onclick="displayItems('juice_items')">Juice</button>
+  <button class="btn info" onclick="displayItems('chocolate_items')">Chocolate</button>
+  <button class="btn info" id="show-cart-button">Show Cart</button>
+</center>
+
+  <div id="content"></div>
+
+
+  <div id="cart-container">
+    <h2>Your Cart</h2>
+    <button id="close-cart-button" class="btn info">Close</button>
+    <ul id="cart-items"></ul>
+  </div>
+  
+  <script>
+     const data = {
+      "biryani_items": [
+      {
+      "name": "Hyderabadi Biryani",
+      "description": "A flavorful and aromatic rice dish made with basmati rice, tender meat (chicken or mutton), and a blend of spices.",
+      "ingredients": ["Basmati rice", "Chicken/Mutton", "Onions", "Yogurt", "Ghee", "Spices"],
+      "spiciness": "Medium",
+      "price": "$12.99",
+      "image_url":"b1.jpg"
+    },
+    {
+      "name": "Lucknowi Biryani",
+      "description": "A traditional biryani from Lucknow, India, made with fragrant rice and slow-cooked meat (usually lamb or goat).",
+      "ingredients": ["Basmati rice", "Lamb/Goat", "Saffron", "Rose water", "Mint leaves", "Spices"],
+      "spiciness": "Mild",
+      "price": "$14.99",
+      "image_url":"b2.jpg"
+    },
+    {
+      "name": "Kolkata Biryani",
+      "description": "A popular biryani variant from Kolkata, India, cooked with potatoes, eggs, and aromatic spices.",
+      "ingredients": ["Basmati rice", "Chicken", "Potatoes", "Eggs", "Caramelized onions", "Spices"],
+      "spiciness": "Medium",
+      "price": "$11.99",
+      "image_url":"b3.jpg"
+    },
+    {
+      "name": "Thalassery Biryani",
+      "description": "A flavorful biryani from Kerala, India, known for its unique blend of spices and the use of Khaima/Jeerakasala rice.",
+      "ingredients": ["Khaima/Jeerakasala rice", "Chicken/Beef", "Caramelized onions", "Coconut milk", "Spices"],
+      "spiciness": "Medium",
+      "price": "$13.99",
+      "image_url":"b4.jpg"
+    },
+    {
+      "name": "Sindhi Biryani",
+      "description": "A delightful biryani from Sindh, Pakistan, prepared with meat (chicken or mutton) and layered with fragrant rice.",
+      "ingredients": ["Basmati rice", "Chicken/Mutton", "Potatoes", "Yogurt", "Tomatoes", "Spices"],
+      "spiciness": "Spicy",
+      "price": "$15.99",
+      "image_url":"b5.jpg"
+    }],
+      "noodle_items": [
+      {
+      "name": "Pad Thai",
+      "description": "A popular Thai stir-fried noodle dish made with rice noodles, shrimp or chicken, bean sprouts, peanuts, and tamarind sauce.",
+      "ingredients": ["Rice noodles", "Shrimp/Chicken", "Bean sprouts", "Tofu", "Peanuts", "Tamarind sauce"],
+      "spiciness": "Mild",
+      "price": "$9.99",
+      "image_url":"n1.jpg"
+    },
+    {
+      "name": "Ramen",
+      "description": "A Japanese noodle soup dish served in a flavorful broth, topped with sliced pork, boiled eggs, nori, and various toppings.",
+      "ingredients": ["Ramen noodles", "Pork", "Eggs", "Nori (seaweed)", "Green onions", "Bamboo shoots"],
+      "spiciness": "Non-spicy",
+      "price": "$10.99",
+      "image_url":"n2.jpg"
+    },
+    {
+      "name": "Pho",
+      "description": "A Vietnamese noodle soup made with rice noodles, beef or chicken, and a fragrant broth with herbs and spices.",
+      "ingredients": ["Rice noodles", "Beef/Chicken", "Bean sprouts", "Thai basil", "Lime", "Hoisin sauce"],
+      "spiciness": "Non-spicy",
+      "price": "$8.99",
+      "image_url":"n3.jpg"
+    },
+    {
+      "name": "Lo Mein",
+      "description": "A Chinese stir-fried noodle dish with vegetables, often served with beef, chicken, shrimp, or tofu.",
+      "ingredients": ["Egg noodles", "Beef/Chicken/Shrimp/Tofu", "Carrots", "Broccoli", "Soy sauce", "Oyster sauce"],
+      "spiciness": "Non-spicy",
+      "price": "$11.99",
+      "image_url":"n4.jpg"
+    },
+    {
+      "name": "Japchae",
+      "description": "A Korean dish made with sweet potato glass noodles stir-fried with vegetables and meat (often beef).",
+      "ingredients": ["Sweet potato glass noodles", "Beef", "Carrots", "Spinach", "Soy sauce", "Sesame oil"],
+      "spiciness": "Non-spicy",
+      "price": "$12.99",
+      "image_url":"n5.jpg"
+    }
+      ],
+      "juice_items": [
+      {
+      "name": "Orange Juice",
+      "description": "A classic and refreshing juice made from freshly squeezed oranges.",
+      "ingredients": ["Fresh oranges"],
+      "sugar_content": "Medium",
+      "price": "$3.99",
+      "image_url":"j1.jpg"
+    },
+    {
+      "name": "Apple Juice",
+      "description": "A sweet and flavorful juice made from freshly pressed apples.",
+      "ingredients": ["Fresh apples"],
+      "sugar_content": "High",
+      "price": "$2.99",
+      "image_url":"j2.jpg"
+    },
+    {
+      "name": "Watermelon Juice",
+      "description": "A hydrating and refreshing juice made from juicy watermelon slices.",
+      "ingredients": ["Fresh watermelon"],
+      "sugar_content": "Low",
+      "price": "$4.49",
+      "image_url":"j3.jpg"
+    },
+    {
+      "name": "Carrot Ginger Juice",
+      "description": "A nutritious juice blend made with fresh carrots and a hint of ginger for added flavor.",
+      "ingredients": ["Fresh carrots", "Fresh ginger"],
+      "sugar_content": "Low",
+      "price": "$4.99",
+      "image_url":"j4.jpg"
+    },
+    {
+      "name": "Pineapple Coconut Juice",
+      "description": "A tropical and creamy juice blend made from fresh pineapples and coconut milk.",
+      "ingredients": ["Fresh pineapples", "Coconut milk"],
+      "sugar_content": "Medium",
+      "price": "$5.99",
+      "image_url":"j5.jpg"
+    }
+      ],
+      "chocolate_items": [
+      {
+      "name": "Milk Chocolate",
+      "description": "A creamy and sweet chocolate made with milk solids and cocoa solids.",
+      "ingredients": ["Sugar", "Cocoa butter", "Milk powder", "Cocoa mass", "Lecithin"],
+      "cocoa_content": "25%",
+      "price": "$1.99",
+      "image_url":"c1.jpg"
+    },
+    {
+      "name": "Dark Chocolate",
+      "description": "A rich and intense chocolate with a higher percentage of cocoa solids and less sugar.",
+      "ingredients": ["Cocoa mass", "Sugar", "Cocoa butter", "Lecithin"],
+      "cocoa_content": "70%",
+      "price": "$2.49",
+      "image_url":"c2.jpg"
+    },
+    {
+      "name": "White Chocolate",
+      "description": "A smooth and creamy chocolate made with cocoa butter, milk solids, and no cocoa solids.",
+      "ingredients": ["Sugar", "Cocoa butter", "Milk powder", "Lecithin"],
+      "cocoa_content": "0%",
+      "price": "$1.79",
+      "image_url":"c3.jpg"
+    },
+    {
+      "name": "Hazelnut Chocolate",
+      "description": "A delightful combination of chocolate and roasted hazelnuts.",
+      "ingredients": ["Sugar", "Cocoa mass", "Cocoa butter", "Hazelnuts", "Lecithin"],
+      "cocoa_content": "40%",
+      "price": "$2.99",
+      "image_url":"c4.jpg"
+    },
+    {
+      "name": "Caramel Sea Salt Chocolate",
+      "description": "A delectable blend of sweet caramel and sea salt with smooth chocolate.",
+      "ingredients": ["Sugar", "Cocoa mass", "Cocoa butter", "Caramel", "Sea salt", "Lecithin"],
+      "cocoa_content": "55%",
+      "price": "$3.49",
+      "image_url":"c5.jpg"
+    }
+      ]
+    };
+
+function displayItems(category) {
+  const contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = ''; 
+  const items = data[category];
+  items.forEach(item => {
+    const itemDetails = `
+      <h2>${item.name}</h2>
+      <p><strong>Description:</strong> ${item.description}</p>
+      <p><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+      <p><strong>Spiciness:</strong> ${item.spiciness}</p>
+      <p><strong>Price:</strong> ${item.price}</p>
+      <img src="${item.image_url}" alt="${item.name}"><br>
+      <button class="btn info" onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
+      <hr>
+    `;
+    contentDiv.insertAdjacentHTML('beforeend', itemDetails);
+  });
+}
+
+    /*let currentPage = 1;
+    const itemsPerPage = 3;
+
+
+  function displayItems(category) {
+      const contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = ''; 
+
+
+      const items = data[category];
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, items.length);
+
+
+      
+     s for (let i = startIndex; i < endIndex; i++) {
+        const item = items[i];
+        const itemDetails = `
+          <h2>${item.name}</h2>
+          <img src="${item.image_url}" alt="${item.name}">
+          <p><strong>Description:</strong> ${item.description}</p>
+          <p><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+          <p><strong>Spiciness:</strong> ${item.spiciness}</p>
+          <p><strong>Price:</strong> ${item.price}</p>
+          <button onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
+          <hr>
+        `;
+        contentDiv.insertAdjacentHTML('beforeend', itemDetails);
+      }
+
+
+
+
+     const items = data[category];
+      items.forEach(item => {
+        const itemDetails = `
+          <h2>${item.name}</h2>
+          <p><strong>Description:</strong> ${item.description}</p>
+          <p><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+          <p><strong>Spiciness:</strong> ${item.spiciness}</p>
+          <p><strong>Price:</strong> ${item.price}</p>
+          <img src="${item.image_url}" alt="${item.name}"><br>
+          <button class="btn info" onclick="addToCart(${JSON.stringify(item)})">Add to Cart</button>
+          
+          <hr>
+        `;
+      });
+//updatePagination();
+
+      
+    }*/
+
+const cartItems = []; // Initialize an empty array to hold cart items
+
+// Add item to cart
+// JavaScript code
+function addToCart(item) {
+    var cartItems = getCartItemsFromStorage(); // Retrieve existing cart items from localStorage
+    cartItems.push(item);  // Add the item to the cartItems array
+    saveCartItemsToStorage(cartItems); // Save updated cart items to localStorage
+    console.log("Item added to cart:", item);
+    console.log("Updated cartItems:", cartItems);
+}
+
+function saveCartItemsToStorage(items) {
+    localStorage.setItem('cart-items', JSON.stringify(items));
+}
+
+function getCartItemsFromStorage() {
+    var storedItems = localStorage.getItem('cart-items');
+    return storedItems ? JSON.parse(storedItems) : [];
+}
+// On another page, retrieve cart items from localStorage
+var cartArray = getCartItemsFromStorage();
+console.log("Retrieved cartItems:", cartArray);
+
+
+
+
+/* Remove item from cart
+function removeFromCart(index) {
+  cartItems.splice(index, 1);
+  updateCart();
+}
+*/
+// Update the cart display in the UI
+function updateCart() {
+  const cartItemsList = document.getElementById('cart-items');
+  
+  // Clear the existing list
+  cartItemsList.innerHTML = '';
+
+  // Iterate through the cart items and create list items with remove buttons
+  cartItems.forEach((item, index) => {
+    const cartItemElement = document.createElement('li');
+    cartItemElement.textContent = item.name;
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.onclick = () => removeFromCart(index);
+
+    cartItemElement.appendChild(removeButton);
+    cartItemsList.appendChild(cartItemElement);
+  });
+}
+
+function showCart() {
+  const cartContainer = document.getElementById('cart-container');
+  const cartItemsList = document.getElementById('cart-items');
+  
+  if (cartItems.length === 0) {
+    cartItemsList.innerHTML = '<p>Your cart is empty.</p>';
+  } else {
+    cartItemsList.innerHTML = '';
+    cartItems.forEach((item, index) => {
+      const cartItemElement = document.createElement('li');
+      cartItemElement.textContent = item.name;
+
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.onclick = () => removeFromCart(index);
+
+      cartItemElement.appendChild(removeButton);
+      cartItemsList.appendChild(cartItemElement);
+    });
+  }
+
+  cartContainer.style.display = 'block';
+}
+
+// Hide the cart container
+function hideCart() {
+  const cartContainer = document.getElementById('cart-container');
+  cartContainer.style.display = 'none';
+}
+
+// Set up the click event for the "Show Cart" button
+const showCartButton = document.getElementById('show-cart-button');
+showCartButton.addEventListener('click', showCart);
+
+// Set up the click event for the "Close" button in the cart
+const closeCartButton = document.getElementById('close-cart-button');
+closeCartButton.addEventListener('click', hideCart);
+
+
+    /*function updatePagination() {
+      const prevButton = document.querySelector('#pagination button:first-child');
+      const nextButton = document.querySelector('#pagination button:last-child');
+      const totalPages = Math.ceil(Object.values(data).flatMap(items => items.length).length / itemsPerPage);
+
+      if (currentPage === 1) {
+        prevButton.disabled = true;
+      } else {
+        prevButton.disabled = false;
+      }
+
+      if (currentPage === totalPages) {
+        nextButton.disabled = true;
+      } else {
+        nextButton.disabled = false;
+      }
+
+      document.getElementById('currentPage').textContent = currentPage;
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        displayItemsForCurrentPage();
+      }
+    }*/
+
+    /*function nextPage() {
+      const totalPages = Math.ceil(Object.values(data).flatMap(items => items.length).length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        displayItemsForCurrentPage();
+      }
+    }
+*/
+   /* function displayItemsForCurrentPage() {
+      const categoryButtons = document.querySelectorAll('button');
+      for (let i = 0; i < categoryButtons.length; i++) {
+        if (categoryButtons[i].disabled === false) {
+          categoryButtons[i].click();
+          break;
+        }
+      }
+    }*/
+  </script>
+</body>
+</html>
