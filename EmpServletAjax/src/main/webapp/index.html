@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Master Entry</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Master Entry</h1>
+        <div class="form">
+            <label for="empNo">Emp No:</label>
+            <input type="text" id="empNo" name="empNo">
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            
+            <label for="job">Job:</label>
+            <input type="text" id="job" name="job"><br><br>
+            
+            <label for="salary">Salary:</label>
+            <input type="text" id="salary" name="salary">
+            
+            <label for="department">Department:</label>
+            <select id="department" name="department">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+            <button id="getEmployeeDataButton">Get Employee Data</button>
+            <button id="addEmployeeButton">Add</button>
+            <button id="editEmployeeButton">Edit</button>
+            <button id="deleteEmployeeButton">Delete</button>
+            <button id="saveEmployeeButton">Save</button>
+            <button id="clearFormButton">Clear</button>
+            <button id="exitButton">Exit</button>
+            <button id="firstButton">First</button>
+            <button id="lastButton">Last</button>
+            <button id="prevButton">Prev</button>
+            <button id="nextButton">Next</button>
+        </div>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Emp No</th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Salary</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Employee data rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
