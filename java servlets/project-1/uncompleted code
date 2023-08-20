@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+	<h1> Employee Form</h1> 
+	 <form id="searchForm">
+        <label for="empNo">By Emp No:  </label>
+        <input type="text" id="empNo" name="empNo"><br><br>
+        
+        <label for="empName">By Emp Name:</label>
+        <input type="text" id="empName" name="empName"><br><br>
+        
+        <label for="deptNo">By Dept No:</label>
+        <input type="text" id="deptNo" name="deptNo"><br><br>
+        
+        <label for="salFrom">Salary From:</label>
+        <input type="text" id="salFrom" name="salFrom"><br><br>
+        
+        <label for="salTo">Salary To:</label>
+        <input type="text" id="salTo" name="salTo"><br><br>
+        
+        <label for="job">By Job:</label>
+        <input type="text" id="job" name="job"><br><br>
+        
+        <button type="button" onclick="searchEmployees()">Search</button>
+         <h1>Employee Table</h1>
+    
+    <table border="1" id="searchResults">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Emp No</th>
+                <th>Emp Name</th>
+                <th>Dept NO</th>
+                <th>Job Role</th>
+                <th>Salary</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+				<th style="text-align:left">1</th>
+                <td><input type="text" name="empNo" id="nempNo"></td>
+                <td><input type="text" name="empName" id="nempName"></td>
+                <td><input type="text" name="dept" id="ndept"></td>
+                <td><input type="text" name="jobRole" id="njobRole"></td>
+                <td><input type="text" name="salary" id="nsalary"></td>
+                <td><button type="button" onclick="editEmployee(this)">Edit</button></td>
+                <td><button type="button" onclick="deleteEmployee(this)">Delete</button></td>
+            </tr>
+            <!-- You can add more rows here with similar structure -->
+        </tbody>
+    </table>
+    <br>
+    <button type="button" onclick="addEmployee()">Add</button>
+
+    </form>
+</center>
+<script>
+	//search for the  data from the database 
+	function searchEmployees() {
+            var empNo = document.getElementById("empNo").value;
+            var empName = document.getElementById("empName").value;
+            var deptNo = document.getElementById("deptNo").value;
+            var salFrom = document.getElementById("salFrom").value;
+            var salTo = document.getElementById("salTo").value;
+            var job = document.getElementById("job").value;
+            
+            var xhr = new XMLHttpRequest();
+            //ajax call to the servlet with parameters
+            xhr.open("GET", `EmployeeSearchServlet?empNo=${empNo}&empName=${empName}&deptNo=${deptNo}&salFrom=${salFrom}&salTo=${salTo}&job=${job}`, true);
+            
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var jsonResponse = xhr.responseText;
+                    displaySearchResults(jsonResponse);
+                }
+            };
+            
+            xhr.send();
+        }
+        // display the  search results in the table format
+        function displaySearchResults(jsonResponse) {
+    var resultsTable = document.getElementById("searchResults").getElementsByTagName('tbody')[0];
+    resultsTable.innerHTML = ""; // Clear previous results
+    
+    var employees = JSON.parse(jsonResponse); // Parse the JSON response
+    
+    for (var i = 0; i < employees.length; i++) {
+        var employee = employees[i];
+        
+        var empNo = employee.empno;
+        var empName = employee.empname;
+        var deptNo = employee.deptno;
+        var jobRole = employee.jobrole;
+        var salary = employee.sal;
+        
+        var row = resultsTable.insertRow();
+        
+        // Serial Number Cell
+        var sNoCell = row.insertCell(0);
+        sNoCell.innerHTML = i + 1; // Incremented serial number
+        
+        var empNoCell = row.insertCell(1);
+        var empNameCell = row.insertCell(2);
+        var deptNoCell = row.insertCell(3);
+        var jobRoleCell = row.insertCell(4);
+        var salaryCell = row.insertCell(5);
+        
+        empNoCell.innerHTML = empNo;
+        empNameCell.innerHTML = empName;
+        deptNoCell.innerHTML = deptNo;
+        jobRoleCell.innerHTML = jobRole;
+        salaryCell.innerHTML = salary;
+        
+        // Edit and Delete Buttons Cells
+        var editCell = row.insertCell(6);
+        var deleteCell = row.insertCell(7);
+        
+        editCell.innerHTML = '<button type="button" onclick="editEmployee(this)">Edit</button>';
+        deleteCell.innerHTML = '<button type="button" onclick="deleteEmployee(this)">Delete</button>';
+    }
+}
+
+    var serialNumber = 2; // Initialize the serial number
+
+function addEmployee() {
+	var table = document.querySelector("tbody");
+            var newRow = document.createElement("tr");
+            
+            newRow.innerHTML = `
+                <td>${serialNumber}</td>
+                <td><input type="text" name="empNo" id="nempNO"></td>
+                <td><input type="text" name="empName" id="nempName"></td>
+                <td><input type="text" name="dept" id="ndept"></td>
+                <td><input type="text" name="jobRole" id="njobrole"></td>
+                <td><input type="text" name="salary" id="nsalary"></td>
+                <td><button type="button" onclick="editEmployee(this)">Edit</button></td>
+                <td><button type="button" onclick="deleteEmployee(this)">Delete</button></td>
+            `;
+            
+            table.appendChild(newRow);
+            serialNumber++;
+    var newEmpNo = document.getElementById("nempNo").value;
+    var newEmpName = document.getElementById("nempName").value;
+    var newDept = document.getElementById("ndept").value;
+    var newJobRole = document.getElementById("nJobRole").value;
+    var newSalary = document.getElementById("nSalary").value;
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "EmployeeSearchServlet", true); // Use POST method for adding
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Handle success or display error message
+        
+    };
+    var params = `newEmpNo=${newEmpNo}&newEmpName=${newEmpName}&newDept=${newDept}&newJobRole=${newJobRole}&newSalary=${newSalary}`;
+    xhr.send(params);
+}
+}
+    </script>
+</body>
+</html>
+
+
+      /**************************************************************************************************8/
+
+
+
+
+      package com.emp.govind;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+@WebServlet("/EmployeeSearchServlet")
+public class EmployeeSearchServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final String url="jdbc:postgresql://localhost:5432/postgres";
+    private static final String username="postgres";
+    private static final String password="Postgres";
+       
+    
+    public EmployeeSearchServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String empNo = request.getParameter("empNo");
+            String empName = request.getParameter("empName");
+            String deptNo = request.getParameter("deptNo");
+            String salFrom = request.getParameter("salFrom");
+            String salTo = request.getParameter("salTo");
+            String job = request.getParameter("job");
+
+            String query = "SELECT * FROM Employee WHERE 1=1 ";
+            
+            if (empNo != null && !empNo.isEmpty()) {
+                query += "AND empno = " + empNo + " ";
+            }
+            if (empName != null && !empName.isEmpty()) {
+                query += "AND empname LIKE '%" + empName + "%' ";
+            }
+            if (deptNo != null && !deptNo.isEmpty()) {
+                query += "AND deptno = " + deptNo + " ";
+            }
+            if (salFrom != null && salTo != null && !salFrom.isEmpty() && !salTo.isEmpty()) {
+                query += "AND sal BETWEEN " + salFrom + " AND " + salTo + " ";
+            }
+            if (job != null && !job.isEmpty()) {
+                query += "AND jobrole LIKE '%" + job + "%' ";
+            }
+
+            try (Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(query)) {
+                JSONArray jsonArray = new JSONArray();
+
+                while (rs.next()) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("empno", rs.getInt("empno"));
+                    jsonObject.put("empname", rs.getString("empname"));
+                    jsonObject.put("deptno", rs.getInt("deptno"));
+                    jsonObject.put("jobrole", rs.getString("jobrole"));
+                    jsonObject.put("sal", rs.getDouble("sal"));
+                    jsonArray.put(jsonObject);
+                }
+
+                PrintWriter out = response.getWriter();
+                out.print(jsonArray.toString());
+                out.flush();
+            } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String newEmpNo = request.getParameter("newEmpNo");
+            String newEmpName = request.getParameter("newEmpName");
+            String newDept = request.getParameter("newDept");
+            String newJobRole = request.getParameter("newJobRole");
+            String newSalary = request.getParameter("newSalary");
+
+            String insertQuery = "INSERT INTO Employee (empno, empname, deptno, jobrole, sal) VALUES (?, ?, ?, ?, ?)";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+                pstmt.setInt(1, Integer.parseInt(newEmpNo));
+                pstmt.setString(2, newEmpName);
+                pstmt.setInt(3, Integer.parseInt(newDept));
+                pstmt.setString(4, newJobRole);
+                pstmt.setDouble(5, Double.parseDouble(newSalary));
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+	}
+
+}
+
+
+
+
+
