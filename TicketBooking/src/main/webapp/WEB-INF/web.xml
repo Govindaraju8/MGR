@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>TicketBooking</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>servlets.BookingServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>StationsServlet</servlet-name>
+        <servlet-class>servlets.StationsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>StationsServlet</servlet-name>
+        <url-pattern>/StationsServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TrainsServlet</servlet-name>
+        <servlet-class>servlets.TrainsServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>TrainsServlet</servlet-name>
+        <url-pattern>/TrainsServlet</url-pattern>
+    </servlet-mapping>
+     <servlet>
+        <servlet-name>ClassesServlet</servlet-name>
+        <servlet-class>servlets.ClassesServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ClassesServlet</servlet-name>
+        <url-pattern>/ClassesServlet</url-pattern>
+    </servlet-mapping>
+  
+</web-app>
