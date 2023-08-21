@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #008B8B;
+}
+
+.center {
+  margin: auto;
+}
+
+select, input, button {
+  width: 80%;
+  padding: 5px;
+  margin: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.end {
+  font-size: 18px;
+  color: white;
+  background-color: #008B8B;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+label.form-label.to-label {
+      width: 2.7rem;
+    }
+label.form-label.to-label1 {
+      width: 2.2em;
+    }
