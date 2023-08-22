@@ -1,1 +1,755 @@
+/***********************************************Booking Servlet*****************************************************/
+
+package com.example;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/BookingServlet")
+public class BookingServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    public BookingServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/*
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Retrieve parameters from the request
+    	String from = request.getParameter("from");
+        String to = request.getParameter("to");
+        String trainName = request.getParameter("train");
+        String clas = request.getParameter("class");
+        String date = request.getParameter("date");
+
+        ArrayList<Passenger> passengers = new ArrayList<>();
+        for (int i = 1; ; i++) {
+            String passengerName = request.getParameter("passengerName" + i);
+            if (passengerName == null) {
+                break;
+            }
+            String passengerAge = request.getParameter("passengerAge" + i);
+            String passengerGender = request.getParameter("passengerGender" + i);
+            String passengerBerth = request.getParameter("passengerBerth" + i);
+
+            Passenger passenger = new Passenger();
+            passenger.setName(passengerName);
+            passenger.setAge(passengerAge);
+            passenger.setGender(passengerGender);
+            passenger.setBerth(passengerBerth);
+
+            passengers.add(passenger);
+        }
+
+        // Prepare a response message
+        StringBuilder responseMessage = new StringBuilder();
+        responseMessage.append("Parameters received by the servlet:\n");
+        responseMessage.append("From: ").append(from).append("\n");
+        responseMessage.append("To: ").append(to).append("\n");
+        responseMessage.append("Train: ").append(trainName).append("\n");
+        responseMessage.append("Class: ").append(clas).append("\n");
+        responseMessage.append("Date: ").append(date).append("\n");
+
+        for (int i = 0; i < passengers.size(); i++) {
+            Passenger passenger = passengers.get(i);
+            responseMessage.append("Passenger ").append(i + 1).append(":\n");
+            responseMessage.append("Name: ").append(passenger.getName()).append("\n");
+            responseMessage.append("Age: ").append(passenger.getAge()).append("\n");
+            responseMessage.append("Gender: ").append(passenger.getGender()).append("\n");
+            responseMessage.append("Berth: ").append(passenger.getBerth()).append("\n");
+        }
+
+        // Print the response message in the servlet page
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(responseMessage.toString());
+    }*/
+/*
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String from = request.getParameter("from");
+        String to = request.getParameter("to");
+        String trainName = request.getParameter("train");
+        String clas = request.getParameter("class");
+        String d = request.getParameter("date");
+        String name[] = request.getParameterValues("passengerName");
+        String age[] = request.getParameterValues("passengerAge");
+        String gender[] = request.getParameterValues("passengerGender");
+        String berth[] = request.getParameterValues("passengerBerth");
+        ArrayList<Passenger> pl = new ArrayList<>();
+        for (int i = 0; i < name.length; i++) {
+            Passenger p = new Passenger(name[i], gender[i], age[i], berth[i]);
+            pl.add(p);
+        }
+        Ticket t = new Ticket(from, to, trainName, clas, d, pl);
+        BookingDAL bd = new BookingDAL();
+        double cost = bd.calfare(t);
+        String pnr = bd.getpnr();
+        
+        request.setAttribute("cost", cost);
+        request.setAttribute("ticket", t);
+        request.setAttribute("pnr", pnr);
+        
+        // Redirect to confirmation.jsp after successful booking
+        RequestDispatcher dispatcher = request.getRequestDispatcher("confirmation.jsp");
+        dispatcher.forward(request, response);
+		    	}
+*/
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    	// Retrieve parameters from the request
+    	String from = request.getParameter("from");
+        String to = request.getParameter("to");
+        String trainName = request.getParameter("train");
+        String clas = request.getParameter("trainClass");
+        String d = request.getParameter("date");
+        String name[] = request.getParameterValues("passengername");
+        String age[] = request.getParameterValues("passengerage");
+        String gender[] = request.getParameterValues("passengergender");
+        String berth[] = request.getParameterValues("passengerberth");
+        ArrayList<Passenger> pl = new ArrayList<>();
+        for (int i = 0; i < name.length; i++) {
+            Passenger p = new Passenger(name[i], gender[i], age[i], berth[i]);
+            pl.add(p);
+        }
+        Ticket t = new Ticket(from, to, trainName, clas, d, pl);
+        BookingDAL bd = new BookingDAL();
+        double cost = bd.calfare(t);
+        String pnr = bd.getpnr();
+        
+        request.setAttribute("cost", cost);
+        request.setAttribute("ticket", t);
+        request.setAttribute("pnr", pnr);
+        
+        // Redirect to confirmation.jsp after successful booking
+        RequestDispatcher dispatcher = request.getRequestDispatcher("confirmation.jsp");
+        dispatcher.forward(request, response);    }
+}
+
+
+/*********************************************station servlet******************************************/
+
+
+package com.example;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/StationServlet")
+public class StationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public StationServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("application/json");
+        try (Connection connection = DBUtil.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT station_name FROM stations")) {
+            PrintWriter out = response.getWriter();
+            out.print("[");
+            boolean first = true;
+            while (resultSet.next()) {
+                if (!first) {
+                    out.print(",");
+                }
+                out.print("\"" + resultSet.getString("station_name") + "\"");
+                first = false;
+            }
+            out.print("]");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+/*************************************************train servlet ******************************************************8/
+
+package com.example;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/TrainServlet")
+public class TrainServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public TrainServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("application/json");
+        try (Connection connection = DBUtil.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT train_name FROM trains")) {
+            PrintWriter out = response.getWriter();
+            out.print("[");
+            boolean first = true;
+            while (resultSet.next()) {
+                if (!first) {
+                    out.print(",");
+                }
+                out.print("\"" + resultSet.getString("train_name") + "\"");
+                first = false;
+            }
+            out.print("]");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+/**************************************************DBUtil (database connection)*************************************/
+
+package com.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBUtil {
+	public static Connection getConnection() throws SQLException {
+		String url="jdbc:postgresql://localhost:5432/postgres";
+		String username="postgres";
+		String password="Postgres";
+        return DriverManager.getConnection(url, username, password);
+    }
+
+}
+
+
+/*************************************BookingDAL class*******************************************************/
+
+package com.example;
+
+import java.sql.Timestamp;
+
+public class BookingDAL {
+	public double calfare(Ticket t) {
+        int nop = t.getPl().size();
+        double x = 100.0; // Replace with the actual fare per passenger
+        double fare = nop * x;
+        return fare;
+    }
+	
+	public String getpnr() {
+		Timestamp t = new Timestamp(System.currentTimeMillis());
+		long p = t.getTime();
+		String pnr = String.valueOf(p);
+		return pnr;
+	}
+
+}
+
+/********************************passenger model class*****************************************************/
+
+package com.example;
+
+public class Passenger {
+	private String name;
+    private String gender;
+    private String age;
+    private String berth;
+
+    public Passenger()
+    {
+    	
+    }
+    public Passenger(String name, String gender, String age, String berth) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.berth = berth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getBerth() {
+        return berth;
+    }
+
+    public void setBerth(String berth) {
+        this.berth = berth;
+    }
+
+}
+
+
+/*************************************Ticket model class***************************************************/
+
+package com.example;
+
+import java.util.ArrayList;
+
+public class Ticket {
+	private String from;
+	private String to;
+	private String trainName;
+	private String clas;
+	private String d;
+	private ArrayList<Passenger> pl;
+
+	public Ticket(String from, String to, String trainName, String clas, String d, ArrayList<Passenger> pl) {
+		super();
+		this.from = from;
+		this.to = to;
+		this.trainName = trainName;
+		this.clas = clas;
+		this.d = d;
+		this.pl = pl;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public String getTrainName() {
+		return trainName;
+	}
+
+	public void setTrainName(String trainName) {
+		this.trainName = trainName;
+	}
+
+	public String getClas() {
+		return clas;
+	}
+
+	public void setClas(String clas) {
+		this.clas = clas;
+	}
+
+	public String getD() {
+		return d;
+	}
+
+	public void setD(String d) {
+		this.d = d;
+	}
+
+	public ArrayList<Passenger> getPl() {
+		return pl;
+	}
+
+	public void setPl(ArrayList<Passenger> pl) {
+		this.pl = pl;
+	}
+
+}
+
+/***************************************index.html(main homme page)**********************************/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Train Ticket Booking</h1>
+    <form method="POST" action="http://localhost:8081/Train_Ticket_Booking/BookingServlet">
+        <label for="from">From:</label>
+        <select id="from" name="from" ></select>
+        
+        <label for="to">To:</label>
+       <select id="to" name="to" required ></select>
+
+        <label for="trains">Train</label>
+       <select id="train" name="train" required></select>
+        
+        <label for="trainClasses">Class:</label>
+        <select id="trainClass" name="trainClass">
+            <option value="sleeper">sleeper</option>
+            <option value="AC">AC</option>
+            <option value="NON-AC">NON-AC</option>
+            <option value="firstClass">First Class</option>
+        </select>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <h2>Passenger Details</h2>
+        <table>
+            <thead>
+                <tr>
+					<th>S.No</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Berth</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="passengersTableBody">
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" name="passengername"></td>
+                    <td><input type="number" name="passengerage"></td>
+                    <td>
+                        <select name="passengergender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="passengerberth">
+                            <option value="lower">lower</option>
+                            <option value="upper">upper</option>
+                            <option value="middle">middle</option>
+                        </select>
+                    </td>
+                    <!--td><input type="text" name="berth1"></td-->
+                    <td><button type="button" onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" id="addPassengerButton" onclick="addPassenger()">Add Passenger</button>
+        <button type="submit" onclick="BookTicket()">Book</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <script>
+		
+		function fetchStations() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8081/Train_Ticket_Booking/StationServlet", true); // Replace "contextPath" with your actual context path
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        var fromInput = document.getElementById("from");
+                        var toInput = document.getElementById("to");
+                        
+                        data.forEach(function(station) {
+                            var option = document.createElement("option");
+                            option.value = station;
+                            option.textContent = station;
+                            fromInput.appendChild(option);
+                            toInput.appendChild(option.cloneNode(true));
+                        });
+                    } else {
+                        console.error("Error fetching stations:", xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            
+            xhr.send();
+        }
+
+        // Call fetchStations() when the page loads
+        fetchStations();
+        
+        
+        function fetchTrains() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8081/Train_Ticket_Booking/TrainServlet", true); // Replace "contextPath" with your actual context path
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        var trainInput = document.getElementById("train");
+                        
+                        data.forEach(function(train) {
+                            var option = document.createElement("option");
+                            option.value = train;
+                            option.textContent = train;
+                            trainInput.appendChild(option);
+                        });
+                    } else {
+                        console.error("Error fetching trains:", xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            
+            xhr.send();
+        }
+
+        // Call fetchTrains() when the page loads
+        fetchTrains();
+        
+        //addpassenger method
+        function addPassenger() {
+            var tableBody = document.getElementById("passengersTableBody");
+            var rowCount = tableBody.rows.length;
+
+            var newRow = tableBody.insertRow(rowCount);
+
+            var cell0 = newRow.insertCell(0);
+            cell0.innerHTML = rowCount + 1;
+
+            var cell1 = newRow.insertCell(1);
+            cell1.innerHTML = '<input type="text" name="passengername">';
+
+            var cell2 = newRow.insertCell(2);
+            cell2.innerHTML = '<input type="number" name="passengerage">';
+
+            var cell3 = newRow.insertCell(3);
+            cell3.innerHTML = `
+                <select name="passengergender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            `;
+
+            var cell4 = newRow.insertCell(4);
+            cell4.innerHTML = `
+                <select name="passengerberth">
+                    <option value="lower">lower</option>
+                    <option value="upper">upper</option>
+                    <option value="middle">middle</option>
+                </select>
+            `;
+
+            var cell5 = newRow.insertCell(5);
+            cell5.innerHTML = '<button type="button" onclick="deleteRow(this)">Delete</button>';
+        }
+        
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+        
+        
+        function BookTicket() {
+    // Collect passenger details
+    var passengerDetails = [];
+    var table = document.getElementById("passengersTableBody");
+    for (var i = 0; i < table.rows.length; i++) {
+        var passenger = {
+            name: table.rows[i].querySelector("input[name^='passengername']").value,
+            age: table.rows[i].querySelector("input[name^='passengerage']").value,
+            gender: table.rows[i].querySelector("select[name^='passengergender']").value,
+            berth: table.rows[i].querySelector("select[name^='passengerberth']").value
+        };
+        passengerDetails.push(passenger);
+    }
+
+    // Prepare data to send to the servlet
+    var formData = new FormData();
+    formData.append("from", document.getElementById("from").value);
+    formData.append("to", document.getElementById("to").value);
+    formData.append("train", document.getElementById("train").value);
+    formData.append("class", document.getElementById("trainClass").value);
+    formData.append("date", document.getElementById("date").value);
+    
+    // Append passenger details to formData
+    for (var i = 0; i < passengerDetails.length; i++) {
+        formData.append("passengerName" + (i + 1), passengerDetails[i].name);
+        formData.append("passengerAge" + (i + 1), passengerDetails[i].age);
+        formData.append("passengerGender" + (i + 1), passengerDetails[i].gender);
+        formData.append("passengerBerth" + (i + 1), passengerDetails[i].berth);
+    }
+
+}
+      
+        function clearForm() {
+            var table = document.querySelector("table tbody");
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
+        }
+    </script>
+</body>
+</html>
+
+/************************************************confirmation.jsp**********************************/
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+    pageEncoding="ISO-8859-1" import="com.example.*,java.util.*"%>
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>confirmation Page</title>
+
+</head>
+
+<body style="text-align:center;">
+
+    <h2>Ticket Details</h2>
+
+    <% Ticket t=(Ticket)request.getAttribute("ticket"); %>
+
+    <p><b>PNR: <%= request.getAttribute("pnr") %></b></p>
+
+    <p>Cost: $<%= request.getAttribute("cost") %></p>
+
+    <p>From: <%= t.getFrom() %></p>
+
+    <p>To: <%= t.getTo() %></p>
+
+    <p>Train Name: <%= t.getTrainName() %></p>
+
+    <p>Class: <%= t.getClas() %></p>
+
+    <p>Date: <%= t.getD() %></p>
+
+    <h3>Passengers:</h3>
+
+    <table border="1" style="margin-left:25%;width:50%;height:30%;">
+
+            <th>Name</th>
+
+            <th>Gender</th>
+
+            <th>Age</th>
+            
+            <th>berth</th>
+
+        </tr>
+
+        <% for (Passenger passenger : t.getPl()) { %>
+
+            <tr>
+
+                <td><%= passenger.getName() %></td>
+
+                <td><%= passenger.getGender() %></td>
+
+                <td><%= passenger.getAge() %></td>
+                
+                <td><%= passenger.getBerth() %></td>
+
+            </tr>
+
+        <% } %>
+
+    </table>
+
+</body>
+
+</html>
+
+
 
