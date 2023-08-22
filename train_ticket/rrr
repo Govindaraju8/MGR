@@ -1,0 +1,240 @@
+<%@ page language="java" import="java.io.*, java.util.*, com.reshu_train.*" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Ticket Booking</h1>
+
+<table class="cen" style="border-spacing: 40px 40px;">
+ 
+    <form action="train_ser" method="GET" name="myform" onsubmit="return valid()">
+    <tr>
+        <td>From:        
+        <select id="trainStart" name="trainStart">
+            <option value="">Select a start station</option>
+            
+            <%
+           		train_ser servlet = new train_ser();
+                List<String> trainStartStations = servlet.getTrainStartStations();
+                for (String station : trainStartStations) {
+            %>
+                <option value="<%= station %>"><%= station %></option>
+            <%
+                }
+            %>
+        </select>
+        <br></td>
+          
+       <td>To:
+        
+       <select name="to" id="location2">
+            <option value="vizag">vizag</option>
+            <option value="vijayawada">vijayawada</option>
+            <option value="warangal">warangal</option>
+            <option value="bangulure">bangulure</option>
+          </select></td>
+   </tr>
+   
+    <tr>  <td> Train name:  
+         <select name="to" id="train">
+              <option value="Agniveena Express">Agniveena Express</option>
+              <option value="Ahilyanagari Express">Ahilyanagari Express</option>
+              <option value="Ahimsa Express">Ahimsa Express</option>
+              <option value="Amarnath Express">Amarnath Express</option>
+            </select></td></tr>
+            
+     <tr> <td>   Class:
+            <select name="to" id="cls">
+                <option value="AC">AC</option>
+                <option value="Non AC">Non AC</option>
+                <option value="General">General</option>
+            </select></td>
+           <td> Date:
+            <input type="date" id="dt1" name="dateof"></td>
+   
+  </tr>
+    
+</table>
+    <table id="demo" style="width:50%" class="cen">
+       <b><center>Passengers</center></b>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+        </tr>
+        
+        <tr>
+        <td><input type="text" name="sno"></td>
+        
+        <td><input type="text" name="name"></td>
+        
+        <td><select name="gender" id="gen">
+            <option value="male">Male</option>
+            <option value="femal">female</option>
+            <option value="others">others</option>
+        </select></td>
+        
+        <td><input type="text" name="age"></td>
+        
+        <td><button type="button" onclick="deleteCells(this)">DELETE</button></td>
+    </tr>
+
+    </table>
+ 
+    <!--  center>
+    <button type="button" onclick="addCells()">ADD</button>
+    <button type="button" onclick="clearPage()">Clear Page</button>
+    <button type="submit">Submit</button>
+    </center>
+  </form>
+    <script>
+    
+      function addCells() {
+        const mytab = document.getElementById("demo");
+        const lr = mytab.rows[mytab.rows.length - 1]; 
+        if(lr){
+            const nr = lr.cloneNode(true); 
+            mytab.appendChild(nr); 
+        	}
+      	}
+      
+     function deleteCells(r) {
+    	var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById('demo').deleteRow(i);
+    }
+  
+   	/*function clearPage() {
+    	document.getElementById('').reset();
+    }*/
+  	function valid(){
+	  	var n=document.myform.name.value;
+	  	var s=document.myform.sno.value;
+	  	var p=document.myform.age.value;
+	  	if(n==null || n==""){
+		  	alert("enter the name fields");
+		  	return false;  
+	  	}
+	  	else if(p==null || p==""){
+		  	alert("enter the age fields");
+		  	return false;  
+	  	}
+	  	else if(s==null || s==""){
+		  	alert("enter the sno fields");
+		  	return false;  
+	  	}
+		else if(isNaN(p))
+			{
+				alert("Enter the numeric value");
+				return false;
+			}
+		else if(isNaN(s))
+		{
+			alert("sno must be numeric");
+			return false;
+		}
+		else if(p<0 || p>100)
+		{
+			alert("Enter the valid age");
+			return false;
+		}
+	  	return true;
+	}
+    </script-->
+    
+</body>
+</html>
+
+
+
+
+
+
+      package com.reshu_train;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/train_ser")
+public class train_ser extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    private List<String> getTrainStartStations() {
+        List<String> trainStartStations = new ArrayList<>();
+
+        try {
+            // Load the JDBC driver (replace with your actual driver)
+        	   Class.forName("org.postgresql.Driver");
+
+            // Connect to your database (replace with your actual database URL, username, and password)
+            String url = "jdbc:postgresql://192.168.110.48:5432/plf_training";
+			String username = "plf_training_admin";
+			String password = "pff123";
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Query to fetch train start stations from the database
+            String query = "SELECT DISTINCT trn_start FROM resh_trains";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String station = resultSet.getString("trn_start");
+                trainStartStations.add(station);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions
+        }
+        
+        return trainStartStations;
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html");
+            List<String> trainStartStations = getTrainStartStations();
+        // Forward the data to the JSP page
+        
+        request.setAttribute("trainStartStations", trainStartStations);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+}
+    
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+    
